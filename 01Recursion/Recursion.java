@@ -7,7 +7,9 @@ public class Recursion{
 	if (n<0){
 	    throw new IllegalArgumentException();
 	}
-	if (n>1){
+	if(n==0){
+	    return 1;
+	}if (n>1){
 	    return n*fact(n-1); 
 	}else{
 	    return n;
@@ -31,8 +33,11 @@ public class Recursion{
 	if (n<0){
 	    throw new IllegalArgumentException();
 	}
+	if (n==0){
+	    return 0;
+	}
 	double guess=n/2;
-	if (n>1){
+	if (n>0){
 	    return sqrt2(n,guess);
 	}else{
 	    return n;
@@ -53,7 +58,7 @@ public class Recursion{
     }
 
     public static void main(String[] args){
-	//Recursion test=new Recursion();
+	Recursion test=new Recursion();
 	//System.out.println(test.fact(5));
 	//System.out.println(test.fact(10));
 	//System.out.println(test.fact(14253566)); //prints out error message
