@@ -10,6 +10,7 @@ public class KnightsTour{
     
     //instance variable
     private int[][]board;
+    private int startx, starty;
     
     //terminal specific character to move the cursor
     private String go(int x,int y){
@@ -31,21 +32,40 @@ public class KnightsTour{
     }
     
     public KnightsTour(int size){
-	
+	board=new int[size][size];
+	startx=0;
+	starty=0;
+	board[startx][starty]=1; //just going to let top left be start for now
+	for (int i=0;i<size;i++){
+	    for (int j=0;j<size;j++){
+		if (i!=0 && j!=0){
+		    board[i][j]=-1;
+		}
+	    }
+	}
     }
         
     public void solve(){
-				
+	if (board.length<2){
+	    System.out.println("Doesn't work.");
+	    System.out.println(board);
+	}else{
+	    solve(startx,starty);
+	}
     }
 
     public void solve(int startx, int starty){
-				
+	
     }
 		
     public boolean solve(int x,int y,int currentMoveNumber){
 	System.out.println(this);
 	wait(20);
 	
+	if (x+2,y+1){// hopefully...
+	    return true;
+	}
+
 	return false;
     }
 }
