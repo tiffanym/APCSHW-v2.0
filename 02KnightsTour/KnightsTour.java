@@ -105,8 +105,9 @@ public class KnightsTour{
 	       ){ 
 		return true;
 	    }
-	    board[x][y]=-1;	    
-	    //solve(x,y,currentMoveNumber);
+	    
+	    board[x][y]=-1;
+
 	}
 
 	return false;
