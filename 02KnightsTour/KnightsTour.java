@@ -10,7 +10,7 @@ public class KnightsTour{
     
     //instance variable
     private int[][]board;
-    private int startx, starty;
+    boolean debug=true;
     
     //terminal specific character to move the cursor
     private String go(int x,int y){
@@ -35,63 +35,61 @@ public class KnightsTour{
 
     public String toString(){
 	String ans = "\n";
-	//build your knights tour here...
 	//return hide + go(startx,starty) + ans + "\n" + show;
 	String boardAR=go(0,0)+"";
 	for (int i=0;i<board.length;i++){
-	    boardAR+="[ ";
 	    for (int j=0;j<board[0].length;j++){
-		if (board[i][j]==-1){
-		    boardAR+=color(38,47)+board[i][j]+" ";    
-		}else{
-		    boardAR+=color(32,40)+board[i][j]+" ";    
-		}
-		
+		    boardAR+=board[i][j]+" ";    
 	    }
-	    boardAR+="]"+ans;
+	    boardAR+=ans;
 	}
-	boardAR+=ans+show +color(37,40);
-	return boardAR; //HMMM.... IS THIS RIGHT?!?!?!?!?!?!?!?!?!?!
+	boardAR+=ans+show;
+	return boardAR;
     }
     
     public KnightsTour(int size){
 	board=new int[size][size];
-	startx=0;
-	starty=0;
-	board[startx][starty]=1; //just going to let top left be start for now
 	for (int i=0;i<size;i++){
 	    for (int j=0;j<size;j++){
-		if (i!=0 || j!=0){
-		    board[i][j]=-1;
-		}
+		board[i][j]=0;
 	    }
 	}
     }
         
-    public void solve(){
+    public boolean solve(){
 	if (board.length<2){
-	    System.out.println("Doesn't work.");
-	    System.out.println(board);
+	    //System.out.println("Doesn't work.");
+	    //System.out.println(board);
+	    return false;
 	}else{
-	    solve(0,0,1);
+	    return solve(0,0);
 	}
     }
 
-    public void solve(int x, int y){
-	
+    public boolean solve(int startx, int starty){
+	if (startx<0 || starty<0 || 
+	    startx>=board.length || starty>=board[0].length){
+	    return false;
+	}else{
+	    return solve(startx,starty,1);
+	}
     }
 		
     public boolean solve(int x,int y,int currentMoveNumber){
-	System.out.println(this);
-	//wait(20);
+	if (debug){
+	    System.out.println(this);
+	    wait(50);
+	}					       
+	//covered all squares
 	if (currentMoveNumber==board.length*board[0].length){
 	    return true;
 	}
+	//out of bounds
 	if (x<0 || y<0 || x>=board.length || y>=board[0].length){
 	    return false;
 	}
 
-	if (Math.abs(board[x][y])==1){ //-1=nothing done yet; 1=start; 
+	if (board[x][y]==0){ //0=no number 
 	    board[x][y]=currentMoveNumber;
 	    
 	    if(solve(x+2,y+1,currentMoveNumber+1) ||
@@ -104,10 +102,10 @@ public class KnightsTour{
 	       solve(x-1,y-2,currentMoveNumber+1)
 	       ){ 
 		return true;
+	    }else{	    
+		board[x][y]=0;
+		return false;
 	    }
-	    
-	    board[x][y]=-1;
-
 	}
 
 	return false;
