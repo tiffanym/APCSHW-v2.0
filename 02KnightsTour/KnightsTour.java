@@ -83,7 +83,7 @@ public class KnightsTour{
 		
     public boolean solve(int x,int y,int currentMoveNumber){
 	System.out.println(this);
-	wait(500);
+	//wait(20);
 	if (currentMoveNumber==board.length*board[0].length){
 	    return true;
 	}
@@ -91,9 +91,9 @@ public class KnightsTour{
 	    return false;
 	}
 
-	if (Math.abs(board[x][y])==1){ //-1=nothing done yet; 1=start;
+	if (Math.abs(board[x][y])==1){ //-1=nothing done yet; 1=start; 
 	    board[x][y]=currentMoveNumber;
-	    /*
+	    
 	    if(solve(x+2,y+1,currentMoveNumber+1) ||
 	       solve(x+2,y-1,currentMoveNumber+1) ||
 	       solve(x-2,y+1,currentMoveNumber+1) ||
@@ -105,34 +105,8 @@ public class KnightsTour{
 	       ){ 
 		return true;
 	    }
-	    */
-	    if (solve(x+2,y+1,currentMoveNumber+1)){ //WHY DOES IT STOP AT 7?!?!?!?!
-		return true;
-	    }
-	    if (solve(x+2,y-1,currentMoveNumber+1)){
-		return true;
-	    }
-	    if (solve(x-2,y+1,currentMoveNumber+1)){
-		return true;
-	    }
-	    if (solve(x-2,y-1,currentMoveNumber+1)){
-		return true;
-	    }
-	    if(solve(x+1,y+2,currentMoveNumber+1)){
-		return true;
-	    }
-	    if(solve(x+1,y+2,currentMoveNumber+1)){
-		return true;
-	    }
-	    if(solve(x-1,y-2,currentMoveNumber+1)){
-		return true;
-	    }
-	    if (solve(x-1,y-2,currentMoveNumber+1)){
-		return true;
-	    }
-
-	    board[x][y]=-1;
-	    solve(x,y,currentMoveNumber);
+	    board[x][y]=-1;	    
+	    //solve(x,y,currentMoveNumber);
 	}
 
 	return false;
