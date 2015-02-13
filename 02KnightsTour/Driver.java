@@ -7,12 +7,12 @@ public class Driver{
 	    f = new KnightsTour(Integer.parseInt(args[0]));
 	}
 	f.clearTerminal();     
-	//if (f.solve()){
-	//    f.solve();
-	//}
-	//else{
-	//    System.out.println("No Solution");
-	//}
-	f.solve();
+	if (f.solve()){
+	    System.out.println("Yay!!!");
+	}
+	else{
+	    System.out.println("No Solution");
+	}
+	//f.solve();
     }
 }
