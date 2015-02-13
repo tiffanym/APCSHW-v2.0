@@ -58,9 +58,7 @@ public class KnightsTour{
         
     public boolean solve(){
 	if (board.length<2){
-	    //System.out.println("Doesn't work.");
-	    //System.out.println(board);
-	    return false;
+	    return true;
 	}else{
 	    return solve(0,0);
 	}
@@ -86,11 +84,16 @@ public class KnightsTour{
 	}
 	//covered all squares
 	if (currentMoveNumber==board.length*board[0].length && board[x][y]==0){
-	    board[x][y]=currentMoveNumber;
-	    //return true;
-	}					       
+	    //board[x][y]=currentMoveNumber;
+	    return true;
+	}
+					       
 	if (board[x][y]==0){ //0=no number 
 	    board[x][y]=currentMoveNumber;
+
+	    //if (currentMoveNumber==board.length*board[0].length){
+	    //	return true;
+	    //}
 	    
 	    if(solve(x+2,y+1,currentMoveNumber+1) ||
 	       solve(x+2,y-1,currentMoveNumber+1) ||
@@ -103,12 +106,14 @@ public class KnightsTour{
 	       ){ 
 		return true;
 	    }
+
+
 	    board[x][y]=0;
 	    return false;
 	}
-	if (board[x][y]==board.length*board[0].length){
-	    return true;
-	}
+	//if (board[x][y]==board.length*board[0].length){
+	//    return true;
+	//	}
 	return false;
     }
 }
