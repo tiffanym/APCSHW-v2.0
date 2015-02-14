@@ -9,7 +9,7 @@ public class NQueens{
     final static String show =  "\033[?25h";
     
     //instance variable
-    private int[][]board;
+    private char[][]board;
     boolean debug=true;
     
     //terminal specific character to move the cursor
@@ -38,7 +38,7 @@ public class NQueens{
 	String boardAR=go(0,0)+"";
 	for (int i=0;i<board.length;i++){
 	    for (int j=0;j<board[0].length;j++){
-		boardAR+=String.format("%-"+board.length+"s",board[i][j]);    
+		boardAR+=String.format("%-2s",board[i][j]);    
 	    }
 	    boardAR+=ans;
 	}
@@ -46,11 +46,11 @@ public class NQueens{
 	return boardAR;
     }
     
-    public KnightsTour(int size){
-	board=new int[size][size];
+    public NQueens(int size){
+	board=new char[size][size];
 	for (int i=0;i<size;i++){
 	    for (int j=0;j<size;j++){
-		board[i][j]=0;
+		board[i][j]='.';
 	    }
 	}
     }
@@ -66,9 +66,9 @@ public class NQueens{
 	}else{
 	    return solve(startx,starty,1);
 	}
-    }
-		
-    public boolean solve(int x,int y,int currentMoveNumber){
+    }		
+
+    public boolean solve(int x,int y,int currentQueenNumber){
 	if (debug){
 	    System.out.println(this);
 	    wait(20);
@@ -78,29 +78,37 @@ public class NQueens{
 	    return false;
 	}
 	//covered all squares
-	if (currentMoveNumber==board.length*board[0].length && board[x][y]==0){
-	    //board[x][y]=board.length*board[0].length;
+	if (currentQueenNumber==board.length && board[x][y]=='.'){
 	    return true;
 	}
-					       
-	if (board[x][y]==0){ //0=no number 
-	    board[x][y]=currentMoveNumber;
-	    	    
-	    if(solve(x+2,y+1,currentMoveNumber+1) ||
-	       solve(x+2,y-1,currentMoveNumber+1) ||
-	       solve(x-2,y+1,currentMoveNumber+1) ||
-	       solve(x-2,y-1,currentMoveNumber+1) ||
-	       solve(x+1,y+2,currentMoveNumber+1) ||
-	       solve(x-1,y+2,currentMoveNumber+1) ||	    
-	       solve(x+1,y-2,currentMoveNumber+1) ||
-	       solve(x-1,y-2,currentMoveNumber+1)
-	       ){ 
-		board[x][y]=currentMoveNumber;
-		return true;
-	    }
-	    board[x][y]=0;
+	//no blockage
+	//if (board[x][y]==0){
+	//    return false;
+	//}
+	
+	if (board[x][y]=='Q'){
 	    return false;
 	}
+
+	if (board[x][y]==0){ //0=no number 
+	    board[x][y]='Q';
+	    	    
+	    if(solve(x-1,y-1,currentQueenNumber+1) || //NW
+	       solve(x,y-1,currentQueenNumber+1) || //N
+	       solve(x+1,y-1,currentQueenNumber+1) || //NE
+	       solve(x+1,y,currentQueenNumber+1) || //E
+	       solve(x+1,y+1,currentQueenNumber+1) || //SE
+	       solve(x,y+1,currentQueenNumber+1) ||  //S
+	       solve(x-1,y+1,currentQueenNumber+1) || //SW
+	       solve(x-1,y,currentQueenNumber+1)    //W
+	       
+	       ){ 
+		return true;
+	    }
+	    board[x][y]='.';
+	    return false;
+	}
+	
 	return false;
     }
 }
