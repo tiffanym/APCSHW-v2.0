@@ -79,13 +79,10 @@ public class KnightsTour{
 	}
 	//covered all squares
 	if (currentMoveNumber==board.length*board[0].length && board[x][y]==0){
-	    //board[x][y]=board.length*board[0].length;
 	    return true;
-	}
-					       
-	if (board[x][y]==0){ //0=no number 
+	}					       
+	if (board[x][y]==0){ //0=no number 	    
 	    board[x][y]=currentMoveNumber;
-	    
 	    if(solve(x+2,y+1,currentMoveNumber+1) ||
 	       solve(x+2,y-1,currentMoveNumber+1) ||
 	       solve(x-2,y+1,currentMoveNumber+1) ||
@@ -99,7 +96,6 @@ public class KnightsTour{
 		return true;
 	    }
 	    board[x][y]=0;
-	    return false;
 	}
 	return false;
     }
