@@ -10,7 +10,7 @@ public class KnightsTour{
     
     //instance variable
     private int[][]board;
-    boolean debug=false;
+    boolean debug=true;
     
     //terminal specific character to move the cursor
     private String go(int x,int y){
@@ -71,14 +71,14 @@ public class KnightsTour{
     public boolean solve(int x,int y,int currentMoveNumber){
 	if (debug){
 	    System.out.println(this);
-	    wait(10);
+	    //wait(10);
 	}
 	//out of bounds
 	if (x<0 || y<0 || x>=board.length || y>=board[0].length){
 	    return false;
 	}
 	//covered all squares
-	if (currentMoveNumber==board.length*board[0].length && board[x][y]==0){
+	if (currentMoveNumber==board.length*board[0].length + 1){
 	    return true;
 	}					       
 	if (board[x][y]==0){ //0=no number 	    
