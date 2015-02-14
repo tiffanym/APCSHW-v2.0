@@ -30,7 +30,7 @@ public class KnightsTour{
     }
 
     public String name(){
-	return "Ming.Tiffany";
+	return "ming.tiffany";
     }
 
     public String toString(){
