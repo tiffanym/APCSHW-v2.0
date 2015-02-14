@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class KnightsTour{
+public class NQueens{
     //constants for the class
     //terminal specific character to clear screen , or hide/show cursor
     final static String clear =  "\033[2J";
@@ -10,7 +10,7 @@ public class KnightsTour{
     
     //instance variable
     private int[][]board;
-    boolean debug=false;
+    boolean debug=true;
     
     //terminal specific character to move the cursor
     private String go(int x,int y){
@@ -46,7 +46,7 @@ public class KnightsTour{
 	return boardAR;
     }
     
-    public KnightsTour(int size){
+    public NQueens(int size){
 	board=new int[size][size];
 	for (int i=0;i<size;i++){
 	    for (int j=0;j<size;j++){
@@ -68,24 +68,24 @@ public class KnightsTour{
 	}
     }
 		
-    public boolean solve(int x,int y,int currentMoveNumber){
+    public boolean solve(int x,int y,int currentQueenNumber){
 	if (debug){
 	    System.out.println(this);
-	    wait(10);
+	    wait(20);
 	}
 	//out of bounds
 	if (x<0 || y<0 || x>=board.length || y>=board[0].length){
 	    return false;
 	}
 	//covered all squares
-	if (currentMoveNumber==board.length*board[0].length && board[x][y]==0){
+	if (currentQueenNumber==board.length && board[x][y]==0){
 	    //board[x][y]=board.length*board[0].length;
 	    return true;
 	}
 					       
 	if (board[x][y]==0){ //0=no number 
 	    board[x][y]=currentMoveNumber;
-	    
+	    	    
 	    if(solve(x+2,y+1,currentMoveNumber+1) ||
 	       solve(x+2,y-1,currentMoveNumber+1) ||
 	       solve(x-2,y+1,currentMoveNumber+1) ||
