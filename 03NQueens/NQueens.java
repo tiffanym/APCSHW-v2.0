@@ -78,7 +78,7 @@ public class NQueens{
 	    return false;
 	}
 	//covered all squares
-	if (currentQueenNumber==board.length && board[x][y]=='.'){
+	if (currentQueenNumber==board.length+1){
 	    return true;
 	}
 	//no blockage
