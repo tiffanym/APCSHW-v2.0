@@ -10,6 +10,7 @@ public class NQueens{
     
     //instance variable
     private char[][]board;
+    private int[] queen;//tells what row each queen is in
     boolean debug=true;
     
     //terminal specific character to move the cursor
@@ -48,48 +49,61 @@ public class NQueens{
     
     public NQueens(int size){
 	board=new char[size][size];
+	queen=new int[size];
 	for (int i=0;i<size;i++){
 	    for (int j=0;j<size;j++){
 		board[i][j]='.';
 	    }
+	    queen[i]=i;
 	}
     }
         
     public boolean solve(){
-	return solve(0,0);
+	return solve(0);
     }
 
-    public boolean solve(int startx, int starty){
-	if (startx<0 || starty<0 || 
-	    startx>=board.length || starty>=board[0].length){
+    public boolean solve(int x){
+	if (x<0 || x>board.length){
 	    return false;
 	}else{
-	    return solve(startx,starty,1);
+	    return solve(x,0,1); //starts on first column
 	}
     }		
 
+    //x=col;y=row
+    //x,y are currentQueen's current position (testing to see if will work)
+    public boolean safeSpot(int x,int y,int currentQueenNumber){
+	//Any queens in same row?
+	for (int i=0;i<currentQueenNumber;i++){//columns
+	    if (queen[i]==y){
+		return false;
+	    }
+	    //Any queens in diagonal?
+	    if (Math.abs(i-x)==Math.abs(queen[i]-y)){
+		return false;
+	    }
+	}
+	return true;
+    }
+
+    //x=col;y=row;
     public boolean solve(int x,int y,int currentQueenNumber){
 	if (debug){
 	    System.out.println(this);
-	    wait(20);
+	    wait(50);
 	}
 	//out of bounds
-	if (x<0 || y<0 || x>=board.length || y>=board[0].length){
+	if (x<0 || y<0 || x>=board.length || y>=board.length){
 	    return false;
 	}
 	//covered all squares
 	if (currentQueenNumber==board.length+1){
 	    return true;
-	}
-	//no blockage
-	//if (board[x][y]==0){
+	} 
+	//if (board[x][y]=='Q'){
 	//    return false;
 	//}
-	
-	if (board[x][y]=='Q'){
-	    return false;
-	}
-
+	/*
 	if (board[x][y]==0){ //0=no number 
 	    board[x][y]='Q';
 	    	    
@@ -108,6 +122,32 @@ public class NQueens{
 	    board[x][y]='.';
 	    return false;
 	}
+	*/
+	//for (int i=0;i<board.length;i++){ //start on first column; go right
+	    boolean safe=true;
+	    if (currentQueenNumber>1){
+		for (int i=0;i<currentQueenNumber;i++){//columns
+		    if (queen[i]==y){
+			safe=false;
+		    }
+		    //Any queens in diagonal?
+		    if (Math.abs(i-x)==Math.abs(queen[i]-y)){
+			safe=false;
+		    }
+		}
+	    }
+		
+	    ///if(safeSpot(x+i,y,currentQueenNumber)){
+	    if (safe && board[x][y]=='.'){
+		board[x][y]='Q';
+		solve(x+1,y+1,currentQueenNumber+1);
+		return true;
+	    }
+	    else{
+		solve(x,y+1,currentQueenNumber);
+	    }
+	    board[x][y]='.';
+	    //}
 	
 	return false;
     }
