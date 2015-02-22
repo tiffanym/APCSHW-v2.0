@@ -2,7 +2,7 @@ public class Driver{
     public static void main(String[]args){
 	NQueens f;
 	if(args.length < 1){
-	    f = new NQueens(3);
+	    f = new NQueens(4);
 	}else{
 	    f = new NQueens(Integer.parseInt(args[0]));
 	}
