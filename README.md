@@ -8,7 +8,7 @@ HW/Name - description
   -sqrt = square root
   -sqrt = 'sqrt' helper function
 
-<u>Mazesolver</u> - example done in class as a foundation / foothold (?) on which to code other recursive functions like KnightsTour or NQueens
+Mazesolver - example done in class as a foundation / foothold (?) on which to code other recursive functions like KnightsTour or NQueens
 
 02KnightsTour - code KnightsTour (look it up) recursively
 
