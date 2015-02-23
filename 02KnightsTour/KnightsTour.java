@@ -30,16 +30,15 @@ public class KnightsTour{
     }
 
     public String name(){
-	return "Ming.Tiffany";
+	return "ming.tiffany";
     }
 
     public String toString(){
 	String ans = "\n";
-	//return hide + go(startx,starty) + ans + "\n" + show;
 	String boardAR=go(0,0)+"";
 	for (int i=0;i<board.length;i++){
 	    for (int j=0;j<board[0].length;j++){
-		    boardAR+=board[i][j]+" ";    
+		boardAR+=String.format("%-"+board.length+"s",board[i][j]);    
 	    }
 	    boardAR+=ans;
 	}
@@ -57,11 +56,7 @@ public class KnightsTour{
     }
         
     public boolean solve(){
-	if (board.length<2){
-	    return true;
-	}else{
-	    return solve(0,0);
-	}
+	return solve(0,0);
     }
 
     public boolean solve(int startx, int starty){
@@ -76,25 +71,18 @@ public class KnightsTour{
     public boolean solve(int x,int y,int currentMoveNumber){
 	if (debug){
 	    System.out.println(this);
-	    //wait(20);
+	    //wait(10);
 	}
 	//out of bounds
 	if (x<0 || y<0 || x>=board.length || y>=board[0].length){
 	    return false;
 	}
 	//covered all squares
-	if (currentMoveNumber==board.length*board[0].length && board[x][y]==0){
-	    //board[x][y]=currentMoveNumber;
+	if (currentMoveNumber==board.length*board[0].length + 1){
 	    return true;
-	}
-					       
-	if (board[x][y]==0){ //0=no number 
+	}					       
+	if (board[x][y]==0){ //0=no number 	    
 	    board[x][y]=currentMoveNumber;
-
-	    //if (currentMoveNumber==board.length*board[0].length){
-	    //	return true;
-	    //}
-	    
 	    if(solve(x+2,y+1,currentMoveNumber+1) ||
 	       solve(x+2,y-1,currentMoveNumber+1) ||
 	       solve(x-2,y+1,currentMoveNumber+1) ||
@@ -104,16 +92,11 @@ public class KnightsTour{
 	       solve(x+1,y-2,currentMoveNumber+1) ||
 	       solve(x-1,y-2,currentMoveNumber+1)
 	       ){ 
+		board[x][y]=currentMoveNumber;
 		return true;
 	    }
-
-
 	    board[x][y]=0;
-	    return false;
 	}
-	//if (board[x][y]==board.length*board[0].length){
-	//    return true;
-	//	}
 	return false;
     }
 }
