@@ -65,15 +65,16 @@ public class NQueens{
 	if (x<0 || x>board.length){
 	    return false;
 	}else{
-	    return solve(0,x,1); //starts on first column
+	    return solve(0,1); //starts on first column
 	}
     }		
 
     public boolean safeSpot(int row, int col){
-	for (int i=0;i<board.length;i++){//columns
+	for (int i=0;i<col;i++){//columns
 	    if (i!=col){
 		//Any queens in same row?
-		if (queen[i]==row){
+		//if (queen[i]==row){
+		if (board[row][i]=='Q'){
 		    return false;
 		}
 		//Any queens in diagonal?
@@ -85,38 +86,28 @@ public class NQueens{
 	return true;
     }
 
-    public boolean solve(int row,int col,int currentQueenNumber){
+    public boolean solve(int col,int currentQueenNumber){
 	if (debug){
 	    System.out.println(this);
 	    wait(1000);
 	}
 	//out of bounds
-	if (row<0 || row>=board.length ||
-	    col<0 || col>=board.length || 
+	if (col<0 || col>=board.length || 
 	    currentQueenNumber<0 || currentQueenNumber>board.length){
 	 return false;
 	}
-	//covered all squares
-	if (currentQueenNumber==board.length ||
-	   (board.length==1 && currentQueenNumber==1)){
-	    return true;
-	}
-       
-	board[row][col]='Q';
-	for (int r=row;r<board.length;r++){
-	    //if (safeSpot(row,col) && solve(row+1,col,currentQueenNumber+1)){
-	    //queen[col]=row;
-	    //board[row][col]='Q';
-	    //return true;
-	    //}
-	    if (safeSpot(r,col)){
-		queen[col]=r;
-		if (solve(0,col+1,currentQueenNumber+1)){
+
+	for (int row=0;row<board.length;row++){
+	    if (safeSpot(row,col)){
+		board[row][col]='Q';
+		queen[col]=row;
+		if (currentQueenNumber==board.length || solve(col+1,currentQueenNumber+1)){
 		    return true;
 		}
+	    }else{
+		board[row][col]='.';
 	    }
 	}
-	board[row][col]='.';
 
 	return false;
     }
