@@ -10,7 +10,7 @@ public class KnightsTour{
     
     //instance variable
     private int[][]board;
-    boolean debug=true;
+    boolean debug=false;
     
     //terminal specific character to move the cursor
     private String go(int x,int y){

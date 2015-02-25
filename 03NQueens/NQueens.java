@@ -92,11 +92,11 @@ public class NQueens{
 	    wait(1000);
 	}
 	//out of bounds
-	if (col<0 || col>=board.length || 
+	if (col || col>=board.length || 
 	    currentQueenNumber<0 || currentQueenNumber>board.length){
 	 return false;
 	}
-
+	
 	for (int row=0;row<board.length;row++){
 	    if (safeSpot(row,col)){
 		board[row][col]='Q';
@@ -108,6 +108,7 @@ public class NQueens{
 		board[row][col]='.';
 	    }
 	}
+	
 
 	return false;
     }
