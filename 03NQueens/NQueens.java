@@ -58,50 +58,31 @@ public class NQueens{
     }
         
     public boolean solve(){
-	return solve(0);
+	boolean works=false;
+	for (int i=0;i<board.length;i++){
+	    works=works || solve(i);
+	}
+	return works;
     }
 
     public boolean solve(int x){
 	if (x<0 || x>board.length){
 	    return false;
 	}else{
-	    //return solve(0,1); //starts on first column
-	    //return solve(0,x,1);
-	    return solve(0,1);
+	    return solve(0,x);//starts on first column
 	}
     }		
 
     //x=col;y=row
-    public boolean safeSpot(int x,int y){//int row, int col){
-	/*
-	for (int i=0;i<col;i++){//columns
-	    if (i!=col){
-		//Any queens in same row?
-		//if (queen[i]==row){
-		if (board[row][i]=='Q'){
-		    return false;
-		}
-		//Any queens in diagonal?
-		if (Math.abs(i-col)==Math.abs(queen[i]-row)){
-		    return false;
-		}
-	    }
-	}
-	return true;
-	*/
+    public boolean safeSpot(int x,int y){
 	for (int i=0;i<x;i++){//columns
 	    //Any queens in same row?
-	    //if (queen[i]==y){
-	    if (board[y][i]=='Q'){
+	    if (queen[i]==y){
 		return false;
 	    }
 	    //Any queens in diagonal?
-	    //if (Math.abs(i-x)==Math.abs(queen[i]-y)){
-	    if (board[y-i][x-i]=='Q' ||
-		board[y-i][x+i]=='Q' ||
-		board[y+i][x-i]=='Q' ||
-		board[y+i][x+i]=='Q'){
-		return false;
+	    if (Math.abs(i-x)==Math.abs(queen[i]-y)){
+	    	return false;
 	    }
 	}
 	return true;
@@ -112,19 +93,35 @@ public class NQueens{
 	    System.out.println(this);
 	    wait(500);
 	}
+	
+	//for 1x1 board
+	if (board.length==1){
+	    return true;
+	}
+	
 	//out of bounds
 	if (col<0 || col>=board.length || currentQueenNumber<1 || currentQueenNumber>board.length){
 	    return false;
 	}
+	
+	if (board.length==3){
+	    return false;
+	}
+	
 	for (int row=0;row<board.length;row++){
-	    if (board[row][col]=='.' && safeSpot(col,row)){
+	    if (safeSpot(col,row)){
 		board[row][col]='Q';
-		if (solve(col+1,currentQueenNumber+1)){
-		    if (currentQueenNumber==board.length){
-			return true;
-		    }
+		queen[col]=row;
+		//if (solve(col+1,currentQueenNumber+1)){
+		if (solve(col+1,currentQueenNumber+1) || currentQueenNumber==board.length){
+		    return true;
 		}
+		else{
+		    board[row][col]='.';
+		}
+		    //}
 	    }else{
+		queen[col]=(queen[col]+1)%board.length;
 		board[row][col]='.';
 	    }
 	}
