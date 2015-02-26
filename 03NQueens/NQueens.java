@@ -11,7 +11,7 @@ public class NQueens{
     //instance variable
     private char[][]board;
     private int[] queen;//tells what row each queen is in //queen[col]=row queen is in;
-    boolean debug=true;
+    boolean debug=false;
     
     //terminal specific character to move the cursor
     private String go(int x,int y){
