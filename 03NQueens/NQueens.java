@@ -65,7 +65,8 @@ public class NQueens{
 	if (x<0 || x>board.length){
 	    return false;
 	}else{
-	    return solve(0,1); //starts on first column
+	    //return solve(0,1); //starts on first column
+	    return solve(0,x,1);
 	}
     }		
 
@@ -86,30 +87,68 @@ public class NQueens{
 	return true;
     }
 
-    public boolean solve(int col,int currentQueenNumber){
+    public boolean solve(int x,int y,int currentQueenNumber){
 	if (debug){
 	    System.out.println(this);
 	    wait(1000);
 	}
 	//out of bounds
-	if (col || col>=board.length || 
+	if (y<0 || y>=board.length || 
+	    x<0 || x>=board.length || 
 	    currentQueenNumber<0 || currentQueenNumber>board.length){
 	 return false;
-	}
-	
-	for (int row=0;row<board.length;row++){
-	    if (safeSpot(row,col)){
-		board[row][col]='Q';
-		queen[col]=row;
-		if (currentQueenNumber==board.length || solve(col+1,currentQueenNumber+1)){
+	}       
+	/*
+	for (int r=row;r<board.length;row++){
+	    if (safeSpot(r,col)){
+		if (solve (r,col,currentQueenNumber+1)){
+		    queen[col]=r;
+		    board[r][col]='Q';		
+		}
+		if (currentQueenNumber==board.length+1){
 		    return true;
 		}
-	    }else{
-		board[row][col]='.';
+	    }
+
+	    //if (safeSpot(row,col)){
+	    //	board[row][col]='Q';
+	    //	queen[col]=row;
+	    //	if (currentQueenNumber==board.length || solve(col+1,currentQueenNumber+1)){
+	    //	    return true;
+	    //	}
+	    //}else{
+	    //	board[row][col]='.';
+	    //}
+	}
+	*/
+	boolean safe=true;
+	if (currentQueenNumber>1){
+	    for (int i=0;i<currentQueenNumber;i++){//columns
+		if (queen[i]==y){
+		    safe=false;
+		}
+		//Any queens in diagonal?
+		if (Math.abs(i-x)==Math.abs(queen[i]-y)){
+		    safe=false;
+		}
 	    }
 	}
 	
-
+	///if(safeSpot(x+i,y,currentQueenNumber)){
+	if (safe && board[x][y]=='.'){
+	    board[x][y]='Q';
+	    if (currentQueenNumber==board.length){
+		return true;
+	    }else{
+		solve(x+1,y+1,currentQueenNumber+1);
+	    }
+	    //return true;
+	}
+	else{
+	    solve(x,y+1,currentQueenNumber);
+	}
+	board[x][y]='.';
+	
 	return false;
     }
 }
