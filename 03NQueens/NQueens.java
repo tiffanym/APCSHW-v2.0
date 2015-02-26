@@ -70,7 +70,8 @@ public class NQueens{
 	}
     }		
 
-    public boolean safeSpot(int row, int col){
+    public boolean safeSpot(int x,int y, int currentQueenNumber){//int row, int col){
+	/*
 	for (int i=0;i<col;i++){//columns
 	    if (i!=col){
 		//Any queens in same row?
@@ -85,6 +86,18 @@ public class NQueens{
 	    }
 	}
 	return true;
+	*/
+	for (int i=0;i<x;i++){//columns
+	    //Any queens in same row?
+	    if (queen[i]==y){
+		return false;
+	    }
+	    //Any queens in diagonal?
+	    if (Math.abs(i-x)==Math.abs(queen[i]-y)){
+		return false;
+	    }
+	}
+	return true;
     }
 
     public boolean solve(int x,int y,int currentQueenNumber){
@@ -92,12 +105,13 @@ public class NQueens{
 	    System.out.println(this);
 	    wait(1000);
 	}
+	
 	//out of bounds
-	if (y<0 || y>=board.length || 
-	    x<0 || x>=board.length || 
-	    currentQueenNumber<0 || currentQueenNumber>board.length){
-	 return false;
-	}       
+	//if (y<0 || y>=board.length || 
+	//    x<0 || x>=board.length || 
+	//    currentQueenNumber<0 || currentQueenNumber>board.length){
+	// return false;
+	//}       
 	/*
 	for (int r=row;r<board.length;row++){
 	    if (safeSpot(r,col)){
@@ -121,6 +135,7 @@ public class NQueens{
 	    //}
 	}
 	*/
+	/*
 	boolean safe=true;
 	if (currentQueenNumber>1){
 	    for (int i=0;i<currentQueenNumber;i++){//columns
@@ -133,22 +148,29 @@ public class NQueens{
 		}
 	    }
 	}
+	*/
 	
-	///if(safeSpot(x+i,y,currentQueenNumber)){
-	if (safe && board[x][y]=='.'){
+	if(safeSpot(x,y,currentQueenNumber) && board[x][y]=='.'){
+	//if (safe && board[x][y]=='.'){
+	    queen[x]=y;
 	    board[x][y]='Q';
-	    if (currentQueenNumber==board.length){
+	    //if (currentQueenNumber==board.length){
+	    //	return true;
+	    //}else{
+	    if((solve(x+1,y+1,currentQueenNumber+1) || solve(x,y+1,currentQueenNumber+1) || solve(x+1,y,currentQueenNumber+1)) 
+	    //if(solve(x+1,(y+1)%board.length,currentQueenNumber+1)
+	    	&& currentQueenNumber==board.length){		
 		return true;
-	    }else{
-		solve(x+1,y+1,currentQueenNumber+1);
 	    }
+		//}
 	    //return true;
 	}
 	else{
-	    solve(x,y+1,currentQueenNumber);
+	    queen[x]+=1;
+	    solve(x,queen[x],currentQueenNumber);
 	}
 	board[x][y]='.';
 	
 	return false;
-    }
+	}
 }
