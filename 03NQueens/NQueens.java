@@ -112,7 +112,6 @@ public class NQueens{
 	    if (safeSpot(col,row)){
 		board[row][col]='Q';
 		queen[col]=row;
-		//if (solve(col+1,currentQueenNumber+1)){
 		if (solve(col+1,currentQueenNumber+1) || currentQueenNumber==board.length){
 		    return true;
 		}
@@ -127,80 +126,4 @@ public class NQueens{
 	}
 	return false;
     }
-
-    /*
-    public boolean solve(int x,int y,int currentQueenNumber){
-	if (debug){
-	    System.out.println(this);
-	    wait(1000);
-	}
-	
-	//out of bounds
-	if (y<0 || y>=board.length || 
-	    x<0 || x>=board.length || 
-	    currentQueenNumber<0 || currentQueenNumber>board.length){
-	 return false;
-	}       
-	//comment out start here
-	for (int r=row;r<board.length;row++){
-	    if (safeSpot(r,col)){
-		if (solve (r,col,currentQueenNumber+1)){
-		    queen[col]=r;
-		    board[r][col]='Q';		
-		}
-		if (currentQueenNumber==board.length+1){
-		    return true;
-		}
-	    }
-
-	    //if (safeSpot(row,col)){
-	    //	board[row][col]='Q';
-	    //	queen[col]=row;
-	    //	if (currentQueenNumber==board.length || solve(col+1,currentQueenNumber+1)){
-	    //	    return true;
-	    //	}
-	    //}else{
-	    //	board[row][col]='.';
-	    //}
-	}
-	//stop here
-    //comment out start here
-	boolean safe=true;
-	if (currentQueenNumber>1){
-	    for (int i=0;i<currentQueenNumber;i++){//columns
-		if (queen[i]==y){
-		    safe=false;
-		}
-		//Any queens in diagonal?
-		if (Math.abs(i-x)==Math.abs(queen[i]-y)){
-		    safe=false;
-		}
-	    }
-	}
-	//stop here
-	
-	if(safeSpot(x,y,currentQueenNumber) && board[x][y]=='.'){
-	//if (safe && board[x][y]=='.'){
-	    queen[x]=y;
-	    board[x][y]='Q';
-	    //if (currentQueenNumber==board.length){
-	    //	return true;
-	    //}else{
-	    if((solve(x+1,y+1,currentQueenNumber+1) || solve(x,y+1,currentQueenNumber+1) || solve(x+1,y,currentQueenNumber+1)) 
-	    //if(solve(x+1,(y+1)%board.length,currentQueenNumber+1)
-	    	&& currentQueenNumber==board.length){		
-		return true;
-	    }
-		//}
-	    //return true;
-	}
-	else{
-	    queen[x]+=1;
-	    solve(x,queen[x],currentQueenNumber);
-	}
-	board[x][y]='.';
-	
-	return false;
-	}
-*/
 }
