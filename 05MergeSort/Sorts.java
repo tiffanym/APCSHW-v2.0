@@ -1,6 +1,10 @@
 import java.util.*;
 
-public class MergeSort{
+public class Sorts{
+    
+    public static void mergeSort(int[] humanity){
+    	
+    }
     
     /**Merges the two given arrays into one sorted array
      *@param a One of the two arrays to be combined.
