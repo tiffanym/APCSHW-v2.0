@@ -3,12 +3,13 @@ public class MakeLake{
     int R,C,E; //R=row;C=col
                //E=desired elevation (only <=E works in final pasture)
     int N;//N=number of stomp digging instructions
-    int[][] instructions=new int[N][3];
+    int[][] instructions;
 
     public MakeLake(String input){
 	//just some constructor for now; create one that reads file
 	String[] info=input.split("\n");
 	for (int line=0;line<info.length;line++){
+	    //sets variables
 	    if (line==0){
 		String[] para=info[line].split(" ");
 		R=Integer.parseInt(para[0]);
@@ -16,17 +17,20 @@ public class MakeLake{
 		E=Integer.parseInt(para[2]);
 		N=Integer.parseInt(para[3]);
 		pasture= new int[R][C];
+		instructions= new int[N][3];
 	    }
+	    //sets pasture
 	    if (line>0 && line<R+1){
 		String[] pastureRow=info[line].split(" ");
 		for (int col=0;col<C;col++){
 		    pasture[line-1][col]=Integer.parseInt(pastureRow[col]);
 		}
 	    }
+	    //sets instructions
 	    if (line>R && line<R+N+1){
 		String[] tempInstruct=info[line].split(" ");
 		for (int col=0;col<3;col++){
-		    pasture[line-R-1][col]=Integer.parseInt(tempInstruct[col]);
+		    instructions[line-R-1][col]=Integer.parseInt(tempInstruct[col]);
 		}
 	    }
 	}
@@ -40,23 +44,24 @@ public class MakeLake{
     }
 
     public void cowsDig(int[] instruction){
-	int row=instruction[0];
-	int col=instruction[1];
+	int row=instruction[0]-1;
+	int col=instruction[1]-1;
 	int depth=instruction[2];
 	//finds highest elevation
-	int max=pasture[row][col]-depth;
-	for (int r=row;r<pasture.length || r<row+3;r++){
-	    for (int c=col;c<pasture[0].length || c<col+3;c++){
-		if (pasture[row][col]>max){
-		    max=pasture[row][col]-depth;
+	int max=pasture[row][col]; //took away -depth
+	for (int r=row;r<pasture.length && r<row+3;r++){
+	    for (int c=col;c<pasture[0].length && c<col+3;c++){
+		if (pasture[r][c]>max){
+		    max=pasture[r][c];
 		}
 	    }
 	}
+	max=max-depth;
 	//tells cows that should stomp (because on an elevation above desired max) to stomp
-	for (int r=row;r<pasture.length || r<row+3;r++){
-	    for (int c=col;c<pasture[0].length || c<col+3;c++){
-		if (pasture[row][col]>max){
-		    pasture[row][col]=max;
+	for (int r=row;r<pasture.length && r<row+3;r++){
+	    for (int c=col;c<pasture[0].length && c<col+3;c++){
+		if (pasture[r][c]>max){
+		    pasture[r][c]=max;
 		}
 	    }
 	}
