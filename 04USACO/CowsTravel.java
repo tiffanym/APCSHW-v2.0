@@ -39,7 +39,7 @@ public class CowsTravel{
     }
     */
     public CowsTravel(){
-	File info=new File("ctravel3.txt");
+	File info=new File("ctravel.in");
 	try{
 	    Scanner scan= new Scanner(info);
 	    int line=0;
