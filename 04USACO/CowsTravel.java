@@ -39,7 +39,7 @@ public class CowsTravel{
     }
     */
     public CowsTravel(){
-	File info=new File("ctravel.in");
+	File info=new File("ctravel3.txt");
 	try{
 	    Scanner scan= new Scanner(info);
 	    int line=0;
@@ -71,28 +71,30 @@ public class CowsTravel{
 		line++;
 	    }
 	}catch (FileNotFoundException e){
-
+	    //WHY WOULD YOU DO THIS TO ME, PROGRAM?! :P
 	}
     }
 
     public int FJneedstoKnow(){
 	//startR,startC= (R1-1,C1-1); endR,endC=(R2-1,C2-1);
-	return travel(R1-1,C1-1,1);
+	return travel(R1-1,C1-1,T);
     }
 
     public int travel(int row,int col,int time){
-	if (row<0 || row>=N || col<0 || col>=M || time<0 || time>T) { //out of bounds
+	if (row<0 || row>=N || col<0 || col>=M || time<0) { //out of bounds
 	    return 0;
 	}
-	if (time==T && row==R2-1 && col==C2-1){ //finished / at end position
+	if (time==0 && row==R2-1 && col==C2-1){ //finished / at end position
 	    return 1;
 	}
 	if (pasture[row][col]==""+'*'){ //is a '*'(tree)
 	    return 0;
 	}
 	//Can a path be made from the current position with the given amount of steps/ time?
-	return travel(row+1,col,time+1) + travel(row,col+1,time+1) +
-		travel(row-1,col,time+1) + travel(row,col-1,time+1);
+	return travel(row+1,col,time-1) + //down
+	    travel(row-1,col,time-1) + //up
+	    travel(row,col+1,time-1) + //right
+	    travel(row,col-1,time-1); //left
     }
     
     public static void main(String[] args){
