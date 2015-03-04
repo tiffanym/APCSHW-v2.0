@@ -6,8 +6,7 @@ public class CowsTravel{
     int N,M,T; //N=row(2<=N<=100) //M=col(2<=M<=100) //T=time(0<T<=15)
     int R1,C1,R2,C2; //(R1,C1)=start (R2,C2)=end
     int S=0; //number of ways cows can travel with given info
-    ArrayList<String> pathsR=new ArrayList<String>();
-    ArrayList<String> pathsC=new ArrayList<String>();
+    ArrayList<String> paths=new ArrayList<String>();
 
     public CowsTravel(String input){
 	String[] info=input.split("\n");
