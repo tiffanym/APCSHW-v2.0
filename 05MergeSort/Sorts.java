@@ -121,5 +121,17 @@ public class Sorts{
 	int[] pleasegodletthiswork=mergeSortH(test2); 
 	System.out.println(Arrays.toString(pleasegodletthiswork));
 	*/
+	
+	//if(args.length==0){
+	//    System.out.println("java Filename [sort] [size]");
+	//    System.out.println("sort:0=merge; otherwise, arrays.sort");
+	//}
+	Random r=new Random();
+	int[] test = new int[4000000];
+	for (int i=0;i<test.length;i++){
+	    test[i]=r.nextInt(test.length);
+	}
+	//mergeSort(test);
+	Arrays.sort(test);
     }
 }
