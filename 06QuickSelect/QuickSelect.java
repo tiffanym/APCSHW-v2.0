@@ -59,24 +59,28 @@ public class QuickSelect{
 	}
 	d[start]=pivot;
 	System.out.println(Arrays.toString(d)); //
+	int ans;
 	if (start==index){
-	    return d[start];
-	}
+	    ans= d[start];
+	}else{
 
-	ary=Arrays.copyOf(d,d.length);
-	
-	if (index<start){
-	    partitionIP(ary,si,start-1,index);
+	    ary=Arrays.copyOf(d,d.length);
+	    
+	    if (index<start){
+		ans=partitionIP(ary,si,start-1,index);
+	    }else{
+		ans=partitionIP(ary,start+1,ei,index);       
+	    }
 	}
-	return partitionIP(ary,start+1,ei,index);       
+	return ans;
     }
 
     public static void main(String[] args){
 	Random r= new Random();
 	//int[] ary={15,12,16,2,4,9,85,21,36};
 	//partition(ary,2,5);  
-	int[] test={2,5,6,1,8,0,9,7,4,3};
-	//int[] test={2,0,4,1,3};
+	//int[] test={2,5,6,1,8,0,9,7,4,3};
+	int[] test={2,0,4,1,3};
 	int num=r.nextInt(test.length);
 	System.out.println("Index: "+num);
 	int fin= partitionIP(test,0,test.length-1,num);
