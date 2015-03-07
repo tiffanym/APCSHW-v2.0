@@ -29,60 +29,46 @@ public class QuickSelect{
 	d[ei]=pivot;
     }
 
-    public static int partitionMain(int[]ary, int si, int ei, int index){
-	QuickSelect.partitionIP(ary,si,ei,index);
+    public static int partitionMain(int[]ary, int index){
 	System.out.println("Index: "+index);
-	return ary[index];
+	//QuickSelect.partitionIP(ary,si,ei,index);
+	//return ary[index];
+	return partitionIP(ary,0,ary.length-1,index);
     }
 
     //in place quickselect
-    public static int[] partitionIP(int[]ary, int si, int ei, int index){ //looking for element at given index
+    public static int partitionIP(int[]ary, int si, int ei, int index){ //looking for element at given index
 	System.out.println("Current Array: "+Arrays.toString(ary)); //
-	if ((si==index && ei==index+1) || (si==index-1 && ei==index)){
-	    return ary;
+	int[] d= Arrays.copyOf(ary,ary.length);
+	System.out.println("Start: "+si+"\n"+"End: "+ei); //
+	
+	int ri=si+(int)(Math.random()*(ei-si+1));
+	int pivot= ary[ri];
+	System.out.println("pivot: "+ pivot); //
+	int start=si;
+	int end=ei;
+	for (int n=si;n<=ei ;n++){
+	    if (ary[n]<pivot){
+		d[start]=ary[n];
+		start++;			
+	    }
+	    if(ary[n]>pivot){		    
+		d[end]=ary[n];
+		end--;
+	    }
 	}
-	//if ((si==0 && ei==0) || (si==ary.length && ei==ary.length)){
-	//    return ary;
-	//}
-	if (ary.length>1 && ei-si>0){ //or 1?
-	    int[] d= new int[ary.length];	    
-	    for (int i=0;i<ary.length;i++){
-		if (i<si || i>ei){
-		    d[i]=ary[i];
-		}
-	    }
-	    System.out.println("Copied Array: "+Arrays.toString(d)+"\n"+"Start: "+si+"\n"+"End: "+ei); //
-	    
-	    int ri=si+(int)(Math.random()*(ei-si+1));
-	    int pivot= ary[ri];
-	    System.out.println("pivot: "+ pivot); //
-	    int origEnd=ei;
-	    for (int n=si;n<ary.length ;n++){
-		if (n<=origEnd && si<=ei){
-		    //if (si<=ei){
-		    if (ary[n]<pivot){
-			System.out.println("Start: "+si); //
-			d[si]=ary[n];
-			si+=1;			
-		    }
-		    if(ary[n]>pivot){
-			System.out.println("End: "+ei); //
-			d[ei]=ary[n];
-			ei-=1;
-		    }
-		    System.out.println(Arrays.toString(d)); //
-		}
-	    }
-	    d[ei]=pivot;
-	    if (index<si){
-		partitionIP(d,0,si-1,index);
-	    }
-	    if (index>ei){
-		partitionIP(d,ei+1,d.length-1,index);
-	    }
-	    return d;
+	d[start]=pivot;
+	System.out.println(Arrays.toString(d)); //
+	if (start==index){
+	    return d[start];
 	}
-	return ary;
+
+	ary=Arrays.copyOf(d,d.length);
+	
+	if (index<start){
+	    partitionIP(ary,si,start-1,index);
+	}
+	return partitionIP(ary,start+1,ei,index);       
     }
 
     public static void main(String[] args){
@@ -90,6 +76,12 @@ public class QuickSelect{
 	//int[] ary={15,12,16,2,4,9,85,21,36};
 	//partition(ary,2,5);  
 	int[] test={2,5,6,1,8,0,9,7,4,3};
-	System.out.println(partitionMain(test,0,test.length-1,r.nextInt(test.length)));
+	//int[] test={2,0,4,1,3};
+	int num=r.nextInt(test.length);
+	System.out.println("Index: "+num);
+	int fin= partitionIP(test,0,test.length-1,num);
+	System.out.println(fin);
+	//System.out.println(partitionIP(test,0,test.length-1,r.nextInt(test.length)));
+	//System.out.println(Arrays.toString(fin));
     }
 }
