@@ -32,6 +32,7 @@ public class MyLinkedList{
     public void set(int index, int value){ //yes exceptions
 
     }
+    //check documentation for return types
     public void add(int value){
 
     }
