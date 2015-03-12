@@ -1,8 +1,5 @@
 public class MyLinkedList{
     LNode head;
-    //while (current.getNext()!=null){
-    //	current=current.getNext();
-    //}
     LNode current; //copy of head
 
     public MyLinkedList(LNode head){
@@ -23,25 +20,50 @@ public class MyLinkedList{
 	L+=current.getValue()+" ]";
 	return L;
     }
+
     public int get(int index){ //yes exceptions
-	for (int posn=0;current.getNext()!=null && (posn< );posn++){ //finish this
-
+	try{
+	    int posn=0;
+	    while (current.getNext()!=null){
+		if(posn==index){
+		    return current.getValue();
+		}
+		current=current.getNext();
+		posn+=1;
+	    }
+	    if (posn==index){
+		return current.getValue();
+	    }
+	}catch(IndexOutOfBoundsException e){
+	    System.out.println("Index out of Bounds");
 	}
-	return index;
+	return 0;
     }
+
+    //returns element previously at specified position
     public void set(int index, int value){ //yes exceptions
-
+	
     }
+
     //check documentation for return types
-    public void add(int value){
-
+    public boolean add(int value){ //something going on here that makes it not work...
+	//int posn=0;
+	//while (current.getNext()!=null){
+	//    posn+=1;
+	//    current=current.getNext();
+	//}
+	//current.setValue(value);	
+	return true;
     }
+
     public void add(int index, int value){
 
     }
+
     public int remove(int index){
 	return index;
     }
+
     public int size(){
 	int size=0;
 	while (current.getNext()!=null){
@@ -51,6 +73,7 @@ public class MyLinkedList{
 	size+=1;
 	return size;
     }
+
     public int indexOf(int value){
 	return value;
     }
@@ -63,10 +86,18 @@ public class MyLinkedList{
 	//TOSTRING should print "[ 3 2 9 ]"
 	//System.out.println(test.toString()); //works
 
-	//SIZE shoudl print 3
-	System.out.println(test.size());
+	//SIZE should print 3
+	//System.out.println(test.size()); //works
 	
 	//why so long to compile though? T.T 
 	//(longer than i think it should take,anyway)	
+
+	//GET
+	//System.out.println(test.get(2)); //works (returns 9; get(1) returns 2)
+	//System.out.println(test.get(5)); //works (returns 0)
+
+	//ADD
+	test.add(6);
+	System.out.println(test.toString());
     }
 }
