@@ -81,10 +81,10 @@ public class MyLinkedList{
 	    LNode temp=new LNode(value,head);
 	    head=temp;
 	}
-	if (index==size){
+	else if (index==size){
 	    add(value);
 	}
-	if(index>0 && index<size){
+	else if(index>0 && index<size){
 	    LNode temp=new LNode(value);
 	    for (int posn=0;current.getNext()!=null && posn<index;posn++){
 		current=current.getNext();
