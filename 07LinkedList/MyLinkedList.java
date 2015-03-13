@@ -4,6 +4,8 @@ public class MyLinkedList{
     LNode tail; //keeps track of last node
     int size=0;
 
+    //Never return or take LNode as parameter!
+    /*
     public MyLinkedList(LNode head){
 	this.head=head;
 	current=new LNode(head.getValue(),head.getNext());
@@ -13,6 +15,7 @@ public class MyLinkedList{
 	}
 	size();
     }
+    */
     public MyLinkedList(){
 	head=new LNode();
 	current=new LNode(head.getValue(),head.getNext());
@@ -68,10 +71,11 @@ public class MyLinkedList{
 	if (size==0){
 	    head=new LNode(value,null);
 	}else{
-	    for (int i=0;i<size;i++){
-		current=current.getNext();
-	    }
-	    current.setNext(new LNode(value));	    
+	    //for (int i=0;i<size;i++){
+	    //	current=current.getNext();
+	    //}
+	    //current.setNext(new LNode(value));	    
+	    tail.setNext(new LNode(value));
 	}
 	return true;
     }
@@ -166,6 +170,8 @@ public class MyLinkedList{
 	//System.out.println(test.set(2,12)); //OH.
 	//System.out.println(test.set(-1,4)); //MY.
 	//System.out.println(test.set(14,1)); //GAWD.
+
+	//System.out.println(test.toString());
 
     }
 }
