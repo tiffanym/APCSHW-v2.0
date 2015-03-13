@@ -111,7 +111,6 @@ public class MyLinkedList{
 	}
     }
 
-    //public int size(){
     public void size(){
 	while (current.getNext()!=null){
 	    size+=1;
