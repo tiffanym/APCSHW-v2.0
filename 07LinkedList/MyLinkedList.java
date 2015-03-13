@@ -1,16 +1,22 @@
 public class MyLinkedList{
     LNode head;
     LNode current; //copy of head
+    LNode tail; //keeps track of last node
     int size=0;
 
     public MyLinkedList(LNode head){
 	this.head=head;
 	current=new LNode(head.getValue(),head.getNext());
+	tail=new LNode(current.getValue(),current.getNext());
+	while (tail.getNext()!=null){
+	    tail=tail.getNext();
+	}
 	size();
     }
     public MyLinkedList(){
 	head=new LNode();
 	current=new LNode(head.getValue(),head.getNext());
+	tail=head;
 	size();
     }
 
@@ -45,7 +51,7 @@ public class MyLinkedList{
 
     //returns element previously at specified position
     public int set(int index, int value){ //yes exceptions
-	if(index>=0 && index<=size()){
+	if(index>=0 && index<=size){
 	    for (int posn=0;current.getNext()!=null && posn<index;posn++){
 		current=current.getNext();
 	    }
@@ -59,19 +65,26 @@ public class MyLinkedList{
     }
 
     public boolean add(int value){
-	if (size()==0){
+	if (size==0){
 	    head=new LNode(value,null);
 	}else{
-	    for (int i=0;i<size()-1;i++){
+	    for (int i=0;i<size;i++){
 		current=current.getNext();
 	    }
-	    current.setNext(new LNode(value));
+	    current.setNext(new LNode(value));	    
 	}
 	return true;
     }
 
     public void add(int index, int value){
-	if(index>=0 && index<=size()){
+	if (index==0){
+	    LNode temp=new LNode(value,head);
+	    head=temp;
+	}
+	if (index==size){
+	    add(value);
+	}
+	if(index>0 && index<size){
 	    LNode temp=new LNode(value);
 	    for (int posn=0;current.getNext()!=null && posn<index;posn++){
 		current=current.getNext();
@@ -85,7 +98,7 @@ public class MyLinkedList{
     }
 
     public int remove(int index){
-	if(index>=0 && index<=size()){
+	if(index>=0 && index<=size){
 	    for (int posn=0;current.getNext()!=null && posn<index;posn++){
 		current=current.getNext();
 	    }
@@ -100,14 +113,11 @@ public class MyLinkedList{
 
     //public int size(){
     public void size(){
-	int size=0;
 	while (current.getNext()!=null){
 	    size+=1;
 	    current=current.getNext();
 	}
 	size+=1;
-	//return size;
-	this.size=size;
     }
 
     public int indexOf(int value){
