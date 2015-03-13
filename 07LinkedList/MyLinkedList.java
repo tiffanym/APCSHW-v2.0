@@ -41,27 +41,58 @@ public class MyLinkedList{
     }
 
     //returns element previously at specified position
-    public void set(int index, int value){ //yes exceptions
-	
+    public int set(int index, int value){ //yes exceptions
+	if(index>=0 && index<=size()){
+	    for (int posn=0;current.getNext()!=null && posn<index;posn++){
+		current=current.getNext();
+	    }
+	    int out=current.getValue();
+	    current.setValue(value);
+	    return out;
+	}else{
+	    System.out.println("Index out of Bounds!");
+	    return -1;
+	}	
     }
 
-    //check documentation for return types
-    public boolean add(int value){ //something going on here that makes it not work...
-	//int posn=0;
-	//while (current.getNext()!=null){
-	//    posn+=1;
-	//    current=current.getNext();
-	//}
-	//current.setValue(value);	
+    public boolean add(int value){
+	if (size()==0){
+	    head=new LNode(value,null);
+	}else{
+	    for (int i=0;i<size()-1;i++){
+		current=current.getNext();
+	    }
+	    current.setNext(new LNode(value));
+	}
 	return true;
     }
 
     public void add(int index, int value){
-
+	if(index>=0 && index<=size()){
+	    LNode temp=new LNode(value);
+	    for (int posn=0;current.getNext()!=null && posn<index;posn++){
+		current=current.getNext();
+	    }
+	    temp.setNext(current);
+	    current.setNext(temp);    
+	}
+	else{
+	    System.out.println("Index out of Bounds!");
+	}
     }
 
     public int remove(int index){
-	return index;
+	if(index>=0 && index<=size()){
+	    for (int posn=0;current.getNext()!=null && posn<index;posn++){
+		current=current.getNext();
+	    }
+	    int out=current.getValue();
+	    current=current.getNext();
+	    return out;
+	}else{
+	    System.out.println("Index out of Bounds!");
+	    return -1;
+	}
     }
 
     public int size(){
@@ -75,7 +106,13 @@ public class MyLinkedList{
     }
 
     public int indexOf(int value){
-	return value;
+	for (int posn=0;current.getNext()!=null;posn++){
+	    if (current.getValue()==value){
+		return posn;
+	    }
+	    current=current.getNext();
+	}
+	return -1; //value not in linked list
     }
 
     public static void main(String[] args){
@@ -96,8 +133,25 @@ public class MyLinkedList{
 	//System.out.println(test.get(2)); //works (returns 9; get(1) returns 2)
 	//System.out.println(test.get(5)); //works (returns 0)
 
-	//ADD
-	test.add(6);
-	System.out.println(test.toString());
+	//ADD to end
+	//System.out.println(test.add(6));
+
+	//ADD to specific index
+	//test.add(1,5); //It works!... I think.
+	//test.add(5,4); //It prints out the message... so.... works?
+
+	//INDEX-finds where a certain value is
+	//System.out.println(test.indexOf(2)); //works
+	//System.out.println(test.indexOf(5)); //works
+
+	//REMOVE
+	//System.out.println(test.remove(2)); //works 
+	//System.out.println(test.remove(5)); //OMG... it works so far \(OoO)/
+	
+	//SET
+	//System.out.println(test.set(2,12)); //OH.
+	//System.out.println(test.set(-1,4)); //MY.
+	//System.out.println(test.set(14,1)); //GAWD.
+
     }
 }
