@@ -1,0 +1,55 @@
+//for visualizing/testing purposes
+public class LNode{
+   private int value;
+   private LNode next;
+   LNode head;
+
+    //constructors
+   public LNode(int value, LNode next){
+      setValue(value);
+      setNext(next);
+   }
+   public LNode(int value){
+      setValue(value);
+      setNext(null);
+   }
+   public LNode(LNode next){
+      setValue(0);
+      setNext(next);
+   }
+   public LNode(){
+      setValue(0);
+      setNext(null);
+   }
+
+   //get/set methods
+   public int getValue(){
+      return value;
+   }
+   public void setValue(int value){
+      this.value=value;
+   }
+   public LNode getNext(){
+      return next;
+   }
+   public void setNext(LNode next){
+      this.next=next;
+   }
+
+   public String toString(){ //no exceptions
+      String L="[ ";
+      while (head.getNext()!=null){
+         L+=head.getValue()+" ";
+         head=head.getNext();
+      }
+      L+=head.getValue()+" ]";
+      return L;
+   }
+
+   public static void main(String[] args) {
+      LNode help2=new LNode(9,null);
+      LNode help1=new LNode(2,help2);	
+      LNode head=new LNode(3,help1);
+      System.out.println(head.toString());
+   }
+}
