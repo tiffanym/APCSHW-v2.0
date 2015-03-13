@@ -1,14 +1,17 @@
 public class MyLinkedList{
     LNode head;
     LNode current; //copy of head
+    int size=0;
 
     public MyLinkedList(LNode head){
 	this.head=head;
 	current=new LNode(head.getValue(),head.getNext());
+	size();
     }
     public MyLinkedList(){
 	head=new LNode();
 	current=new LNode(head.getValue(),head.getNext());
+	size();
     }
 
     public String toString(){ //no exceptions
@@ -95,14 +98,16 @@ public class MyLinkedList{
 	}
     }
 
-    public int size(){
+    //public int size(){
+    public void size(){
 	int size=0;
 	while (current.getNext()!=null){
 	    size+=1;
 	    current=current.getNext();
 	}
 	size+=1;
-	return size;
+	//return size;
+	this.size=size;
     }
 
     public int indexOf(int value){
