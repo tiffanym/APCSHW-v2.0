@@ -73,17 +73,6 @@ public class TempList{
 	if (index<0 || index>=size){
 	    throw new IndexOutOfBoundsException("Index "+index+" out of Bounds!");
 	}else{
-	    //int out;
-	    /*
-	    for (int posn=0;current.getNext()!=null;posn++){
-		if (posn==index){
-		    out=posn;
-		    current=current.getNext();
-		    break;
-		}
-		current=current.getNext
-	    }
-	    */
 	    int posn=0;
 	    current=head;
 	    LNode temp=new LNode(current.getValue(),null);
