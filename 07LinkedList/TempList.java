@@ -80,28 +80,15 @@ public class TempList{
 	else{
 	    int posn=0;
 	    current=head;
-	    //LNode temp=new LNode(current.getValue(),null);
-	    //LNode temp=head;
 	    while (current.getNext()!=null && posn<index-1){
 		current=current.getNext();
-		//temp.setNext(new LNode(current.getValue(),null));
 		posn++;
-		//out=current.getValue();
 	    }
 	    if (index==size-1){
 		tail=current;
-	    }	    
-	    //current.setNext(current.getNext().getNext());
-	    //head=current;
-	    //else{
-		//current=current.getNext(); //at index position
-		//current=current.getNext(); //at index+1 position
-		//temp.setNext(new LNode(current.getValue(),current.getNext()));
-		// }
+	    }
 	    out=current.getNext().getValue();
-	    current.setNext(current.getNext().getNext());
-	    
-		//head=temp;
+	    current.setNext(current.getNext().getNext());	    
 	    size--;;
 	}
 	return out;
