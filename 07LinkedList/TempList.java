@@ -1,3 +1,4 @@
+import java.util.*;
 public class TempList{
     LNode head, current, tail;
     int size;
@@ -57,6 +58,16 @@ public class TempList{
 	}
     }
 
+    public int indexOf(int value){
+	for (int posn=0;current.getNext()!=null;posn++){
+	    if (current.getValue()==value){
+		return posn;
+	    }
+	    current=current.getNext();
+	}
+	throw new NoSuchElementException(value+" not in linked list");
+    }
+
     public String toString(){
 	String L="[ ";
 	current=new LNode(head.getValue(),head.getNext());
@@ -96,5 +107,9 @@ public class TempList{
 	//GET(index)
 	System.out.println(test.get(2));
 	System.out.println(test.get(15));
+
+	//INDEXOF(value)
+	System.out.println(test.indexOf(14));
+	System.out.println(test.indexOf(200));
     }
 }
