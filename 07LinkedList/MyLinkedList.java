@@ -103,10 +103,10 @@ public class MyLinkedList{
 		current=current.getNext();
 		posn++;
 	    }
+	    before=current.getValue();
 	    if (index==size-1){
 		tail.setValue(value);
-	    }
-	    before=current.getValue();
+	    }	    
 	    current.setValue(value);
 	}
 	return before;
@@ -164,8 +164,8 @@ public class MyLinkedList{
 
 	//SET(index,value)
 	//System.out.println("Size:"+test.size());
-	System.out.println(test.set(3,4));
-	System.out.println(test.set(4,16));
+	System.out.println("set "+test.set(3,4));
+	System.out.println("set "+test.set(4,16));
 	System.out.println(test.toString());
     }
 }

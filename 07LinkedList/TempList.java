@@ -103,10 +103,10 @@ public class TempList{
 		current=current.getNext();
 		posn++;
 	    }
+	    before=current.getValue();
 	    if (index==size-1){
 		tail.setValue(value);
 	    }
-	    before=current.getValue();
 	    current.setValue(value);
 	}
 	return before;
