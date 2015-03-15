@@ -94,11 +94,6 @@ public class TempList{
 	return out;
     }
 
-    //for testing purposes
-    public String tailString(){
-	return tail.toString();
-    }
-
     public String toString(){
 	String L="[ ";
 	current=new LNode(head.getValue(),head.getNext());
