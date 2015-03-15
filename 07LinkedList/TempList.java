@@ -68,6 +68,53 @@ public class TempList{
 	throw new NoSuchElementException(value+" not in linked list");
     }
 
+    public int remove(int index){
+	int out=-1;
+	if (index<0 || index>=size){
+	    throw new IndexOutOfBoundsException("Index "+index+" out of Bounds!");
+	}else{
+	    //int out;
+	    /*
+	    for (int posn=0;current.getNext()!=null;posn++){
+		if (posn==index){
+		    out=posn;
+		    current=current.getNext();
+		    break;
+		}
+		current=current.getNext
+	    }
+	    */
+	    int posn=0;
+	    current=head;
+	    LNode temp=new LNode(current.getValue(),null);
+	    while (current.getNext()!=null && posn<index){
+		current=current.getNext();
+		temp.setNext(new LNode(current.getValue(),null));
+		posn++;
+		out=current.getValue();
+	    }
+	    //current=current.getNext();
+	    if (index==size-1){
+		tail=current;
+	    }
+	    //current.setNext(current.getNext().getNext());
+	    //head=current;
+	    else{
+		//current=current.getNext(); //at index position
+		current=current.getNext(); //at index+1 position
+	    }
+	    temp.setNext(new LNode(current.getValue(),current.getNext()));
+	    head=temp;
+	    size--;;
+	}
+	return out;
+    }
+
+    //for testing purposes
+    public String tailString(){
+	return tail.toString();
+    }
+
     public String toString(){
 	String L="[ ";
 	current=new LNode(head.getValue(),head.getNext());
@@ -106,10 +153,15 @@ public class TempList{
 	
 	//GET(index)
 	System.out.println(test.get(2));
-	System.out.println(test.get(15));
+	//System.out.println(test.get(15));
 
 	//INDEXOF(value)
 	System.out.println(test.indexOf(14));
-	System.out.println(test.indexOf(200));
+	//System.out.println(test.indexOf(200));
+
+	//REMOVE(index)
+	System.out.println("removed "+test.remove(2));
+	//System.out.println("tail: "+test.tailString());
+	System.out.println(test.toString());       
     }
 }
