@@ -43,6 +43,20 @@ public class TempList{
 	}
     }
 
+    public int get (int index){
+	if (index<0 || index>=size){
+	    throw new IndexOutOfBoundsException("Index "+index+" out of Bounds!");
+	}else{
+	    current=head;
+	    int posn=0;
+	    while (current.getNext()!=null && posn<index){
+		current=current.getNext();
+		posn++;
+	    }
+	    return current.getValue();
+	}
+    }
+
     public String toString(){
 	String L="[ ";
 	current=new LNode(head.getValue(),head.getNext());
@@ -73,9 +87,14 @@ public class TempList{
 
 	//ADD(index,value)
 	test.add(2,4);
-
 	//test.add(16,6);
-	System.out.println(test.toString());
+
+	System.out.println(test.toString());       
+	//SIZE()
 	System.out.println(test.size());
+	
+	//GET(index)
+	System.out.println(test.get(2));
+	System.out.println(test.get(15));
     }
 }
