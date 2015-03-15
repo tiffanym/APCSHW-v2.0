@@ -164,8 +164,8 @@ public class MyLinkedList{
 
 	//SET(index,value)
 	//System.out.println("Size:"+test.size());
-	System.out.println("set "+test.set(3,4));
-	System.out.println("set "+test.set(4,16));
+	System.out.println("before set change: "+test.set(3,4));
+	System.out.println("before set change: "+test.set(4,16));
 	System.out.println(test.toString());
     }
 }
