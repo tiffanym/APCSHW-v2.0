@@ -11,10 +11,10 @@ public class LNode{
 	setValue(value);
 	setNext(null);
     }
-    public LNode(LNode next){
-	setValue(0);
-	setNext(next);
-    }
+    //public LNode(LNode next){
+    //	setValue(0);
+    //	setNext(next);
+    //}
     public LNode(){
 	setValue(0);
 	setNext(null);
