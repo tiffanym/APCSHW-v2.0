@@ -27,11 +27,8 @@ public class TempList{
 
     public void add(int index,int value){
 	current=head;
-	if (index<0){
+	if (index<0 || index>=size){
 	    throw new IndexOutOfBoundsException();
-	}
-	else if (index>=size){
-	    add(value);
 	}else{
 	    int posn=0;
 	    while(current.getNext()!=null && posn<index-1){
@@ -134,11 +131,11 @@ public class TempList{
 	TempList test=new TempList();
 	//ADD(value)
 	test.add(1);
-	test.add(2);
-	test.add(3);
-	test.add(-1);
-	test.add(14);
-	test.add(5);
+	//test.add(2);
+	//test.add(3);
+	//test.add(-1);
+	//test.add(14);
+	//test.add(5);
 
 	//TOSTRING()
 	System.out.println(test.toString());
@@ -166,8 +163,9 @@ public class TempList{
 	System.out.println(test.toString());       
 
 	//SET(index,value)
-	System.out.println("Size:"+test.size());
+	//System.out.println("Size:"+test.size());
 	System.out.println(test.set(3,4));
+	System.out.println(test.set(4,16));
 	System.out.println(test.toString());
     }
 }
