@@ -72,28 +72,36 @@ public class TempList{
 	int out=-1;
 	if (index<0 || index>=size){
 	    throw new IndexOutOfBoundsException("Index "+index+" out of Bounds!");
-	}else{
+	}
+	if (index==0){
+	    out=head.getValue();
+	    head=head.getNext();	 
+	}
+	else{
 	    int posn=0;
 	    current=head;
-	    LNode temp=new LNode(current.getValue(),null);
-	    while (current.getNext()!=null && posn<index){
+	    //LNode temp=new LNode(current.getValue(),null);
+	    //LNode temp=head;
+	    while (current.getNext()!=null && posn<index-1){
 		current=current.getNext();
-		temp.setNext(new LNode(current.getValue(),null));
+		//temp.setNext(new LNode(current.getValue(),null));
 		posn++;
-		out=current.getValue();
+		//out=current.getValue();
 	    }
-	    //current=current.getNext();
 	    if (index==size-1){
 		tail=current;
-	    }
+	    }	    
 	    //current.setNext(current.getNext().getNext());
 	    //head=current;
-	    else{
+	    //else{
 		//current=current.getNext(); //at index position
-		current=current.getNext(); //at index+1 position
-	    }
-	    temp.setNext(new LNode(current.getValue(),current.getNext()));
-	    head=temp;
+		//current=current.getNext(); //at index+1 position
+		//temp.setNext(new LNode(current.getValue(),current.getNext()));
+		// }
+	    out=current.getNext().getValue();
+	    current.setNext(current.getNext().getNext());
+	    
+		//head=temp;
 	    size--;;
 	}
 	return out;
@@ -149,8 +157,9 @@ public class TempList{
 	//System.out.println(test.indexOf(200));
 
 	//REMOVE(index)
+	System.out.println("removed "+test.remove(4));
 	System.out.println("removed "+test.remove(2));
-	//System.out.println("tail: "+test.tailString());
+	System.out.println("removed "+test.remove(15));
 	System.out.println(test.toString());       
     }
 }
