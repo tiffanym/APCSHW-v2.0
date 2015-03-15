@@ -26,7 +26,6 @@ public class TempList{
 
     public void add(int index,int value){
 	current=head;
-	//current=new LNode(head.getValue(),head.getNext());
 	if (index<0){
 	    throw new IndexOutOfBoundsException();
 	}
@@ -38,13 +37,6 @@ public class TempList{
 		current=current.getNext();
 		posn++;
 	    }
-	    //if (current.getNext()!=null){
-	    //	LNode temp=new LNode(value,current.getNext());
-	    //	current.setNext(temp);
-	    //	//current.setNext(new LNode(value,current.getNext()));
-	    //}else{
-	    //	current.setNext(new LNode(value,null));
-	    //}
 	    LNode temp=new LNode(value,current.getNext());
 	    current.setNext(temp);
 	    size++;
@@ -80,7 +72,7 @@ public class TempList{
 	System.out.println(test.toString());
 
 	//ADD(index,value)
-	test.add(2,4); //Doesn't add 
+	test.add(2,4);
 
 	//test.add(16,6);
 	System.out.println(test.toString());
