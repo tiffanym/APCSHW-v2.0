@@ -94,6 +94,27 @@ public class TempList{
 	return out;
     }
 
+    public int set(int index,int value){
+	int before=0;
+	if (index<0 || index>=size){
+	    throw new IndexOutOfBoundsException("Index "+index+" out of Bounds!");
+	}
+	else{
+	    current=head;
+	    int posn=0;
+	    while (current.getNext()!=null && posn<index){
+		current=current.getNext();
+		posn++;
+	    }
+	    if (index==size-1){
+		tail.setValue(value);
+	    }
+	    before=current.getValue();
+	    current.setValue(value);
+	}
+	return before;
+    }
+
     public String toString(){
 	String L="[ ";
 	current=new LNode(head.getValue(),head.getNext());
@@ -141,7 +162,12 @@ public class TempList{
 	//REMOVE(index)
 	System.out.println("removed "+test.remove(4));
 	System.out.println("removed "+test.remove(2));
-	System.out.println("removed "+test.remove(15));
+	//System.out.println("removed "+test.remove(15));
 	System.out.println(test.toString());       
+
+	//SET(index,value)
+	System.out.println("Size:"+test.size());
+	System.out.println(test.set(3,4));
+	System.out.println(test.toString());
     }
 }
