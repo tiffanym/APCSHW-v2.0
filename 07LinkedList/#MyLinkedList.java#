@@ -132,9 +132,6 @@ public class MyLinkedList{
     }
 
     public static void main(String[] args){
-	//make test conditions
-
-	/*
 	MyLinkedList test=new MyLinkedList();
 	//ADD(value)
 	test.add(1);
@@ -174,6 +171,5 @@ public class MyLinkedList{
 	System.out.println("before set change: "+test.set(3,4));
 	System.out.println("before set change: "+test.set(4,16));
 	System.out.println(test.toString());
-	*/
     }
 }
