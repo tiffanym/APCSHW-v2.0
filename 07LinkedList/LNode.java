@@ -1,9 +1,9 @@
-public class LNode{
+public class LNode<T>{
     private int value;
-    private LNode next;
+    private LNode<T> next;
 
     //constructors
-    public LNode(int value, LNode next){
+    public LNode(int value, LNode<T> next){
 	setValue(value);
 	setNext(next);
     }
@@ -11,10 +11,7 @@ public class LNode{
 	setValue(value);
 	setNext(null);
     }
-    //public LNode(LNode next){
-    //	setValue(0);
-    //	setNext(next);
-    //}
+
     public LNode(){
 	setValue(0);
 	setNext(null);
@@ -30,7 +27,7 @@ public class LNode{
     public LNode getNext(){
 	return next;
     }
-    public void setNext(LNode next){
+    public void setNext(LNode<T> next){
 	this.next=next;
     }
     
