@@ -9,6 +9,10 @@ public class MyLinkedList{
 	size=0;
     }
 
+    public String name(){
+	return "ming.tiffany";
+    }
+
     public boolean add(int value){
 	if (size==0){
 	    head=new LNode(value,null);
