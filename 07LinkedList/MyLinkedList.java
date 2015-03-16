@@ -1,6 +1,6 @@
 import java.util.*;
 public class MyLinkedList{
-    LNode head, current, tail;
+    LNode<T> head, current, tail;
     int size;
 
     public MyLinkedList(){
@@ -39,13 +39,13 @@ public class MyLinkedList{
 		current=current.getNext();
 		posn++;
 	    }
-	    LNode temp=new LNode(value,current.getNext());
+	    LNode<T> temp=new LNode(value,current.getNext());
 	    current.setNext(temp);
 	    size++;
 	}
     }
 
-    public int get (int index){
+    public T get (int index){
 	if (index<0 || index>=size){
 	    throw new IndexOutOfBoundsException("Index "+index+" out of Bounds!");
 	}else{
@@ -59,7 +59,7 @@ public class MyLinkedList{
 	}
     }
 
-    public int indexOf(int value){
+    public int indexOf(T value){
 	for (int posn=0;current.getNext()!=null;posn++){
 	    if (current.getValue()==value){
 		return posn;
@@ -69,8 +69,8 @@ public class MyLinkedList{
 	throw new NoSuchElementException(value+" not in linked list");
     }
 
-    public int remove(int index){
-	int out=-1;
+    public T remove(int index){
+	T out; //I don't need to initialize... right?
 	if (index<0 || index>=size){
 	    throw new IndexOutOfBoundsException("Index "+index+" out of Bounds!");
 	}
@@ -95,8 +95,8 @@ public class MyLinkedList{
 	return out;
     }
 
-    public int set(int index,int value){
-	int before=0;
+    public T set(int index,T value){
+	T before; //initilize? (compile to see)
 	if (index<0 || index>=size){
 	    throw new IndexOutOfBoundsException("Index "+index+" out of Bounds!");
 	}

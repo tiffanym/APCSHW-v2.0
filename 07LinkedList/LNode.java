@@ -1,30 +1,31 @@
 public class LNode<T>{
-    private int value;
+    private T value;
     private LNode<T> next;
 
     //constructors
-    public LNode(int value, LNode<T> next){
+    public LNode(T value, LNode<T> next){
 	setValue(value);
 	setNext(next);
     }
-    public LNode(int value){
+    public LNode(T value){
 	setValue(value);
 	setNext(null);
     }
 
     public LNode(){
-	setValue(0);
+	//T temp= new T();
+	setValue(null);
 	setNext(null);
     }
 
     //get/set methods
-    public int getValue(){
+    public T getValue(){
 	return value;
     }
-    public void setValue(int value){
+    public void setValue(T value){
 	this.value=value;
     }
-    public LNode getNext(){
+    public LNode<T> getNext(){
 	return next;
     }
     public void setNext(LNode<T> next){
