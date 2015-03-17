@@ -38,8 +38,6 @@ public class MyLinkedList<T>{
 		posn++;
 	    }
 	    T temp=current.getValue();
-	    //LNode<T> temp=new LNode<T>(value,current.getNext());
-	    //temp=
 	    current.setValue(value);
 	    current.setNext(new LNode<T>(temp,current.getNext()));
 	    size++;
