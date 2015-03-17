@@ -132,6 +132,66 @@ public class MyLinkedList<T>{
 
     public static void main(String[] args){
 	//make test conditions
+	MyLinkedList<Integer> testL=new MyLinkedList<Integer>();
+	ArrayList<Integer> testA=new ArrayList<Integer>();
+	
+	int num=5;
+	for (int i=0;i<num;i++){
+	    testL.add(i);
+	    testA.add(i);
+	    System.out.println("Linked List: "+testL.toString());
+	    System.out.println("Array List "+testA.toString());
+	}
+
+	testL.add(2,6); //Mine adds before instead of after given index
+	testA.add(2,6);
+	System.out.println("Linked List: "+testL.toString());
+	System.out.println("Array List "+testA.toString());
+
+	//testL.add(15,8);
+	//testA.add(15,8);
+	//System.out.println("Linked List: "+testL.toString());
+	//System.out.println("Array List "+testA.toString());
+
+	testL.remove(4);
+	testA.remove(4);
+	System.out.println("Linked List: "+testL.toString());
+	System.out.println("Array List "+testA.toString());
+
+	//testL.remove(15);
+	//testA.remove(15);
+	//System.out.println("Linked List: "+testL.toString());
+	//System.out.println("Array List "+testA.toString());
+
+	testL.set(2,8);
+	testA.set(2,8);
+	System.out.println("Linked List: "+testL.toString());
+	System.out.println("Array List "+testA.toString());
+
+	//testL.set(15,8);
+	//testA.set(15,8);
+	//System.out.println("Linked List: "+testL.toString());
+	//System.out.println("Array List "+testA.toString());
+
+	testL.get(4);
+	testA.get(4);
+	System.out.println("Linked List: "+testL.toString());
+	System.out.println("Array List "+testA.toString());
+
+	//testL.get(15);
+	//testA.get(15);
+	//System.out.println("Linked List: "+testL.toString());
+	//System.out.println("Array List "+testA.toString());
+
+	//testL.indexOf(8);
+	//testA.indexOf(8);
+	//System.out.println("Linked List: "+testL.toString());
+	//System.out.println("Array List "+testA.toString());
+
+	testL.size();
+	testA.size();
+	System.out.println("Linked List: "+testL.toString());
+	System.out.println("Array List "+testA.toString());
 
 	/*
 	MyLinkedList test=new MyLinkedList();
