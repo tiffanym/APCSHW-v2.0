@@ -1,5 +1,5 @@
 import java.util.*;
-public class MyLinkedList{
+public class MyLinkedList<T>{
     LNode<T> head, current, tail;
     int size;
 
@@ -13,23 +13,21 @@ public class MyLinkedList{
 	return "ming.tiffany";
     }
 
-    public boolean add(int value){
+    public boolean add(T value){
 	if (size==0){
-	    head=new LNode(value,null);
+	    head=new LNode<T>(value);
 	    tail=head;
 	    current=head;
 	}else{
-	    while (current.getNext()!=null){
-		current=current.getNext();
-	    }
-	    current.setNext(new LNode(value,null));
-	    tail=current.getNext();
+	    LNode<T> temp=new LNode<T>(value);
+	    tail.setNext(temp);
+	    tail=tail.getNext();
 	}
 	size++;
 	return true;
     }
 
-    public void add(int index,int value){
+    public void add(int index,T value){
 	current=head;
 	if (index<0 || index>=size){
 	    throw new IndexOutOfBoundsException();
@@ -39,8 +37,11 @@ public class MyLinkedList{
 		current=current.getNext();
 		posn++;
 	    }
-	    LNode<T> temp=new LNode(value,current.getNext());
-	    current.setNext(temp);
+	    T temp=current.getValue();
+	    //LNode<T> temp=new LNode<T>(value,current.getNext());
+	    //temp=
+	    current.setValue(value);
+	    current.setNext(new LNode<T>(temp,current.getNext()));
 	    size++;
 	}
     }
@@ -70,7 +71,7 @@ public class MyLinkedList{
     }
 
     public T remove(int index){
-	T out; //I don't need to initialize... right?
+	T out; 
 	if (index<0 || index>=size){
 	    throw new IndexOutOfBoundsException("Index "+index+" out of Bounds!");
 	}
@@ -96,7 +97,7 @@ public class MyLinkedList{
     }
 
     public T set(int index,T value){
-	T before; //initilize? (compile to see)
+	T before;
 	if (index<0 || index>=size){
 	    throw new IndexOutOfBoundsException("Index "+index+" out of Bounds!");
 	}
@@ -118,7 +119,7 @@ public class MyLinkedList{
 
     public String toString(){
 	String L="[ ";
-	current=new LNode(head.getValue(),head.getNext());
+	current=head;
 	while (current.getNext()!=null){
 	    L+=current.getValue()+" ";
 	    current=current.getNext();
