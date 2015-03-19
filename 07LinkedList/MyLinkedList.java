@@ -137,17 +137,6 @@ public class MyLinkedList<T> implements Iterable<T>{
 	return iter.iterator();
     }
 
-    public T next(){
-	//add
-	T tmp;
-	return tmp;
-    }
-    
-    public boolean hasNext(){
-	//add
-	return true;
-    }
-
     public void remove(){
 	throw new UnsupportedOperationException();
     }
@@ -155,7 +144,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     public static void main(String[] args){
 	//
 
-	/*
+	
 	//make test conditions
 	MyLinkedList<Integer> testL=new MyLinkedList<Integer>();
 	ArrayList<Integer> testA=new ArrayList<Integer>();
@@ -168,8 +157,10 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    System.out.println("Array List "+testA.toString());
 	}
 
-	testL.add(2,6); //Mine adds before instead of after given index
-	testA.add(2,6);
+	//testL.add(2,6); //Mine adds before instead of after given index
+	//testA.add(2,6);
+	testL.add(0,6);
+	testA.add(0,6);
 	System.out.println("Linked List: "+testL.toString());
 	System.out.println("Array List "+testA.toString());
 
@@ -177,7 +168,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	//testA.add(15,8);
 	//System.out.println("Linked List: "+testL.toString());
 	//System.out.println("Array List "+testA.toString());
-
+	
 	testL.remove(4);
 	testA.remove(4);
 	System.out.println("Linked List: "+testL.toString());
@@ -217,7 +208,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	testA.size();
 	System.out.println("Linked List: "+testL.toString());
 	System.out.println("Array List "+testA.toString());
-	*/
+	
 
 	/*
 	MyLinkedList test=new MyLinkedList();
