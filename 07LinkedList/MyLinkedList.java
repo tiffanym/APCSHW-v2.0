@@ -2,7 +2,6 @@ import java.util.*;
 import java.lang.*;
 public class MyLinkedList<T> implements Iterable<T>{
     LNode<T> head, current, tail;
-    MyLinkedList<T> iter;
     int size;
 
     public MyLinkedList(){	
@@ -134,17 +133,41 @@ public class MyLinkedList<T> implements Iterable<T>{
 
     //for Iterable interface
     public Iterator<T> iterator(){
-	return iter.iterator();
+	return new  MyLinkedListIterator<T>(head);
     }
 
-    public void remove(){
-	throw new UnsupportedOperationException();
+    private class MyLinkedListIterator<T> implements Iterator<T>{
+	LNode<T> current;
+
+	public MyLinkedListIterator(LNode<T> current){
+	    this.current=current;
+	}
+
+	public T next(){
+	    current=current.getNext();
+	    if (hasNext()){
+		return current.getValue();
+	    }else{
+		throw new NoSuchElementException();
+	    }
+	}
+
+	public boolean hasNext(){
+	    if(current.getNext()!=null){
+		return true;
+	    }
+	    return false;
+	}
+
+	public void remove(){
+	    throw new UnsupportedOperationException();
+	}
     }
 
     public static void main(String[] args){
 	//
 
-	
+	/*
 	//make test conditions
 	MyLinkedList<Integer> testL=new MyLinkedList<Integer>();
 	ArrayList<Integer> testA=new ArrayList<Integer>();
@@ -208,7 +231,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	testA.size();
 	System.out.println("Linked List: "+testL.toString());
 	System.out.println("Array List "+testA.toString());
-	
+	*/
 
 	/*
 	MyLinkedList test=new MyLinkedList();
