@@ -67,9 +67,9 @@ public class MyStack<T>{
 	//System.out.println(test.pop());
 	//System.out.println(test.pop());
 	System.out.println(test.peek());
-	System.out.println(test.toString());
+	//System.out.println(test.toString());
 	System.out.println(test.push(3));
-	System.out.println(test.toString());
+	//System.out.println(test.toString());
 	System.out.println(test.peek());
 	
 	
