@@ -15,10 +15,15 @@ public class MyStack<T>{
 	    temp.setNext(head);
 	    head=temp;
 	}
+	size++;
 	return item;
     }
 
     public static void main(String[] args){
-	
+	MyStack<Integer> test=new MyStack<Integer>();
+	System.out.println(test.push(0));
+	System.out.println(test.push(-5));
+	System.out.println(test.push(3));
+	System.out.println(test.push(4));
     }
 }
