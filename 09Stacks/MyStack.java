@@ -1,3 +1,6 @@
+import java.util.*;
+
+
 public class MyStack<T>{
     int size;
     LNode<T> head;
@@ -7,8 +10,12 @@ public class MyStack<T>{
 	head=null;
     }
 
+    public boolean isEmpty(){
+	return (size==0);
+    }
+
     public T push(T item){
-	if (size==0){
+	if (isEmpty()){
 	    head=new LNode<T>(item,null);
 	}else{
 	    LNode<T> temp=new LNode<T>(item,null);
@@ -19,11 +26,26 @@ public class MyStack<T>{
 	return item;
     }
 
+    public T pop(){
+	if (isEmpty()){
+	    throw new EmptyStackException();
+	}
+	T out=head.getValue();
+	head=head.getNext();
+	size--;
+	return out;
+    }
+
     public static void main(String[] args){
 	MyStack<Integer> test=new MyStack<Integer>();
 	System.out.println(test.push(0));
 	System.out.println(test.push(-5));
-	System.out.println(test.push(3));
-	System.out.println(test.push(4));
+	//System.out.println(test.push(3));
+	//System.out.println(test.push(4));
+	System.out.println(test.pop());
+	System.out.println(test.pop());
+	System.out.println(test.pop());
+	
+	
     }
 }
