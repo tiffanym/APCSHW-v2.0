@@ -24,8 +24,8 @@ public class MyQueue<T>{
 	}
 	//System.out.println(test.enqueue("hola"));
 	//System.out.println(test.enqueue(2));
-	//System.out.println(test.dequeue());
-	//System.out.println(test.dequeue()); //returns error...
+	System.out.println(test.dequeue());
+	System.out.println(test.dequeue()); //returns error... (when you're dequeueing an empty array)
 
     }
 }
