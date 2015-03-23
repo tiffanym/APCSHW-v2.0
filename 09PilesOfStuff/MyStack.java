@@ -3,16 +3,13 @@ import java.util.*;
 public class MyStack<T>{
     int size;
     LNode<T> head;
-    //MyLinkedList<T> stack;
 
     public MyStack(){
 	size=0;
 	head=null;
-	//stack=new MyLinkedList<T>();
     }
 
-    public boolean isEmpty(){
-	//return (stack.size()==0);
+    public boolean isEmpty(){	
 	return size==0;
     }
 
@@ -26,8 +23,6 @@ public class MyStack<T>{
 	}
 	size++;
 	return item;
-	//	stack.add(item);
-	//return item;
     }
 
     public T pop(){
@@ -57,7 +52,7 @@ public class MyStack<T>{
 	    current=current.getNext();
 	}
 	ans+="]";
-	return ans;
+	return ans;	
     }
 
     public static void main(String[] args){

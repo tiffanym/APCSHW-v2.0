@@ -30,15 +30,17 @@ public class MyLinkedList<T> implements Iterable<T>{
 
     public void add(int index,T value){
 	current=head;
-	if (index<0 || index>=size){
+	if (index!=0 && (index<0 || index>=size)){
 	    throw new IndexOutOfBoundsException();
 	}else{
 	    int posn=0;
-	    while(current.getNext()!=null && posn<index-1){
-		current=current.getNext();
-		posn++;
+	    if (index>0){
+		while(current.getNext()!=null && posn<index-1){
+		    current=current.getNext();
+		    posn++;
+		}
+		T temp=current.getValue();
 	    }
-	    T temp=current.getValue();
 	    current.setValue(value);
 	    current.setNext(new LNode<T>(temp,current.getNext()));
 	    size++;
