@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.*;
 
 public class Sorts{
     //******MERGE SORT******//
@@ -14,11 +15,6 @@ public class Sorts{
 	
 	if (humanity.length==1){
 	    return humanity;
-	}
-	if (humanity.length==2){
-	    a[0]=humanity[0];
-	    b[0]=humanity[1];
-	    return merge(a,b);
 	}
 
 	//putting elements in subarrays
@@ -40,9 +36,10 @@ public class Sorts{
      */
     public static int[] merge(int[] a, int[] b){
 	int[] sortAR=new int[a.length+b.length];
-	int posn=0;
-	int posnA=0;
-	int posnB=0;
+	//int posn=0;
+	//int posnA=0;
+	//int posnB=0;
+	/*
 	for (int i=0;posnA+posnB<sortAR.length && 
 		 posnA<a.length && posnB<b.length;i++){
 	    if (a[posnA]<b[posnB]){
@@ -73,6 +70,35 @@ public class Sorts{
 		sortAR[posn]=b[i];
 		posn++;
 	    }
+	}
+	*/
+	ArrayList<Integer> a1= new ArrayList<Integer>(Arrays.asList(a));
+	ArrayList<Integer> b1= new ArrayList<Integer>(Arrays.asList(b));
+	ArrayList<Integer> temp= new ArrayList<Integer>(); //temp for sortAR;
+	for (int posn=0;posn<a.length+b.length;posn++){
+	    if (!a1.isEmpty() && !b1.isEmpty()){
+		int n=a1.get(0)-b1.get(0);
+		if (n<0){
+		    temp.add(a1.remove(0));
+		}else if (n==0){
+		    temp.add(a1.remove(0));
+		    temp.add(b1.remove(0));
+		}else{
+		    temp.add(b1.remove(0));
+		}
+	    }else if (!a1.isEmpty() && b1.isEmpty()){
+		temp.add(a1);
+		break;
+	    }else if (a1.isEmpty() && !b1.isEmpty()){
+		temp.add(b1);
+		break;
+	    }
+	}
+	
+	for (int i=0;i<sortAR.length;i++){
+	    //sortAR[i]=temp.remove(0).intValue();
+	    int n=temp.remove(0);
+	    sortAR[i]=n.intValue();
 	}
 	return sortAR;
     }
