@@ -1,20 +1,22 @@
 import java.util.*;
 
-
 public class MyStack<T>{
     int size;
     LNode<T> head;
+    //MyLinkedList<T> stack;
 
     public MyStack(){
 	size=0;
 	head=null;
+	//stack=new MyLinkedList<T>();
     }
 
     public boolean isEmpty(){
-	return (size==0);
+	//return (stack.size()==0);
+	return size==0;
     }
 
-    public T push(T item){
+    public T push(T item){	
 	if (isEmpty()){
 	    head=new LNode<T>(item,null);
 	}else{
@@ -24,6 +26,8 @@ public class MyStack<T>{
 	}
 	size++;
 	return item;
+	//	stack.add(item);
+	//return item;
     }
 
     public T pop(){
@@ -32,7 +36,7 @@ public class MyStack<T>{
 	}
 	T out=head.getValue();
 	head=head.getNext();
-	size--;
+	size--;	
 	return out;
     }
 
