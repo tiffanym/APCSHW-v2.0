@@ -30,7 +30,10 @@ public class MyLinkedList<T> implements Iterable<T>{
 
     public void add(int index,T value){
 	current=head;
-	if (index<0 || index>=size){
+	if (index==size){
+	    add(value);
+	}
+	if (index<0 || index>size){
 	    throw new IndexOutOfBoundsException();
 	}else{
 	    int posn=0;
