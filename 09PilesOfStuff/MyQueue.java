@@ -1,18 +1,19 @@
-public class MyQueue<T>{
-    MyLinkedList<T> queue;
+public class MyQueue<T> extends MyLinkedList<T>{
+    //MyLinkedList<T> queue;
 
     public MyQueue(){
-	queue=new MyLinkedList<T>();
+	//queue=new MyLinkedList<T>();
     }
 
     public T enqueue(T n){
-	queue.add(n);
+	//queue.add(n);
+	add(n);
 	return n;
     }
 
     public T dequeue(){
-	T temp=queue.remove(queue.size()-1);
-	return temp;
+	//T temp=queue.remove(queue.size()-1);
+	return remove(size()-1);
     }
 
     public static void main(String[] args){
