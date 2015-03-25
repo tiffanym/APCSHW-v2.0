@@ -1,3 +1,4 @@
+import java.util.*;
 public class MyDeque<T>{
     T[] data;
     int head,tail;
@@ -8,25 +9,28 @@ public class MyDeque<T>{
 
     public void addLast(T value){
 	if (tail==data.length){
-	    
-
+	    resize(data.length+1);
 	}
     }
     
     public T removeFirst(){
 	if (data.length==0){
 	    throw new NoSuchElementException();
-	}else{
-	    data[0]==null;
 	}
+	T temp=data[0];
+	data[head]=null;
+	head++;
+	return temp;
     }
 
     public T removeLast(){
 	if (data.length==0){
 	    throw new NoSuchElementException();
-	}else{
-	    data[data.length-1]==null;
-	}
+	}	
+	T temp=data[tail];
+	data[tail]=null;
+	tail--;	
+	return temp;
     }
 
     public T getFirst(){
