@@ -11,6 +11,8 @@ public class MyDeque<T>{
 	if (tail==data.length){
 	    resize(data.length+1);
 	}
+	data[tail]=value;
+	tail++;	
     }
     
     public T removeFirst(){
@@ -58,7 +60,7 @@ public class MyDeque<T>{
     }
     
     public static void main(String[] args){
-	MyDeque test=new MyDeque();
-	
+	MyDeque<Integer> test=new MyDeque<Integer>();
+	test.addLast(0);
     }
 }
