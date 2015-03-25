@@ -7,8 +7,9 @@ public class MyDeque<T>{
     }
 
     public void addLast(T value){
-	if (t==data.length){
+	if (tail==data.length){
 	    
+
 	}
     }
     
@@ -36,10 +37,10 @@ public class MyDeque<T>{
 	return data[data.length-1];
     }
 
-    public T[] resize(int size){
+    public void resize(int size){
 	T[] out=new T[size];
 	if (size==data.length){
-	    return data;
+	    out=data;
 	}else if (size<data.length){
 	    for (int i=0;i<size;i++){
 		out[i]=data[i];
@@ -49,7 +50,7 @@ public class MyDeque<T>{
 		out[i]=data[i];
 	    }
 	}
-	return out;
+	data=out;
     }
     
     public static void main(String[] args){
