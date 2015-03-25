@@ -13,11 +13,19 @@ public class MyDeque<T>{
     }
     
     public T removeFirst(){
-
+	if (data.length==0){
+	    throw new NoSuchElementException();
+	}else{
+	    data[0]==null;
+	}
     }
 
     public T removeLast(){
-
+	if (data.length==0){
+	    throw new NoSuchElementException();
+	}else{
+	    data[data.length-1]==null;
+	}
     }
 
     public T getFirst(){
@@ -29,6 +37,10 @@ public class MyDeque<T>{
     }
 
     public T[] resize(){
+	
+    }
+    
+    public static void main(String[] args){
 	
     }
 }
