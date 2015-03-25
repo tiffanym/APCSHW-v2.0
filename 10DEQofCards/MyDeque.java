@@ -4,7 +4,11 @@ public class MyDeque<T>{
     int head,tail;
 
     public void addFirst(T value){
-	
+	if (head==data.length){
+	    resize(data.length+1); //change so that everything moves forward and can add to front?
+	}
+	data[head]==value;
+	head++;
     }
 
     public void addLast(T value){
