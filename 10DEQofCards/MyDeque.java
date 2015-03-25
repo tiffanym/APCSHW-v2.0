@@ -21,11 +21,11 @@ public class MyDeque<T>{
     }
 
     public T getFirst(){
-
+	return data[0];
     }
 
     public T getLast(){
-
+	return data[data.length-1];
     }
 
     public T[] resize(){
