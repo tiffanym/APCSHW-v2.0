@@ -2,6 +2,13 @@ import java.util.*;
 public class MyDeque<T>{
     T[] data;
     int head,tail;
+    int size;
+
+    public MyDeque(){
+	head=0;
+	tail=0;
+	size=0;
+    }
 
     public void addFirst(T value){
 	if (head==data.length){
@@ -47,18 +54,16 @@ public class MyDeque<T>{
 	return data[data.length-1];
     }
 
-    public void resize(int size){
-	T[] out=new T[size];
+    public void resize(){
+	int temp=data.length;
 	if (size==data.length){
-	    out=data;
-	}else if (size<data.length){
-	    for (int i=0;i<size;i++){
-		out[i]=data[i];
-	    }
-	}else{ //size>data.length
-	    for (int i=0;i<data.length;i++){
-		out[i]=data[i];
-	    }
+	    temp=2*data.length;
+	}else if (size<(int)(0.25*data.length)){
+	    temp=(int)(0.5*data.length);
+	}
+	T out=new T[temp];
+	for (int i=0;i<data.length && i<temp;i++){
+	    out[i]=data[i];
 	}
 	data=out;
     }
