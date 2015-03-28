@@ -86,6 +86,7 @@ public class MyDeque<T>{
     
     public static void main(String[] args){
 	MyDeque<Integer> test=new MyDeque<Integer>();
+	//ADDLAST
 	test.addLast(new Integer(0));
 	System.out.println("last: "+test.getLast()); //addLast seems to work when adding first element to an empty array
 	for (int i=0;i<5;i++){
@@ -93,11 +94,19 @@ public class MyDeque<T>{
 	    System.out.println("last: "+test.getLast());
 	} //yay!!! addLast seems to work even when pushed past boundaries of array (meaning resize also works...!)
 	
+	//ADDFIRST
 	test.addFirst(new Integer(5));
 	System.out.println("first: "+test.getFirst()); //addFirst works with adding one element
 	for (int i=0;i<5;i++){
 	    test.addFirst(new Integer(i+20));
 	    System.out.println("first: "+test.getFirst());
 	}
+
+	//REMOVEFIRST
+	test.addFirst(new Integer(-2));
+	System.out.println("removed: "+test.removeFirst());
+
+	//REMOVELAST
+	
     }
 }
