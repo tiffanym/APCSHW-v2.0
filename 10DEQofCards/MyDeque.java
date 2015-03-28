@@ -1,62 +1,62 @@
 import java.util.*;
 public class MyDeque<T>{
-    T[] data;
+    Object[] data;
     int head,tail;
     int size;
 
     public MyDeque(){
-	data=new T[10];
+	data=new Object[10];
 	head=0;
-	tail=0;
+	tail=size-1;
 	size=0;
     }
     //h--,insert
     public void addFirst(T value){
 	resize();
+	head--;
 	if (head<0){
 	    head+=data.length;
 	}
 	data[head]=value;
-	head--;
 	size++;
     }
     //t++,insert
     public void addLast(T value){
 	resize();
+	tail++;	
 	if (tail==data.length){
 	    tail=tail%data.length;
 	}
 	data[tail]=value;
-	tail++;	
 	size++;
     }
     
     public T removeFirst(){
-	if (data.length==0){
+	if (size==0 || data.length==0){
 	    throw new NoSuchElementException();
 	}
-	T temp=data[0];
+	Object temp=data[0];
 	data[head]=null;
 	head++;
-	return temp;
+	return (T)temp;
     }
 
     public T removeLast(){
-	if (data.length==0){
+       	if (size==0 || data.length==0){
 	    throw new NoSuchElementException();
 	}	
-	T temp=data[tail];
+	Object temp=data[tail];
 	data[tail]=null;
 	tail--;	
-	return temp;
+	return (T)temp;
     }
 
     public T getFirst(){
-	return data[0];
+	return (T)data[head];
     }
 
     public T getLast(){
-	return data[data.length-1];
+	return (T)data[tail];
     }
 
     public void resize(){
@@ -64,7 +64,7 @@ public class MyDeque<T>{
 	if (size==data.length){
 	    temp=2*data.length;
 	}
-	T out=new T[temp];
+	Object[] out=new Object[temp];
 	if (head<=tail){
 	    for (int i=head;i<tail+1;i++){
 		out[i]=data[i];
@@ -73,7 +73,7 @@ public class MyDeque<T>{
 	    for (int i=0;i<tail;i++){
 		out[i]=data[i];
 	    }
-	    for (int i=head;head<data.length;i++){
+	    for (int i=head;i<data.length;i++){
 		out[i]=data[i];
 	    }
 	}
@@ -86,6 +86,18 @@ public class MyDeque<T>{
     
     public static void main(String[] args){
 	MyDeque<Integer> test=new MyDeque<Integer>();
-	test.addLast(0);
+	test.addLast(new Integer(0));
+	System.out.println("last: "+test.getLast()); //addLast seems to work when adding first element to an empty array
+	for (int i=0;i<5;i++){
+	    test.addLast(new Integer(i+10));
+	    System.out.println("last: "+test.getLast());
+	} //yay!!! addLast seems to work even when pushed past boundaries of array (meaning resize also works...!)
+	
+	test.addFirst(new Integer(5));
+	System.out.println("first: "+test.getFirst()); //addFirst works with adding one element
+	for (int i=0;i<5;i++){
+	    test.addFirst(new Integer(i+20));
+	    System.out.println("first: "+test.getFirst());
+	}
     }
 }
