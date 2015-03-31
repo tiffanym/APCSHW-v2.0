@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 public class Maze{
     private char[][]maze;
     private int maxx,maxy;
@@ -65,18 +66,26 @@ public class Maze{
     public String toString(boolean animate){
 	String mazeAnim="";
 	if (animate){
-	    String ans = ""+maxx+","+maxy+"\n";
+	    String ans = clear+""+maxx+","+maxy+"\n";
 	    for(int i=0;i<maxx*maxy;i++){
 		if(i%maxx ==0 && i!=0){
 		    ans+="\n";
 		}
 		ans += maze[i%maxx][i/maxx];
 	    }
-	    mazeAnim= hide()+invert()+go(0,0)+ans+"\n"+show();	
+	    mazeAnim= hide+go(0,0)+ans+"\n"+show;	
 	}else{
 	    mazeAnim=maze.toString();
 	}
 	return mazeAnim;
+    }
+
+    public void wait(int millis){
+	try {
+	    Thread.sleep(millis);
+	}
+	catch (InterruptedException e) {
+	}
     }
     
     public boolean solveBFS(){
@@ -88,11 +97,11 @@ public class Maze{
      * Replace spaces with x's as you traverse the maze. 
      */
     public boolean solveBFS(boolean animate){   
-
+	return false; //change later
     }
     
     public boolean solveDFS(){
-	return solveDFS(false);
+	return solveDFS(true);
     }
 
     /**Solve the maze using a frontier in a DFS manner. 
@@ -125,8 +134,8 @@ public class Maze{
     }
 
     public static void main(String[] args){
-	Maze test=new Maze();
-	//System.out.println(test.solveBFS);
-	System.out.println(test.solveDFS);
+	Maze test=new Maze("data1.dat");
+	//System.out.println(test.solveBFS());
+	System.out.println(test.solveDFS());
     }
 }
