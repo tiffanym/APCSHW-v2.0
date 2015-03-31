@@ -128,7 +128,7 @@ public class Maze{
 		solve (maze,x-1,y,animate) || solve (maze,x,y-1,animate)){
 		return true;
 	    }
-	    maze[x][y]='.';
+	    maze[x][y]='x';
 	}
 	return false;//by default the maze didn't get solved
     }
