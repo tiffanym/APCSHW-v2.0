@@ -50,6 +50,15 @@ public class Maze{
 
     }
     
+    private class Coordinate{
+
+    }
+
+    private class Frontier{
+	//stuff
+    }
+
+
     //do not do the funky character codes
     public String toString(){
 	String ans = "";
@@ -133,6 +142,15 @@ public class Maze{
 	}
 	return false;//by default the maze didn't get solved
     }
+
+    //method?
+    private boolean solve(boolean animate, int mode){
+	Fronteier nexts=new Frontier(mode);
+	//1=DFS; 0=BFS
+	return true;
+    }
+
+
 
     //prints out final coordinates of shortest path [x1,y1,x2,y2,x3,y3]
     public int[] solutionArray(){
