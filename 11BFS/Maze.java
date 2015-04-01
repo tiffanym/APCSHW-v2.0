@@ -5,7 +5,7 @@ public class Maze{
     private int maxx,maxy;
     private int startx,starty;
 
-    private static final String clear =  "\033[2J";
+    private static final String clear = "\033[2J";
     private static final String hide =  "\033[?25l";
     private static final String show =  "\033[?25h";
     private String go(int x,int y){
@@ -64,7 +64,7 @@ public class Maze{
     
     //do the funky character codes when animate is true
     public String toString(boolean animate){
-	String mazeAnim="";
+	String mazeAnim=clear+"";
 	if (animate){
 	    String ans = clear+""+maxx+","+maxy+"\n";
 	    for(int i=0;i<maxx*maxy;i++){
@@ -114,7 +114,8 @@ public class Maze{
     
     public boolean solve(char[][]maze,int x,int y, boolean animate){
 	if (animate){
-	    System.out.println(this);
+	    //System.out.println(this);
+	    System.out.println(toString(animate));
 	    wait(20);
 	}
 	if (maze[x][y]=='E'){
@@ -133,9 +134,15 @@ public class Maze{
 	return false;//by default the maze didn't get solved
     }
 
+    //prints out final coordinates of shortest path [x1,y1,x2,y2,x3,y3]
+    public int[] solutionArray(){
+	return null;
+    }
+
     public static void main(String[] args){
-	Maze test=new Maze("data1.dat");
+	//Maze test=new Maze("data1.dat");
+	Maze test2=new Maze("easy.dat");
 	//System.out.println(test.solveBFS());
-	System.out.println(test.solveDFS());
+	System.out.println(test2.solveDFS());
     }
 }
