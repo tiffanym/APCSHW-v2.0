@@ -49,13 +49,53 @@ public class Maze{
 	}
 
     }
-    
-    private class Coordinate{
 
+    public class Coordinate{
+	int x,y;
+	
+	public Coordinate(int x, int y){
+	    setX(x);
+	    setY(y);
+	}
+	public Coordinate(){
+	    setX(0);
+	    setY(0);
+	}
+
+	public int getX(){
+	    return x;
+	}
+	public void setX(int x){
+	    this.x=x;
+	}
+	public int getY(){
+	    return y;
+	}
+	public void setY(int y){
+	    this.y=y;
+	}
     }
 
-    private class Frontier{
-	//stuff
+    private class Frontier{//is a deque
+	int mode;
+	MyDeque<Coordinate> pile = new MyDeque<Coordinate>();
+	//queue-->BFS =0
+	//stack-->DFS =1
+	public Frontier (int mode){
+	    this.mode=mode;
+	}
+
+	public void add(Coordinate next){
+	    pile.addLast(next);
+	}
+
+	public void remove(){
+	    if (mode==1){ //DFS=stack
+		pile.removeLast();
+	    }else if (mode==0){ //BFS=queue
+		pile.removeFirst();
+	    }
+	}
     }
 
 
@@ -145,7 +185,7 @@ public class Maze{
 
     //method?
     private boolean solve(boolean animate, int mode){
-	Fronteier nexts=new Frontier(mode);
+	Frontier nexts=new Frontier(mode);
 	//1=DFS; 0=BFS
 	return true;
     }
