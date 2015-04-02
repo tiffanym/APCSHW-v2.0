@@ -1,7 +1,6 @@
 import java.util.*;
 import java.io.*;
 public class Mazesolver{
-
     private char[][]maze;
     private int maxx,maxy;
     private int startx,starty;
