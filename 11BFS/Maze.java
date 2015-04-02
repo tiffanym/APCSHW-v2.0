@@ -4,7 +4,9 @@ public class Maze{
     private char[][]maze;
     private int maxx,maxy;
     private int startx,starty;
+    private int[] answer; //prints out answer coordinates as array
 
+    //Stuff for printing out maze
     private static final String clear = "\033[2J";
     private static final String hide =  "\033[?25l";
     private static final String show =  "\033[?25h";
@@ -50,6 +52,47 @@ public class Maze{
 
     }
 
+    /**TOSTRING methods*/
+    //No funky character codes
+    public String toString(){
+	String ans = "";
+	for(int i=0;i<maxx*maxy;i++){
+	    if(i%maxx ==0 && i!=0){
+		ans+="\n";
+	    }
+	    ans += maze[i%maxx][i/maxx];
+	}
+	return ans;	
+    }
+    
+    //Do the funk[y] character codes when animate is true
+    public String toString(boolean animate){
+	String mazeAnim=clear+"";
+	if (animate){
+	    String ans = clear+""+maxx+","+maxy+"\n";
+	    for(int i=0;i<maxx*maxy;i++){
+		if(i%maxx ==0 && i!=0){
+		    ans+="\n";
+		}
+		ans += maze[i%maxx][i/maxx];
+	    }
+	    mazeAnim= hide+go(0,0)+ans+"\n"+show;	
+	}else{
+	    mazeAnim=maze.toString();
+	}
+	return mazeAnim;
+    }
+
+    public void wait(int millis){
+	try {
+	    Thread.sleep(millis);
+	}
+	catch (InterruptedException e) {
+	}
+    }
+
+
+    /**COORDINATE class*/
     public class Coordinate{
 	int x,y;
 	
@@ -76,64 +119,36 @@ public class Maze{
 	}
     }
 
-    private class Frontier{//is a deque
+    /**FRONTIER class*/
+    private class Frontier<T> implements MyDeque<T>{//is a deque
 	int mode;
-	MyDeque<Coordinate> pile = new MyDeque<Coordinate>();
+	//MyDeque<Coordinate> pile = new MyDeque<Coordinate>();
+
 	//queue-->BFS =0
 	//stack-->DFS =1
 	public Frontier (int mode){
 	    this.mode=mode;
 	}
 
-	public void add(Coordinate next){
-	    pile.addLast(next);
+	//public void add(Coordinate next){
+	public void add(T next){
+	    if (mode==1){ //DFS=stack
+		//pile.addFirst(next);
+		addFirst(next);
+	    }else if (mode==0){ //BFS=queue
+		//pile.addLast(next);
+		addLast(next);
+	    }	    
 	}
 
 	public void remove(){
 	    if (mode==1){ //DFS=stack
-		pile.removeLast();
+		//pile.removeFirst();
+		removeFirst();
 	    }else if (mode==0){ //BFS=queue
-		pile.removeFirst();
+		//pile.removeLast();
+		removeLast();
 	    }
-	}
-    }
-
-
-    //do not do the funky character codes
-    public String toString(){
-	String ans = "";
-	for(int i=0;i<maxx*maxy;i++){
-	    if(i%maxx ==0 && i!=0){
-		ans+="\n";
-	    }
-	    ans += maze[i%maxx][i/maxx];
-	}
-	return ans;	
-    }
-    
-    //do the funky character codes when animate is true
-    public String toString(boolean animate){
-	String mazeAnim=clear+"";
-	if (animate){
-	    String ans = clear+""+maxx+","+maxy+"\n";
-	    for(int i=0;i<maxx*maxy;i++){
-		if(i%maxx ==0 && i!=0){
-		    ans+="\n";
-		}
-		ans += maze[i%maxx][i/maxx];
-	    }
-	    mazeAnim= hide+go(0,0)+ans+"\n"+show;	
-	}else{
-	    mazeAnim=maze.toString();
-	}
-	return mazeAnim;
-    }
-
-    public void wait(int millis){
-	try {
-	    Thread.sleep(millis);
-	}
-	catch (InterruptedException e) {
 	}
     }
     
@@ -158,12 +173,12 @@ public class Maze{
      * Replace spaces with x's as you traverse the maze. 
      */
     public boolean solveDFS(boolean animate){  
-	return solve(maze,startx,starty,animate);
+	//return solve(maze,startx,starty,animate);
+	return solve(animate,1,startx,starty);
     }
     
     public boolean solve(char[][]maze,int x,int y, boolean animate){
 	if (animate){
-	    //System.out.println(this);
 	    System.out.println(toString(animate));
 	    wait(20);
 	}
@@ -184,23 +199,56 @@ public class Maze{
     }
 
     //method?
-    private boolean solve(boolean animate, int mode){
-	Frontier nexts=new Frontier(mode);
+    private boolean solve(boolean animate,int mode,int x, int y){
+	Frontier<Coordinate> nexts=new Frontier<Coordinate>(mode);
 	//1=DFS; 0=BFS
-	return true;
+	//FOR BOTH
+	if (animate){
+	    System.out.println(toString(animate));
+	    wait(20);
+	}
+	if (maze[x][y]=='E'){
+	    solutionArray(nexts);
+	    return true;
+	}
+
+	if (maze[x][y]==' ' || maze[x][y]=='S'){
+	    if (maze[x][y]!='S'){
+		maze[x][y]='o';
+	    }
+	    //If DFS
+	    if (mode==1){	   	  
+		//if (solve(maze,x+1,y,animate) || solve (maze,x,y+1,animate) ||
+		//  solve (maze,x-1,y,animate) || solve (maze,x,y-1,animate)){
+		if (solve(animate,mode,x+1,y) || solve(animate,mode,x,y+1) ||
+		    solve(animate,mode,x-1,y) || solve(animate,mode,x,y-1)){
+		    nexts.add(new Coordinate(x,y));
+		    return true;
+		}
+		maze[x][y]='x';
+	    }
+	    
+	    //If BFS
+	    if (mode==0){
+
+	    }
+	}
+	
+	return false;//by default the maze didn't get solved
     }
 
 
 
     //prints out final coordinates of shortest path [x1,y1,x2,y2,x3,y3]
-    public int[] solutionArray(){
+    public int[] solutionArray(Frontier nexts){
+	int[] temp=new int[nexts.size()];
 	return null;
     }
 
     public static void main(String[] args){
-	//Maze test=new Maze("data1.dat");
-	Maze test2=new Maze("easy.dat");
-	//System.out.println(test.solveBFS());
-	System.out.println(test2.solveDFS());
+	Maze test1=new Maze("data1.dat");
+	//Maze test2=new Maze("easy.dat");
+	//System.out.println(test1.solveBFS());
+	System.out.println(test1.solveDFS());
     }
 }
