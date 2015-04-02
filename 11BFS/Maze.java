@@ -120,9 +120,9 @@ public class Maze{
     }
 
     /**FRONTIER class*/
-    private class Frontier<T> implements MyDeque<T>{//is a deque
+    private class Frontier{//is a deque
 	int mode;
-	//MyDeque<Coordinate> pile = new MyDeque<Coordinate>();
+	MyDeque<Coordinate> pile = new MyDeque<Coordinate>();
 
 	//queue-->BFS =0
 	//stack-->DFS =1
@@ -130,24 +130,24 @@ public class Maze{
 	    this.mode=mode;
 	}
 
-	//public void add(Coordinate next){
-	public void add(T next){
+	public void add(Coordinate next){
+	//public void add(T next){
 	    if (mode==1){ //DFS=stack
-		//pile.addFirst(next);
-		addFirst(next);
+		pile.addFirst(next);
+		//addFirst(next);
 	    }else if (mode==0){ //BFS=queue
-		//pile.addLast(next);
-		addLast(next);
+		pile.addLast(next);
+		//addLast(next);
 	    }	    
 	}
 
 	public void remove(){
 	    if (mode==1){ //DFS=stack
-		//pile.removeFirst();
-		removeFirst();
+		pile.removeFirst();
+		//removeFirst();
 	    }else if (mode==0){ //BFS=queue
-		//pile.removeLast();
-		removeLast();
+		pile.removeLast();
+		//removeLast();
 	    }
 	}
     }
@@ -200,7 +200,7 @@ public class Maze{
 
     //method?
     private boolean solve(boolean animate,int mode,int x, int y){
-	Frontier<Coordinate> nexts=new Frontier<Coordinate>(mode);
+	Frontier nexts=new Frontier(mode);
 	//1=DFS; 0=BFS
 	//FOR BOTH
 	if (animate){
@@ -241,7 +241,7 @@ public class Maze{
 
     //prints out final coordinates of shortest path [x1,y1,x2,y2,x3,y3]
     public int[] solutionArray(Frontier nexts){
-	int[] temp=new int[nexts.size()];
+	//int[] temp=new int[nexts.size()];
 	return null;
     }
 
