@@ -83,7 +83,13 @@ public class MyDeque<T>{
 	    tail=size-1;
 	}
     }
-    
+
+    //EXTRA: For Maze.java (with BFS and DFS to work)
+    public int size(){
+	return size;
+    }
+    //EXTRA: For Maze.java (with BFS and DFS to work)
+
     public static void main(String[] args){
 	MyDeque<Integer> test=new MyDeque<Integer>();
 	//ADDLAST

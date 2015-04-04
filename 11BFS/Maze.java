@@ -150,6 +150,10 @@ public class Maze{
 		//removeLast();
 	    }
 	}
+	
+	public int size(){
+	    return pile.size();
+	}
     }
     
     public boolean solveBFS(){
