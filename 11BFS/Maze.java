@@ -209,7 +209,7 @@ public class Maze{
 	    wait(20);
 	}
 	if (maze[x][y]=='E'){
-	    solutionArray(nexts);
+	    System.out.println(Arrays.toString(solutionArray(nexts)));
 	    return true;
 	}
 
@@ -225,7 +225,7 @@ public class Maze{
 		    solve(animate,mode,x-1,y) || solve(animate,mode,x,y-1)){
 		    nexts.add(new Coordinate(x,y));
 		    return true;
-		}
+			}
 		maze[x][y]='x';
 	    }
 	    
