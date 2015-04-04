@@ -131,23 +131,18 @@ public class Maze{
 	}
 
 	public void add(Coordinate next){
-	//public void add(T next){
 	    if (mode==1){ //DFS=stack
 		pile.addFirst(next);
-		//addFirst(next);
 	    }else if (mode==0){ //BFS=queue
 		pile.addLast(next);
-		//addLast(next);
 	    }	    
 	}
 
 	public void remove(){
 	    if (mode==1){ //DFS=stack
 		pile.removeFirst();
-		//removeFirst();
 	    }else if (mode==0){ //BFS=queue
 		pile.removeLast();
-		//removeLast();
 	    }
 	}
 	
