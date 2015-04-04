@@ -138,12 +138,14 @@ public class Maze{
 	    }	    
 	}
 
-	public void remove(){
+	public Coordinate remove(){
+	    Coordinate out=null; //returns nothing if empty
 	    if (mode==1){ //DFS=stack
-		pile.removeFirst();
+		out=pile.removeFirst();
 	    }else if (mode==0){ //BFS=queue
-		pile.removeLast();
+		out=pile.removeLast();
 	    }
+	    return out;
 	}
 	
 	public int size(){
@@ -240,8 +242,16 @@ public class Maze{
 
     //prints out final coordinates of shortest path [x1,y1,x2,y2,x3,y3]
     public int[] solutionArray(Frontier nexts){
-	//int[] temp=new int[nexts.size()];
-	return null;
+	int[] temp=new int[nexts.size()*2];
+	int posn=0;
+	while (posn<temp.length){
+	    Coordinate out=nexts.remove();
+	    temp[posn]=out.getX();
+	    posn++;
+	    temp[posn]=out.getY();
+	    posn++;
+	}
+	return temp;
     }
 
     public static void main(String[] args){
