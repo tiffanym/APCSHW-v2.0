@@ -6,7 +6,8 @@ public class Maze{
     private int startx,starty;
     private int mode;
     MyDeque<Coordinate> nexts=new MyDeque<Coordinate>();
-    MyDeque<Coordinate> temp=new MyDeque<Coordinate>();
+    //MyDeque<Coordinate> tp=new MyDeque<Coordinate>();
+    private int[][] checked;
 
     //Stuff for printing out maze
     private static final String clear = "\033[2J";
@@ -50,6 +51,15 @@ public class Maze{
 	    if(c=='S'){
 		startx = i%maxx;
 		starty = i/maxx;
+	    }
+	}
+
+	checked=new int[maze.length][maze[0].length];
+	for (int i=0;i<maze.length;i++){
+	    for (int j=0;i<maze.length;j++){
+		if (i!=startx && j!=starty){
+		    checked[i][j]=-1;
+		}
 	    }
 	}
 
@@ -99,11 +109,13 @@ public class Maze{
     public class Coordinate{
 	int x,y;
 	int level;
+	Coordinate parent=null;
 	
-	public Coordinate(int x, int y, int level){
+	public Coordinate(int x, int y, int level,Coordinate parent){
 	    setX(x);
 	    setY(y);
 	    setLevel(level);
+	    setParent(parent);
 	}
 	public Coordinate(int x, int y){
 	    setX(x);
@@ -134,6 +146,12 @@ public class Maze{
 	public void setLevel(int level){
 	    this.level=level;
 	}
+	public Coordinate getParent(){
+	    return parent;
+	}
+	public void setParent(Coordinate parent){
+	    this.parent=parent;
+	}
     }
     
     public boolean solveBFS(){
@@ -152,7 +170,7 @@ public class Maze{
 	mode=0;
 	//boolean works=solve(animate,mode,startx,starty);
 	Coordinate start=new Coordinate(startx,starty);
-	boolean works=solve(animate,start);
+	boolean works=solve(animate,start,0);
 	if (works){
 	    System.out.println(Arrays.toString(solutionCoordinates()));  
 	}
@@ -172,17 +190,24 @@ public class Maze{
 	return works;	
     }
 
+
+
     //idea/ pseudo-code from www.alexanderuseche.com/search-algorithms-breadth-first-search/
     //temp (maybe?) method for BFS
-    public boolean solve(boolean animate, Coordinate point){ 
-	nexts.addLast(point); //queue: add to last; remove from first
-	boolean[][] checked=new boolean[maze.length][maze[0].length];
+    public boolean solve(boolean animate, Coordinate point, int currentLevel){ 
+	point.setLevel(currentLevel);
+	nexts.addLast(point); //queue: add to last; remove from first //starting point has level 0
+	//stack:add to last;remove from last
+	Coordinate parent=null;
+	//boolean[][] checked=new boolean[maze.length][maze[0].length];
+	int i=currentLevel+1;
 	while (!nexts.isEmpty()){
 	    if (animate){
 		System.out.println(toString(animate));
 		wait(20);
 	    }
-	    
+	    //while (!nexts.isEmpty()){ //for (Coordinate thing : nexts)
+	    MyDeque<Coordinate> tp=new MyDeque<Coordinate>();
 	    Coordinate temp=nexts.removeFirst();
 	    int x=temp.getX();
 	    int y=temp.getY();
@@ -190,28 +215,53 @@ public class Maze{
 	    for (int[] spot:connected){
 		if (spot[0]<0 || spot[1]<0 || spot[0]>=maxx || spot[1]>=maxy){
 		    return false;
-		}
-		if(!checked[spot[0]][spot[1]]){
-		    nexts.addLast(temp);
+		    }
+		if(checked[spot[0]][spot[1]]==-1){
+		    //nexts.addLast(temp);
 		    if (maze[spot[0]][spot[1]]=='E'){
-			checked[spot[0]][spot[1]]=true;
-			nexts.addLast(new Coordinate(spot[0],spot[1]));
+			checked[spot[0]][spot[1]]=i; //currentLevel+1;
+			nexts.addLast(new Coordinate(spot[0],spot[1],i,point));			
 			return true;
 		    }
 		    if (maze[spot[0]][spot[1]]==' '|| maze[spot[0]][spot[1]]=='S'){
-			checked[spot[0]][spot[1]]=true;
-			Coordinate p2=new Coordinate(spot[0],spot[1]);
-			nexts.addLast(p2);
+			checked[spot[0]][spot[1]]=i; //currentLevel+1;
+			Coordinate p2=new Coordinate(spot[0],spot[1],i,point);
+			//nexts.addLast(p2);
+			tp.addLast(p2);
 			//nexts.addLast(new Coordinate(spot[0],spot[1]));
-		    }else{
-			nexts.removeFirst();
-		    }
+		    }//else{
+		    //	nexts.removeFirst();
+		    //}
 		}
 	    }
-	    checked[x][y]=true; //added
+	    tp=nexts;
+	    i++;
+		//}
+	    
+	    //checked[x][y]=true; //added
 	}
 	return false;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
