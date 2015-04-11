@@ -250,7 +250,8 @@ public class Maze{
 	int[] temp=new int[nexts.size()*2];
 	int posn=0;
 	while (posn<temp.length){
-	    Coordinate out=nexts.remove(0);
+	    //For DFS (change later so can switch between both)
+	    Coordinate out=nexts.remove(nexts.size()-1);
 	    temp[posn]=out.getX();
 	    posn++;
 	    temp[posn]=out.getY();
