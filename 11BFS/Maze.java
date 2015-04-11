@@ -139,7 +139,7 @@ public class Maze{
     public boolean solveBFS(boolean animate){   
 	boolean works=solve(animate,0,startx,starty);
 	if (works){
-	    System.out.println(Arrays.toString(solutionArray(nexts)));  
+	    System.out.println(Arrays.toString(solutionArray(nexts,0)));  
 	}
 	return works;	
     }
@@ -151,7 +151,7 @@ public class Maze{
     public boolean solveDFS(boolean animate){
 	boolean works=solve(animate,1,startx,starty);
 	if (works){
-	    System.out.println(Arrays.toString(solutionArray(nexts)));  
+	    System.out.println(Arrays.toString(solutionArray(nexts,1)));  
 	}
 	return works;	
     }
@@ -220,13 +220,17 @@ public class Maze{
 
 
     //prints out final coordinates of shortest path [x1,y1,x2,y2,x3,y3]
-    public int[] solutionArray(MyDeque<Coordinate> nexts){
+    public int[] solutionArray(MyDeque<Coordinate> nexts, int mode){
 	int[] temp=new int[nexts.size()*2];
 	int posn=0;
 	while (posn<temp.length){
-	    //For DFS (change later so can switch between both)
-	    //Coordinate out=nexts.remove(nexts.size()-1);
-	    Coordinate out=nexts.removeLast();
+	    Coordinate out=new Coordinate();
+	    if (mode==1){ //DFS
+		out=nexts.removeLast();
+	    }
+	    if (mode==0){
+		out=nexts.removeFirst(); //temporary (need to check once BFS code works)
+	    }
 	    temp[posn]=out.getX();
 	    posn++;
 	    temp[posn]=out.getY();
@@ -236,9 +240,9 @@ public class Maze{
     }
 
     public static void main(String[] args){
-	Maze test1=new Maze("data1.dat");
-	//Maze test2=new Maze("easy.dat");
-	System.out.println(test1.solveBFS());
-	//System.out.println(test2.solveDFS());
+	//Maze test1=new Maze("data1.dat");
+	Maze test2=new Maze("easy.dat");
+	//System.out.println(test2.solveBFS());
+	System.out.println(test2.solveDFS());
     }
 }
