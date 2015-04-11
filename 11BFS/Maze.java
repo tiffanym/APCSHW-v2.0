@@ -98,14 +98,22 @@ public class Maze{
     /**COORDINATE class*/
     public class Coordinate{
 	int x,y;
+	int level;
 	
+	public Coordinate(int x, int y, int level){
+	    setX(x);
+	    setY(y);
+	    setLevel(level);
+	}
 	public Coordinate(int x, int y){
 	    setX(x);
 	    setY(y);
+	    level=-1;
 	}
 	public Coordinate(){
 	    setX(0);
 	    setY(0);
+	    level=-1;
 	}
 
 	public int getX(){
@@ -119,6 +127,12 @@ public class Maze{
 	}
 	public void setY(int y){
 	    this.y=y;
+	}
+	public int getLevel(){
+	    return level;
+	}
+	public void setLevel(int level){
+	    this.level=level;
 	}
     }
     
@@ -186,14 +200,18 @@ public class Maze{
 		    }
 		    if (maze[spot[0]][spot[1]]==' '|| maze[spot[0]][spot[1]]=='S'){
 			checked[spot[0]][spot[1]]=true;
-			nexts.addLast(new Coordinate(spot[0],spot[1]));
+			Coordinate p2=new Coordinate(spot[0],spot[1]);
+			nexts.addLast(p2);
+			//nexts.addLast(new Coordinate(spot[0],spot[1]));
+		    }else{
+			nexts.removeFirst();
 		    }
 		}
 	    }
+	    checked[x][y]=true; //added
 	}
 	return false;
     }
-
 
 
 
