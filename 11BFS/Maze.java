@@ -241,12 +241,8 @@ public class Maze{
 		}
 	    }
 
-
 	    nexts=tp;
 	    i++;
-		//}
-	    
-	    //checked[x][y]=true; //added
 	}
 	return false;
     }
