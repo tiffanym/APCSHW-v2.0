@@ -7,7 +7,6 @@ public class Maze{
     private int[] answer; //prints out answer coordinates as array
     ArrayList<Coordinate> nexts=new ArrayList<Coordinate>(); //using arraylist so easier to visualize
 
-
     //Stuff for printing out maze
     private static final String clear = "\033[2J";
     private static final String hide =  "\033[?25l";
@@ -120,40 +119,6 @@ public class Maze{
 	}
 	public void setY(int y){
 	    this.y=y;
-	}
-    }
-
-    /**FRONTIER class*/
-    private class Frontier{//is a deque
-	int mode;
-	MyDeque<Coordinate> pile = new MyDeque<Coordinate>();
-
-	//queue-->BFS =0
-	//stack-->DFS =1
-	public Frontier (int mode){
-	    this.mode=mode;
-	}
-
-	public void add(Coordinate next){
-	    if (mode==1){ //DFS=stack
-		pile.addFirst(next);
-	    }else if (mode==0){ //BFS=queue
-		pile.addLast(next);
-	    }	    
-	}
-
-	public Coordinate remove(){
-	    Coordinate out=null; //returns nothing if empty
-	    if (mode==1){ //DFS=stack
-		out=pile.removeFirst();
-	    }else if (mode==0){ //BFS=queue
-		out=pile.removeLast();
-	    }
-	    return out;
-	}
-	
-	public int size(){
-	    return pile.size();
 	}
     }
     
