@@ -234,7 +234,7 @@ public class Maze{
 		    //}
 		}
 	    }
-	    tp=nexts;
+	    nexts=tp;
 	    i++;
 		//}
 	    
