@@ -4,7 +4,6 @@ public class Maze{
     private char[][]maze;
     private int maxx,maxy;
     private int startx,starty;
-    private int[] answer; //prints out answer coordinates as array
     //ArrayList<Coordinate> nexts=new ArrayList<Coordinate>(); //using arraylist so easier to visualize
     MyDeque<Coordinate> nexts=new MyDeque<Coordinate>();
     MyDeque<Coordinate> temp=new MyDeque<Coordinate>();
@@ -221,9 +220,9 @@ public class Maze{
 
     //prints out final coordinates of shortest path [x1,y1,x2,y2,x3,y3]
     public int[] solutionArray(MyDeque<Coordinate> nexts, int mode){
-	int[] temp=new int[nexts.size()*2];
+	int[] answer=new int[nexts.size()*2];
 	int posn=0;
-	while (posn<temp.length){
+	while (posn<answer.length){
 	    Coordinate out=new Coordinate();
 	    if (mode==1){ //DFS
 		out=nexts.removeLast();
@@ -231,12 +230,12 @@ public class Maze{
 	    if (mode==0){
 		out=nexts.removeFirst(); //temporary (need to check once BFS code works)
 	    }
-	    temp[posn]=out.getX();
+	    answer[posn]=out.getX();
 	    posn++;
-	    temp[posn]=out.getY();
+	    answer[posn]=out.getY();
 	    posn++;
 	}
-	return temp;
+	return answer;
     }
 
     public static void main(String[] args){
