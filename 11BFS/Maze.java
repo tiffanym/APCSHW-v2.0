@@ -4,7 +4,7 @@ public class Maze{
     private char[][]maze;
     private int maxx,maxy;
     private int startx,starty;
-    //ArrayList<Coordinate> nexts=new ArrayList<Coordinate>(); //using arraylist so easier to visualize
+    private int mode;
     MyDeque<Coordinate> nexts=new MyDeque<Coordinate>();
     MyDeque<Coordinate> temp=new MyDeque<Coordinate>();
 
@@ -16,7 +16,6 @@ public class Maze{
 	return ("\033[" + x + ";" + y + "H");
     }
     
-    /** Same constructor as before...*/
     public Maze(String filename){ 
 	startx = -1;
 	starty = -1;
@@ -136,9 +135,10 @@ public class Maze{
      * Replace spaces with x's as you traverse the maze. 
      */
     public boolean solveBFS(boolean animate){   
-	boolean works=solve(animate,0,startx,starty);
+	mode=0;
+	boolean works=solve(animate,mode,startx,starty);
 	if (works){
-	    System.out.println(Arrays.toString(solutionArray(nexts,0)));  
+	    System.out.println(Arrays.toString(solutionCoordinates()));  
 	}
 	return works;	
     }
@@ -148,9 +148,10 @@ public class Maze{
      * Replace spaces with x's as you traverse the maze. 
      */    
     public boolean solveDFS(boolean animate){
-	boolean works=solve(animate,1,startx,starty);
+	mode=1;
+	boolean works=solve(animate,mode,startx,starty);
 	if (works){
-	    System.out.println(Arrays.toString(solutionArray(nexts,1)));  
+	    System.out.println(Arrays.toString(solutionCoordinates()));  
 	}
 	return works;	
     }
@@ -215,11 +216,13 @@ public class Maze{
 	
 	return false;//by default the maze didn't get solved
     }
-
-
-
-    //prints out final coordinates of shortest path [x1,y1,x2,y2,x3,y3]
-    public int[] solutionArray(MyDeque<Coordinate> nexts, int mode){
+    
+    /**return an array [x1,y1,x2,y2,x3,y3...]
+     *that contains the coordinates of the solution from start to end.
+     *Precondition :  solveBFS() OR solveDFS() has already been called (otherwise an empty array is returned)
+     *Postcondition:  the correct solution is in the returned array
+     */
+    public int[] solutionCoordinates(){
 	int[] answer=new int[nexts.size()*2];
 	int posn=0;
 	while (posn<answer.length){
@@ -227,7 +230,7 @@ public class Maze{
 	    if (mode==1){ //DFS
 		out=nexts.removeLast();
 	    }
-	    if (mode==0){
+	    if (mode==0){ //BFS
 		out=nexts.removeFirst(); //temporary (need to check once BFS code works)
 	    }
 	    answer[posn]=out.getX();
@@ -239,9 +242,9 @@ public class Maze{
     }
 
     public static void main(String[] args){
-	//Maze test1=new Maze("data1.dat");
-	Maze test2=new Maze("easy.dat");
+	Maze test1=new Maze("data1.dat");
+	//Maze test2=new Maze("easy.dat");
 	//System.out.println(test2.solveBFS());
-	System.out.println(test2.solveDFS());
+	System.out.println(test1.solveDFS());
     }
 }
