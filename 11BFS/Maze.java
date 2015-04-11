@@ -5,6 +5,8 @@ public class Maze{
     private int maxx,maxy;
     private int startx,starty;
     private int[] answer; //prints out answer coordinates as array
+    ArrayList<Coordinate> nexts=new ArrayList<Coordinate>(); //using arraylist so easier to visualize
+
 
     //Stuff for printing out maze
     private static final String clear = "\033[2J";
@@ -167,40 +169,23 @@ public class Maze{
 	return false; //change later
     }
     
-    //public boolean solveDFS(){
-    //	return solveDFS(true);
-    //}
+    public boolean solveDFS(){
+	return solveDFS(true);
+    }
 
     /**Solve the maze using a frontier in a DFS manner. 
      * When animate is true, print the board at each step of the algorithm.
      * Replace spaces with x's as you traverse the maze. 
-     */
-    // public boolean solveDFS(boolean animate){  
-	//return solve(maze,startx,starty,animate);
-	//return solve(animate,1,startx,starty);
-	//}
-    
-    //using arraylist so easier to visualize
-    ArrayList<Coordinate> nexts=new ArrayList<Coordinate>();
-    
-    public boolean solveDFS(){
-	return solveDFS(true);
-    }
-    
-    //ADDED STUFF HERE
+     */    
     public boolean solveDFS(boolean animate){
 	boolean works=solve(animate,1,startx,starty);
 	if (works){
 	    System.out.println(Arrays.toString(solutionArray(nexts)));  
 	}
-	return works;
-	
+	return works;	
     }
 
-
-    //method?
     private boolean solve(boolean animate,int mode,int x, int y){
-	//Frontier nexts=new Frontier(mode);
 	//1=DFS; 0=BFS
 	//FOR BOTH
 	if (animate){
@@ -212,7 +197,6 @@ public class Maze{
 	    return false;
 	}
 	if (maze[x][y]=='E'){
-	    //System.out.println(Arrays.toString(solutionArray(nexts)));
 	    nexts.add(new Coordinate(x,y));
 	    return true;
 	}
@@ -222,9 +206,7 @@ public class Maze{
 		maze[x][y]='o';
 	    }
 	    //If DFS
-	    if (mode==1){	   	  
-		//if (solve(maze,x+1,y,animate) || solve (maze,x,y+1,animate) ||
-		//  solve (maze,x-1,y,animate) || solve (maze,x,y-1,animate)){
+	    if (mode==1){
 		if (solve(animate,mode,x+1,y) || solve(animate,mode,x,y+1) ||
 		    solve(animate,mode,x-1,y) || solve(animate,mode,x,y-1)){
 		    nexts.add(new Coordinate(x,y));
@@ -245,7 +227,6 @@ public class Maze{
 
 
     //prints out final coordinates of shortest path [x1,y1,x2,y2,x3,y3]
-    //public int[] solutionArray(Frontier nexts){
     public int[] solutionArray(ArrayList<Coordinate> nexts){
 	int[] temp=new int[nexts.size()*2];
 	int posn=0;
