@@ -7,6 +7,7 @@ public class Maze{
     private int[] answer; //prints out answer coordinates as array
     //ArrayList<Coordinate> nexts=new ArrayList<Coordinate>(); //using arraylist so easier to visualize
     MyDeque<Coordinate> nexts=new MyDeque<Coordinate>();
+    MyDeque<Coordinate> temp=new MyDeque<Coordinate>();
 
     //Stuff for printing out maze
     private static final String clear = "\033[2J";
@@ -124,7 +125,11 @@ public class Maze{
     }
     
     public boolean solveBFS(){
-	return solveBFS(false);
+	return solveBFS(true);//change to false later; true only for testing purposes
+    }
+
+    public boolean solveDFS(){
+	return solveDFS(false);
     }
 
     /**Solve the maze using a frontier in a BFS manner. 
@@ -132,13 +137,13 @@ public class Maze{
      * Replace spaces with x's as you traverse the maze. 
      */
     public boolean solveBFS(boolean animate){   
-	return false; //change later
+	boolean works=solve(animate,0,startx,starty);
+	if (works){
+	    System.out.println(Arrays.toString(solutionArray(nexts)));  
+	}
+	return works;	
     }
     
-    public boolean solveDFS(){
-	return solveDFS(true);
-    }
-
     /**Solve the maze using a frontier in a DFS manner. 
      * When animate is true, print the board at each step of the algorithm.
      * Replace spaces with x's as you traverse the maze. 
@@ -183,7 +188,29 @@ public class Maze{
 	    
 	    //If BFS
 	    if (mode==0){
-
+		boolean works=false;
+		nexts.addLast(new Coordinate(x,y));
+		if(solve(animate,mode,x+1,y)){
+		    nexts.addLast(new Coordinate(x+1,y));		    
+		    works=true;
+		}
+		if (solve(animate,mode,x,y+1)){
+		    nexts.addLast(new Coordinate(x,y+1));
+		    works=true;
+		}
+		if (solve(animate,mode,x-1,y)){
+		    nexts.addLast(new Coordinate(x-1,y));
+		    works=true;
+		}
+		if (solve(animate,mode,x,y-1)){
+		    nexts.addLast(new Coordinate(x,y-1));
+		    works=true;
+		}
+		if (works){
+		    nexts.addLast(temp.removeFirst());
+		    return true;
+		}
+		maze[x][y]='x';
 	    }
 	}
 	
@@ -211,7 +238,7 @@ public class Maze{
     public static void main(String[] args){
 	Maze test1=new Maze("data1.dat");
 	//Maze test2=new Maze("easy.dat");
-	//System.out.println(test1.solveBFS());
-	System.out.println(test1.solveDFS());
+	System.out.println(test1.solveBFS());
+	//System.out.println(test2.solveDFS());
     }
 }
