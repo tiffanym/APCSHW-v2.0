@@ -207,33 +207,41 @@ public class Maze{
 		wait(20);
 	    }
 	    //while (!nexts.isEmpty()){ //for (Coordinate thing : nexts)
+
 	    MyDeque<Coordinate> tp=new MyDeque<Coordinate>();
-	    Coordinate temp=nexts.removeFirst();
-	    int x=temp.getX();
-	    int y=temp.getY();
-	    int[][] connected={{x+1,y},{x,y+1},{x-1,y},{x,y-1}};
-	    for (int[] spot:connected){
-		if (spot[0]<0 || spot[1]<0 || spot[0]>=maxx || spot[1]>=maxy){
-		    return false;
+
+	    MyDeque<Coordinate> copy=nexts;
+	    while(!copy.isEmpty()){ //for u in frontier: (Python pseudo) //to loop through nexts without taking out impt things(?)
+		Coordinate temp=copy.removeFirst();//nexts.removeFirst();
+		int x=temp.getX();
+		int y=temp.getY();
+		int[][] connected={{x+1,y},{x,y+1},{x-1,y},{x,y-1}};
+		for (int[] spot:connected){
+		    if (spot[0]<0 || spot[1]<0 || spot[0]>=maxx || spot[1]>=maxy){
+			return false;
 		    }
-		if(checked[spot[0]][spot[1]]==-1){
-		    //nexts.addLast(temp);
-		    if (maze[spot[0]][spot[1]]=='E'){
-			checked[spot[0]][spot[1]]=i; //currentLevel+1;
-			nexts.addLast(new Coordinate(spot[0],spot[1],i,point));			
-			return true;
+		    if(checked[spot[0]][spot[1]]==-1){
+			//nexts.addLast(temp);
+			if (maze[spot[0]][spot[1]]=='E'){
+			    checked[spot[0]][spot[1]]=i; //currentLevel+1;
+			    //nexts.addLast(new Coordinate(spot[0],spot[1],i,point));			
+			    tp.addLast(new Coordinate(spot[0],spot[1],i,point));			
+			    return true;
+			}
+			if (maze[spot[0]][spot[1]]==' '|| maze[spot[0]][spot[1]]=='S'){
+			    checked[spot[0]][spot[1]]=i; //currentLevel+1;
+			    Coordinate p2=new Coordinate(spot[0],spot[1],i,point);
+			    //nexts.addLast(p2);
+			    tp.addLast(p2);
+			    //nexts.addLast(new Coordinate(spot[0],spot[1]));
+			}//else{
+			//	nexts.removeFirst();
+			//}
 		    }
-		    if (maze[spot[0]][spot[1]]==' '|| maze[spot[0]][spot[1]]=='S'){
-			checked[spot[0]][spot[1]]=i; //currentLevel+1;
-			Coordinate p2=new Coordinate(spot[0],spot[1],i,point);
-			//nexts.addLast(p2);
-			tp.addLast(p2);
-			//nexts.addLast(new Coordinate(spot[0],spot[1]));
-		    }//else{
-		    //	nexts.removeFirst();
-		    //}
 		}
 	    }
+
+
 	    nexts=tp;
 	    i++;
 		//}

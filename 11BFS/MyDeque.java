@@ -1,5 +1,5 @@
 import java.util.*;
-public class MyDeque<T> implements Iteratble<T>{
+public class MyDeque<T>{
     Object[] data;
     int head,tail;
     int size;
