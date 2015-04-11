@@ -5,7 +5,8 @@ public class Maze{
     private int maxx,maxy;
     private int startx,starty;
     private int[] answer; //prints out answer coordinates as array
-    ArrayList<Coordinate> nexts=new ArrayList<Coordinate>(); //using arraylist so easier to visualize
+    //ArrayList<Coordinate> nexts=new ArrayList<Coordinate>(); //using arraylist so easier to visualize
+    MyDeque<Coordinate> nexts=new MyDeque<Coordinate>();
 
     //Stuff for printing out maze
     private static final String clear = "\033[2J";
@@ -162,7 +163,7 @@ public class Maze{
 	    return false;
 	}
 	if (maze[x][y]=='E'){
-	    nexts.add(new Coordinate(x,y));
+	    nexts.addLast(new Coordinate(x,y));
 	    return true;
 	}
 
@@ -174,7 +175,7 @@ public class Maze{
 	    if (mode==1){
 		if (solve(animate,mode,x+1,y) || solve(animate,mode,x,y+1) ||
 		    solve(animate,mode,x-1,y) || solve(animate,mode,x,y-1)){
-		    nexts.add(new Coordinate(x,y));
+		    nexts.addLast(new Coordinate(x,y));
 		    return true;
 		}
 		maze[x][y]='x';
@@ -192,12 +193,13 @@ public class Maze{
 
 
     //prints out final coordinates of shortest path [x1,y1,x2,y2,x3,y3]
-    public int[] solutionArray(ArrayList<Coordinate> nexts){
+    public int[] solutionArray(MyDeque<Coordinate> nexts){
 	int[] temp=new int[nexts.size()*2];
 	int posn=0;
 	while (posn<temp.length){
 	    //For DFS (change later so can switch between both)
-	    Coordinate out=nexts.remove(nexts.size()-1);
+	    //Coordinate out=nexts.remove(nexts.size()-1);
+	    Coordinate out=nexts.removeLast();
 	    temp[posn]=out.getX();
 	    posn++;
 	    temp[posn]=out.getY();
