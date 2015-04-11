@@ -136,7 +136,9 @@ public class Maze{
      */
     public boolean solveBFS(boolean animate){   
 	mode=0;
-	boolean works=solve(animate,mode,startx,starty);
+	//boolean works=solve(animate,mode,startx,starty);
+	Coordinate start=new Coordinate(startx,starty);
+	boolean works=solve(animate,start);
 	if (works){
 	    System.out.println(Arrays.toString(solutionCoordinates()));  
 	}
@@ -155,6 +157,45 @@ public class Maze{
 	}
 	return works;	
     }
+
+    //idea/ pseudo-code from www.alexanderuseche.com/search-algorithms-breadth-first-search/
+    //temp (maybe?) method for BFS
+    public boolean solve(boolean animate, Coordinate point){ 
+	nexts.addLast(point); //queue: add to last; remove from first
+	boolean[][] checked=new boolean[maze.length][maze[0].length];
+	while (!nexts.isEmpty()){
+	    if (animate){
+		System.out.println(toString(animate));
+		wait(20);
+	    }
+	    
+	    Coordinate temp=nexts.removeFirst();
+	    int x=temp.getX();
+	    int y=temp.getY();
+	    int[][] connected={{x+1,y},{x,y+1},{x-1,y},{x,y-1}};
+	    for (int[] spot:connected){
+		if (spot[0]<0 || spot[1]<0 || spot[0]>=maxx || spot[1]>=maxy){
+		    return false;
+		}
+		if(!checked[spot[0]][spot[1]]){
+		    nexts.addLast(temp);
+		    if (maze[spot[0]][spot[1]]=='E'){
+			checked[spot[0]][spot[1]]=true;
+			nexts.addLast(new Coordinate(spot[0],spot[1]));
+			return true;
+		    }
+		    if (maze[spot[0]][spot[1]]==' '|| maze[spot[0]][spot[1]]=='S'){
+			checked[spot[0]][spot[1]]=true;
+			nexts.addLast(new Coordinate(spot[0],spot[1]));
+		    }
+		}
+	    }
+	}
+	return false;
+    }
+
+
+
 
     private boolean solve(boolean animate,int mode,int x, int y){
 	//1=DFS; 0=BFS
@@ -188,29 +229,7 @@ public class Maze{
 	    
 	    //If BFS
 	    if (mode==0){
-		boolean works=false;
-		nexts.addLast(new Coordinate(x,y));
-		if(solve(animate,mode,x+1,y)){
-		    nexts.addLast(new Coordinate(x+1,y));		    
-		    works=true;
-		}
-		if (solve(animate,mode,x,y+1)){
-		    nexts.addLast(new Coordinate(x,y+1));
-		    works=true;
-		}
-		if (solve(animate,mode,x-1,y)){
-		    nexts.addLast(new Coordinate(x-1,y));
-		    works=true;
-		}
-		if (solve(animate,mode,x,y-1)){
-		    nexts.addLast(new Coordinate(x,y-1));
-		    works=true;
-		}
-		if (works){
-		    nexts.addLast(temp.removeFirst());
-		    return true;
-		}
-		maze[x][y]='x';
+		//temp.addLast
 	    }
 	}
 	
