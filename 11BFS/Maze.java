@@ -242,9 +242,9 @@ public class Maze{
     }
 
     public static void main(String[] args){
-	Maze test1=new Maze("data1.dat");
-	//Maze test2=new Maze("easy.dat");
-	//System.out.println(test2.solveBFS());
-	System.out.println(test1.solveDFS());
+	//Maze test1=new Maze("data1.dat");
+	Maze test2=new Maze("easy.dat");
+	System.out.println(test2.solveBFS());
+	//System.out.println(test1.solveDFS());
     }
 }
