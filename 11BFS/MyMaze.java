@@ -24,8 +24,7 @@ public class MyMaze{
 	maxx=0;
 	maxy=0;
 	try{
-	    Scanner in = new Scanner(new File(filename));
-	    
+	    Scanner in = new Scanner(new File(filename));	    
 	    //keep reading next line
 	    while(in.hasNext()){
 		String line= in.nextLine();
@@ -37,8 +36,7 @@ public class MyMaze{
 		maxy++;
 		ans+=line;
 	    }
-	}
-	catch(Exception e){
+	}catch(Exception e){
 	    System.out.println("File: "+filename+" could not be opened.");
 	    e.printStackTrace();
 	    System.exit(0);
@@ -62,7 +60,6 @@ public class MyMaze{
 		}
 	    }
 	}
-
     }
 
     /**TOSTRING methods*/
