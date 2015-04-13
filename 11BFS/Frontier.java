@@ -1,28 +1,36 @@
 /**FRONTIER class*/
-private class Frontier{//is a deque
+import java.util.*;
+public class Frontier{//is a deque
     int mode;
-    MyDeque<Coordinate> pile = new MyDeque<Coordinate>();
+    MyDeque<Point> pile;
     
     //queue-->BFS =0
     //stack-->DFS =1
-    public Frontier (int mode){
+    public Frontier (int mode){	
 	this.mode=mode;
+	pile=new MyDeque<Point>();
     }
     
-    public void add(Coordinate next){
-	if (mode==1){ //DFS=stack
-	    pile.addFirst(next);
-	}else if (mode==0){ //BFS=queue
-	    pile.addLast(next);
-	}	    
+    public void add(Point next){
+	//if (mode==1){ //DFS=stack
+	//    pile.addFirst(next);
+	//}else if (mode==0){ //BFS=queue
+	//    pile.addLast(next);
+	//}
+	//pile.addLast(next);
+	pile.addLast(next);
     }
     
-    public Coordinate remove(){
-	Coordinate out=null; //returns nothing if empty
-	if (mode==1){ //DFS=stack
-	    out=pile.removeFirst();
-	}else if (mode==0){ //BFS=queue
-	    out=pile.removeLast();
+    public Point remove(){
+	Point out=null; //returns nothing if empty
+	if (size()>0){
+	    if (mode==1){ //DFS=stack
+		out=pile.removeLast();
+	    }else if (mode==0){ //BFS=queue
+		out=pile.removeFirst();
+	    }
+	}else{
+	    throw new NoSuchElementException();
 	}
 	return out;
     }

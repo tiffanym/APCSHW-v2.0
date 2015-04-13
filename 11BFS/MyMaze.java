@@ -114,14 +114,7 @@ public class MyMaze{
      * Replace spaces with x's as you traverse the maze. 
      */
     public boolean solveBFS(boolean animate){   
-	///mode=0;
-	//boolean works=solve(animate,mode,startx,starty);
-	Point start=new Point(startx,starty);
-	boolean works=solve(animate,start,0);
-	if (works){
-	    System.out.println(Arrays.toString(solutionCoordinates()));  
-	}
-	return works;	
+	return solve(animate,0);
     }
     
     /**Solve the maze using a frontier in a DFS manner. 
@@ -129,23 +122,39 @@ public class MyMaze{
      * Replace spaces with x's as you traverse the maze. 
      */    
     public boolean solveDFS(boolean animate){
-	mode=1;
-	boolean works=solve(animate,mode,startx,starty);
-	if (works){
-	    System.out.println(Arrays.toString(solutionCoordinates()));  
-	}
-	return works;	
+	return solve(animate,1);
     }
 
-    private boolean solve(boolean animate,int mode,int x, int y){
+    private boolean solve(boolean animate,int mode){
 	//1=DFS; 0=BFS
-	//FOR BOTH
-	if (animate){
-	    System.out.println(toString(animate));
-	    wait(20);
+	Frontier rest = new Frontier(mode);
+	Point start = new Point(startx,starty);//startx and starty are instance variables in my maze class
+	
+	rest.add(start);//put the start into the Frontier 
+	
+	boolean solved = false;
+	while(!solved && rest.hasNext()){
+	    if(animate && !solved){
+		System.out.println(toString(true));
+	    }
+	    //get the top
+	    Point next = rest.remove();
+	    //check if solved
+	    if(maze[next.getX()][next.getY()]=='E'){
+		//solved!
+		solved = true;
+		addCoordinatesToSolutionArray(next);
+		//my point class has a reference to previous points, so the solution will be determined from the final point
+	    }else{
+		//not solved, so add neighbors to Frontier and mark the floor with x.
+		maze[next.getX()][next.getY()]='x';
+		for(Point p : getNeighbors(next)){
+		    rest.add(p);
+		}
+		
+	    }
 	}
-
-	return false;//by default the maze didn't get solved
+	return solved;
     }
     
     /**return an array [x1,y1,x2,y2,x3,y3...]
