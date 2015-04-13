@@ -1,13 +1,13 @@
 import java.util.*;
 import java.io.*;
-public class Maze{
+public class MyMaze{
     private char[][]maze;
     private int maxx,maxy;
     private int startx,starty;
-    private int mode;
-    MyDeque<Coordinate> nexts=new MyDeque<Coordinate>();
+    //private int mode;
+    //MyDeque<Coordinate> nexts=new MyDeque<Coordinate>();
     //MyDeque<Coordinate> tp=new MyDeque<Coordinate>();
-    private int[][] checked;
+    //private int[][] checked;
 
     //Stuff for printing out maze
     private static final String clear = "\033[2J";
@@ -17,7 +17,7 @@ public class Maze{
 	return ("\033[" + x + ";" + y + "H");
     }
     
-    public Maze(String filename){ 
+    public MyMaze(String filename){ 
 	startx = -1;
 	starty = -1;
 	String ans = "";
@@ -103,59 +103,9 @@ public class Maze{
 	catch (InterruptedException e) {
 	}
     }
-
-
-    /**COORDINATE class*/
-    public class Coordinate{
-	int x,y;
-	int level;
-	Coordinate parent=null;
-	
-	public Coordinate(int x, int y, int level,Coordinate parent){
-	    setX(x);
-	    setY(y);
-	    setLevel(level);
-	    setParent(parent);
-	}
-	public Coordinate(int x, int y){
-	    setX(x);
-	    setY(y);
-	    level=-1;
-	}
-	public Coordinate(){
-	    setX(0);
-	    setY(0);
-	    level=-1;
-	}
-
-	public int getX(){
-	    return x;
-	}
-	public void setX(int x){
-	    this.x=x;
-	}
-	public int getY(){
-	    return y;
-	}
-	public void setY(int y){
-	    this.y=y;
-	}
-	public int getLevel(){
-	    return level;
-	}
-	public void setLevel(int level){
-	    this.level=level;
-	}
-	public Coordinate getParent(){
-	    return parent;
-	}
-	public void setParent(Coordinate parent){
-	    this.parent=parent;
-	}
-    }
     
     public boolean solveBFS(){
-	return solveBFS(true);//change to false later; true only for testing purposes
+	return solveBFS(true);
     }
 
     public boolean solveDFS(){
@@ -167,9 +117,9 @@ public class Maze{
      * Replace spaces with x's as you traverse the maze. 
      */
     public boolean solveBFS(boolean animate){   
-	mode=0;
+	///mode=0;
 	//boolean works=solve(animate,mode,startx,starty);
-	Coordinate start=new Coordinate(startx,starty);
+	Point start=new Point(startx,starty);
 	boolean works=solve(animate,start,0);
 	if (works){
 	    System.out.println(Arrays.toString(solutionCoordinates()));  
@@ -189,85 +139,6 @@ public class Maze{
 	}
 	return works;	
     }
-
-
-
-    //idea/ pseudo-code from www.alexanderuseche.com/search-algorithms-breadth-first-search/
-    //temp (maybe?) method for BFS
-    public boolean solve(boolean animate, Coordinate point, int currentLevel){ 
-	point.setLevel(currentLevel);
-	nexts.addLast(point); //queue: add to last; remove from first //starting point has level 0
-	//stack:add to last;remove from last
-	Coordinate parent=null;
-	//boolean[][] checked=new boolean[maze.length][maze[0].length];
-	int i=currentLevel+1;
-	while (!nexts.isEmpty()){
-	    if (animate){
-		System.out.println(toString(animate));
-		wait(20);
-	    }
-	    //while (!nexts.isEmpty()){ //for (Coordinate thing : nexts)
-
-	    MyDeque<Coordinate> tp=new MyDeque<Coordinate>();
-
-	    MyDeque<Coordinate> copy=nexts;
-	    while(!copy.isEmpty()){ //for u in frontier: (Python pseudo) //to loop through nexts without taking out impt things(?)
-		Coordinate temp=copy.removeFirst();//nexts.removeFirst();
-		int x=temp.getX();
-		int y=temp.getY();
-		int[][] connected={{x+1,y},{x,y+1},{x-1,y},{x,y-1}};
-		for (int[] spot:connected){
-		    if (spot[0]<0 || spot[1]<0 || spot[0]>=maxx || spot[1]>=maxy){
-			return false;
-		    }
-		    if(checked[spot[0]][spot[1]]==-1){
-			//nexts.addLast(temp);
-			if (maze[spot[0]][spot[1]]=='E'){
-			    checked[spot[0]][spot[1]]=i; //currentLevel+1;
-			    //nexts.addLast(new Coordinate(spot[0],spot[1],i,point));			
-			    tp.addLast(new Coordinate(spot[0],spot[1],i,point));			
-			    return true;
-			}
-			if (maze[spot[0]][spot[1]]==' '|| maze[spot[0]][spot[1]]=='S'){
-			    checked[spot[0]][spot[1]]=i; //currentLevel+1;
-			    Coordinate p2=new Coordinate(spot[0],spot[1],i,point);
-			    //nexts.addLast(p2);
-			    tp.addLast(p2);
-			    //nexts.addLast(new Coordinate(spot[0],spot[1]));
-			}//else{
-			//	nexts.removeFirst();
-			//}
-		    }
-		}
-	    }
-
-	    nexts=tp;
-	    i++;
-	}
-	return false;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private boolean solve(boolean animate,int mode,int x, int y){
 	//1=DFS; 0=BFS
@@ -289,7 +160,7 @@ public class Maze{
 	int[] answer=new int[nexts.size()*2];
 	int posn=0;
 	while (posn<answer.length){
-	    Coordinate out=new Coordinate();
+	    Point out=new Point();
 	    if (mode==1){ //DFS
 		out=nexts.removeLast();
 	    }
