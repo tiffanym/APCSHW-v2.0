@@ -85,6 +85,32 @@ public class MyDeque<T>{
     }
 
 
+
+    /**PRIORITY QUEUE*/
+    public void add(T object,int index){
+	
+    }
+    
+    public T removeSmallest(){	
+	T min=(T)data[0];
+	int indexOut=0;
+	for (int i=0;i<size;i++){
+	    //if (min.compareTo(data[i])>0){ //this.compareTo(arg)>0 => arg<this
+	    if(min>data[i]){
+		min=(T)data[i];
+		indexOut=i;
+	    }
+	}
+	data[indexOut]=0;
+	return min;
+    }
+
+    //public void resize(){
+    //}    
+    /**PRIORITY QUEUE*/
+
+
+
     //EXTRA: For Maze.java (with BFS and DFS to work)
     public int size(){
 	return size;
