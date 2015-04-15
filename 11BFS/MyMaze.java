@@ -88,7 +88,7 @@ public class MyMaze{
 	}else{
 	    mazeAnim=maze.toString();
 	}
-	return mazeAnim;
+	return mazeAnim+solution(); //added to show frontier
     }
 
     public void wait(int millis){
