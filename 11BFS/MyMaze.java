@@ -4,8 +4,7 @@ public class MyMaze{
     private char[][]maze;
     private int maxx,maxy;
     private int startx,starty;
-    private String solution;
-    private int[] solutionAR;
+    private int[] solutionAR=new int[0];
 
     //Stuff for printing out maze
     private static final String clear = "\033[2J";
@@ -113,7 +112,11 @@ public class MyMaze{
      * Replace spaces with x's as you traverse the maze. 
      */
     public boolean solveBFS(boolean animate){   
-	return solve(animate,0);
+	boolean works=solve(animate,0);
+	if (works){
+	    System.out.println(Arrays.toString(solutionCoordinates()));
+	}
+	return works;
     }
     
     /**Solve the maze using a frontier in a DFS manner. 
@@ -121,7 +124,11 @@ public class MyMaze{
      * Replace spaces with x's as you traverse the maze. 
      */    
     public boolean solveDFS(boolean animate){
-	return solve(animate,1);
+	boolean works=solve(animate,1);
+	if (works){
+	    System.out.println(Arrays.toString(solutionCoordinates()));
+	}
+	return works;
     }
 
     private boolean solve(boolean animate,int mode){
@@ -163,6 +170,7 @@ public class MyMaze{
 	    temp[temp.length-1]=next.getY();
 	    next=next.getParent();
 	}
+	solutionAR=temp;
     }
 
     public Point[] getNeighbors(Point next){
@@ -187,7 +195,23 @@ public class MyMaze{
      *Postcondition:  the correct solution is in the returned array
      */
     public int[] solutionArray(){
-	return new int[10];
+	return solutionAR;
+    }
+
+    public String solution(){
+	String ans="[";
+	for (int i=0;i<solutionAR.length;i++){
+	    if (i%2==0){
+		ans+="("+solutionAR[i]+",";
+	    }else{
+		ans+=solutionAR[i]+")";
+		if (i!=solutionAR.length-1){
+		    ans+=",";
+		}
+	    }
+	    ans+="]";
+	}
+	return ans;
     }
 
     public static void main(String[] args){
