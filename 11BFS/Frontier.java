@@ -38,4 +38,8 @@ public class Frontier{//is a deque
     public int size(){
 	return pile.size();
     }
+    
+    public boolean hasNext(){
+	return size()>0;
+    }
 }

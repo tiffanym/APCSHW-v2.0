@@ -4,10 +4,8 @@ public class MyMaze{
     private char[][]maze;
     private int maxx,maxy;
     private int startx,starty;
-    //private int mode;
-    //MyDeque<Coordinate> nexts=new MyDeque<Coordinate>();
-    //MyDeque<Coordinate> tp=new MyDeque<Coordinate>();
-    //private int[][] checked;
+    private String solution;
+    private int[] solutionAR;
 
     //Stuff for printing out maze
     private static final String clear = "\033[2J";
@@ -51,7 +49,7 @@ public class MyMaze{
 		starty = i/maxx;
 	    }
 	}
-
+	/*
 	checked=new int[maze.length][maze[0].length];
 	for (int i=0;i<maze.length;i++){
 	    for (int j=0;i<maze.length;j++){
@@ -60,6 +58,7 @@ public class MyMaze{
 		}
 	    }
 	}
+	*/
     }
 
     /**TOSTRING methods*/
@@ -128,7 +127,7 @@ public class MyMaze{
     private boolean solve(boolean animate,int mode){
 	//1=DFS; 0=BFS
 	Frontier rest = new Frontier(mode);
-	Point start = new Point(startx,starty);//startx and starty are instance variables in my maze class
+	Point start = new Point(startx,starty);
 	
 	rest.add(start);//put the start into the Frontier 
 	
@@ -156,35 +155,56 @@ public class MyMaze{
 	}
 	return solved;
     }
+
+    public void addCoordinatesToSolutionArray(Point next){	
+	while (next!=null){
+	    int[] temp=new int[solutionAR.length+2];
+	    temp[temp.length-2]=next.getX();
+	    temp[temp.length-1]=next.getY();
+	    next=next.getParent();
+	}
+    }
+
+    public Point[] getNeighbors(Point next){
+	//Point[] neighbors={new Point(x+1,y),
+	//		   new Point(x,y+1),
+	//		   new Point(x-1,y),
+	//		   new POint(x,y-1)};
+	ArrayList<Point> temp=new ArrayList<Point>();
+	int x=next.getX();
+	int y=next.getY();
+	int[][] connected={{x+1,y},{x,y+1},{x-1,y},{x,y-1}};
+	for(int[] spot:connected){
+	    if (spot[0]>=0 && spot[1]>=0 && spot[0]<maxx && spot[1]<maxy){
+		if (maze[spot[0]][spot[1]]==' ' ||maze[spot[0]][spot[1]]=='E'){
+		    temp.add(new Point(spot[0],spot[1]));
+		}
+	    }
+	}
+	Point[] neighbors= (Point[])temp.toArray();
+	return neighbors;
+    }
     
     /**return an array [x1,y1,x2,y2,x3,y3...]
      *that contains the coordinates of the solution from start to end.
      *Precondition :  solveBFS() OR solveDFS() has already been called (otherwise an empty array is returned)
      *Postcondition:  the correct solution is in the returned array
      */
-    public int[] solutionCoordinates(){
-	int[] answer=new int[nexts.size()*2];
-	int posn=0;
-	while (posn<answer.length){
-	    Point out=new Point();
-	    if (mode==1){ //DFS
-		out=nexts.removeLast();
-	    }
-	    if (mode==0){ //BFS
-		out=nexts.removeFirst(); //temporary (need to check once BFS code works)
-	    }
-	    answer[posn]=out.getX();
-	    posn++;
-	    answer[posn]=out.getY();
-	    posn++;
-	}
-	return answer;
+    public int[] solutionArray(){
+	return new int[10];
     }
 
     public static void main(String[] args){
-	//MyMaze test1=new Maze("data1.dat");
-	MyMaze test2=new Maze("easy.dat");
-	System.out.println(test2.solveBFS());
+	//MyMaze test1=new MyMaze("data1.dat");
+	MyMaze test2=new MyMaze("easy.dat");
+	//System.out.println(test2.solveBFS());
 	//System.out.println(test1.solveDFS());
+
+	Point x=new Point(0,1);
+	Point y=new Point(5,4);
+	Point z=new Point(3,3);
+	x.setParent(z);
+	z.setParent(y);
+	test2.addCoordinatesToSolutionArray(x);
     }
 }
