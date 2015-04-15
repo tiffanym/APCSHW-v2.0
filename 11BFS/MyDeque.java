@@ -95,13 +95,13 @@ public class MyDeque<T>{
 	resize();
 	priorityBox[tail]=priority;
     }
-    
+    /*
     public T removeSmallest(){	
 	T min=(T)data[0];
 	int indexOut=0;
 	for (int i=0;i<size;i++){
-	    if (min.compareTo(data[i])>0){ //this.compareTo(arg)>0 => arg<this
-	    //if(min>data[i]){
+	    if (min.compareTo((T)data[i])>0){ //this.compareTo(arg)>0 => arg<this
+		//if(min>(T)data[i]){
 		min=(T)data[i];
 		indexOut=i;
 	    }
@@ -109,6 +109,7 @@ public class MyDeque<T>{
 	data[indexOut]=0;
 	return min;
     }
+    */
 
     //public void resize(){ //use resize method above
     //}    
