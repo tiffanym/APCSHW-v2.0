@@ -166,10 +166,6 @@ public class MyMaze{
     }
 
     public Point[] getNeighbors(Point next){
-	//Point[] neighbors={new Point(x+1,y),
-	//		   new Point(x,y+1),
-	//		   new Point(x-1,y),
-	//		   new POint(x,y-1)};
 	ArrayList<Point> temp=new ArrayList<Point>();
 	int x=next.getX();
 	int y=next.getY();
