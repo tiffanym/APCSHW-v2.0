@@ -114,7 +114,7 @@ public class MyMaze{
     public boolean solveBFS(boolean animate){   
 	boolean works=solve(animate,0);
 	if (works){
-	    System.out.println(Arrays.toString(solutionCoordinates()));
+	    System.out.println(Arrays.toString(solutionArray()));
 	}
 	return works;
     }
@@ -126,7 +126,7 @@ public class MyMaze{
     public boolean solveDFS(boolean animate){
 	boolean works=solve(animate,1);
 	if (works){
-	    System.out.println(Arrays.toString(solutionCoordinates()));
+	    System.out.println(Arrays.toString(solutionArray()));
 	}
 	return works;
     }
@@ -164,8 +164,9 @@ public class MyMaze{
     }
 
     public void addCoordinatesToSolutionArray(Point next){	
+	int[] temp;
 	while (next!=null){
-	    int[] temp=new int[solutionAR.length+2];
+	    temp=new int[solutionAR.length+2];
 	    temp[temp.length-2]=next.getX();
 	    temp[temp.length-1]=next.getY();
 	    next=next.getParent();
