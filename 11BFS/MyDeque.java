@@ -3,12 +3,14 @@ public class MyDeque<T>{
     Object[] data;
     int head,tail;
     int size;
+    int[] priorityBox;
 
     public MyDeque(){
 	data=new Object[10];
 	head=0;
 	tail=size-1;
 	size=0;
+	priorityBox=new int[10];
     }
     //h--,insert
     public void addFirst(T value){
@@ -87,8 +89,11 @@ public class MyDeque<T>{
 
 
     /**PRIORITY QUEUE*/
-    public void add(T object,int index){
-	
+    public void add(T object,int priority){
+	addLast(object);
+	tail++;
+	resize();
+	priorityBox[tail]=priority;
     }
     
     public T removeSmallest(){	
@@ -105,7 +110,7 @@ public class MyDeque<T>{
 	return min;
     }
 
-    //public void resize(){
+    //public void resize(){ //use resize method above
     //}    
     /**PRIORITY QUEUE*/
 
