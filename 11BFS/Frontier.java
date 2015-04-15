@@ -42,4 +42,7 @@ public class Frontier{//is a deque
     public boolean hasNext(){
 	return size()>0;
     }
+
+    //public String toString(){
+    //}
 }

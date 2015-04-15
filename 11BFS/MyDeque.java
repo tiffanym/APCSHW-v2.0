@@ -127,6 +127,25 @@ public class MyDeque<T>{
     public boolean isEmpty(){
 	return size==0;
     }
+
+    /*
+    public String toString(){
+	resize();
+	String ans="[";
+	for (int i=head;i<tail;i++){
+	    if (i%2==0){
+		ans+="("+data[i]+",";
+	    }else{
+		ans+=
+		if (i!=tail-1){
+		    ans+="";
+		}
+	    }
+	}
+    }
+    */
+
+
     /*
     public Iterator<T> iterator(){
 	return new MyDequeIterator<T>();
