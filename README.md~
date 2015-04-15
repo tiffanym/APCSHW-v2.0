@@ -20,6 +20,3 @@ Mazesolver - example done in class as a foundation / foothold (?) on which to co
   -http://tjsct.wikidot.com/usaco-mar08-silver  (Question 7 "Cow Travelling")
 
 05MergeSort - code for merge sort (look it up; different method of sorting (vs selectionSort, insertionSort, bubbleSort, radixSort, etc.)
-
-011BFS - code for BFS, DFS (using queue and stacks, respectively) and adds Priority Queue to MyDeque
-  -great site to test code: http://qiao.github.io/PathFinding.js/visual/
