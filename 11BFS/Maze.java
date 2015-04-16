@@ -155,11 +155,11 @@ public class Maze{
     }
     
     public boolean solveBFS(){
-	return solveBFS(true);//change to false later; true only for testing purposes
+	return solveBFS(false);//change to false later; true only for testing purposes
     }
 
     public boolean solveDFS(){
-	return solveDFS(false);
+	return solveDFS(true);
     }
 
     /**Solve the maze using a frontier in a BFS manner. 
@@ -189,7 +189,7 @@ public class Maze{
 	}
 	return works;	
     }
-
+    
 
 
     //idea/ pseudo-code from www.alexanderuseche.com/search-algorithms-breadth-first-search/
@@ -246,8 +246,6 @@ public class Maze{
 	}
 	return false;
     }
-
-
 
 
 
@@ -334,9 +332,9 @@ public class Maze{
 
     public static void main(String[] args){
 	//Maze test1=new Maze("data1.dat");
-	//Maze test2=new Maze("easy.dat");
-	Maze whee=new Maze("emptyMaze.dat");
+	Maze test2=new Maze("easy.dat");
+	//Maze whee=new Maze("emptyMaze.dat");
 	//System.out.println(test2.solveBFS());
-	System.out.println(whee.solveDFS());
+	System.out.println(test2.solveDFS());
     }
 }

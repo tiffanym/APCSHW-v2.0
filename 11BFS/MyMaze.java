@@ -142,6 +142,7 @@ public class MyMaze{
 	while(!solved && rest.hasNext()){
 	    if(animate && !solved){
 		System.out.println(toString(true));
+		System.out.println("Solution: "+solution());
 	    }
 	    //get the top
 	    Point next = rest.remove();
@@ -177,18 +178,26 @@ public class MyMaze{
     }
 
     public Point[] getNeighbors(Point next){
-	ArrayList<Point> temp=new ArrayList<Point>();
+	//ArrayList<Point> temp=new ArrayList<Point>();
+	Point[] temp=new Point[4];
+	int len=0;
 	int x=next.getX();
 	int y=next.getY();
 	int[][] connected={{x+1,y},{x,y+1},{x-1,y},{x,y-1}};
 	for(int[] spot:connected){
 	    if (spot[0]>=0 && spot[1]>=0 && spot[0]<maxx && spot[1]<maxy){
 		if (maze[spot[0]][spot[1]]==' ' ||maze[spot[0]][spot[1]]=='E'){
-		    temp.add(new Point(spot[0],spot[1]));
+		    //temp.add(new Point(spot[0],spot[1]));
+		    temp[len]=new Point(spot[0],spot[1]);
+		    len++;
 		}
 	    }
 	}
-	Point[] neighbors= (Point[])temp.toArray();
+	//Point[] neighbors= temp.toArray();
+	Point[] neighbors=new Point[len];
+	for (int i=0;i<len;i++){
+	    temp[i]=neighbors[i];
+	}
 	return neighbors;
     }
     
@@ -221,16 +230,16 @@ public class MyMaze{
 	//MyMaze test1=new MyMaze("data1.dat");
 	MyMaze test2=new MyMaze("easy.dat");
 	//System.out.println(test2.solveBFS());
-	//System.out.println(test1.solveDFS());
+	System.out.println(test2.solveDFS());
 
-	Point x=new Point(0,1);
-	Point y=new Point(5,4);
-	Point z=new Point(3,3);
-	x.setParent(z);
-	z.setParent(y);
+	//Point x=new Point(0,1);
+	//Point y=new Point(5,4);
+	//Point z=new Point(3,3);
+	//x.setParent(z);
+	//z.setParent(y);
 	//test2.addCoordinatesToSolutionArray(x);
 	//test2.addCoordinatesToSolutionArray(y);
-	test2.addCoordinatesToSolutionArray(z);
-	System.out.println(test2.solution());
+	//test2.addCoordinatesToSolutionArray(z);
+	//System.out.println(test2.solution());
     }
 }
