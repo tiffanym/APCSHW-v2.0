@@ -12,12 +12,6 @@ public class Frontier{//is a deque
     }
     
     public void add(Point next){
-	//if (mode==1){ //DFS=stack
-	//    pile.addFirst(next);
-	//}else if (mode==0){ //BFS=queue
-	//    pile.addLast(next);
-	//}
-	//pile.addLast(next);
 	pile.addLast(next);
     }
     
@@ -42,7 +36,4 @@ public class Frontier{//is a deque
     public boolean hasNext(){
 	return size()>0;
     }
-
-    //public String toString(){
-    //}
 }
