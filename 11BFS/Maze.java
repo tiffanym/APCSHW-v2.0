@@ -78,7 +78,7 @@ public class Maze{
 	}else{
 	    mazeAnim=maze.toString();
 	}
-	return mazeAnim+solution(); //added to show frontier
+	return mazeAnim+"Path: "+solution(); //added to show frontier
     }
 
     public void wait(int millis){
@@ -153,7 +153,8 @@ public class Maze{
 	return solved;
     }
 
-    public void addCoordinatesToSolutionArray(Point next){	
+    public void addCoordinatesToSolutionArray(Point next){
+	//Point copy=next;
 	while (next!=null){
 	    int[]temp=new int[solutionAR.length+2];
 	    for (int i=0;i<solutionAR.length;i++){
@@ -210,7 +211,7 @@ public class Maze{
 	Maze test1=new Maze("data1.dat");
 	Maze test2=new Maze("easy.dat");
 	Maze test3=new Maze("emptyMaze.dat");
-	//System.out.println(test2.solveBFS());
+	//System.out.println(test3.solveBFS());
 	System.out.println(test3.solveDFS());
     }
 }
