@@ -104,7 +104,7 @@ public class MyMaze{
     }
 
     public boolean solveDFS(){
-	return solveDFS(false);
+	return solveDFS(true);
     }
 
     /**Solve the maze using a frontier in a BFS manner. 
@@ -144,21 +144,20 @@ public class MyMaze{
 		System.out.println(toString(true));
 		System.out.println("Solution: "+solution());
 	    }
-	    //get the top
 	    Point next = rest.remove();
 	    //check if solved
 	    if(maze[next.getX()][next.getY()]=='E'){
-		//solved!
 		solved = true;
 		addCoordinatesToSolutionArray(next);
-		//my point class has a reference to previous points, so the solution will be determined from the final point
 	    }else{
 		//not solved, so add neighbors to Frontier and mark the floor with x.
-		maze[next.getX()][next.getY()]='x';
+		if (maze[next.getX()][next.getY()]!='S'){
+		    maze[next.getX()][next.getY()]='x';
+		}
 		for(Point p : getNeighbors(next)){
 		    rest.add(p);
+		    addCoordinatesToSolutionArray(next);
 		}
-		
 	    }
 	}
 	return solved;
@@ -177,9 +176,9 @@ public class MyMaze{
 	}
     }
 
-    public Point[] getNeighbors(Point next){
-	//ArrayList<Point> temp=new ArrayList<Point>();
-	Point[] temp=new Point[4];
+    public ArrayList<Point> getNeighbors(Point next){
+	ArrayList<Point> temp=new ArrayList<Point>();
+	//Point[] temp=new Point[4];
 	int len=0;
 	int x=next.getX();
 	int y=next.getY();
@@ -187,18 +186,19 @@ public class MyMaze{
 	for(int[] spot:connected){
 	    if (spot[0]>=0 && spot[1]>=0 && spot[0]<maxx && spot[1]<maxy){
 		if (maze[spot[0]][spot[1]]==' ' ||maze[spot[0]][spot[1]]=='E'){
-		    //temp.add(new Point(spot[0],spot[1]));
-		    temp[len]=new Point(spot[0],spot[1]);
-		    len++;
+		    temp.add(new Point(spot[0],spot[1]));
+		    //temp[len]=new Point(spot[0],spot[1]);
+		    //len++;
 		}
 	    }
 	}
 	//Point[] neighbors= temp.toArray();
-	Point[] neighbors=new Point[len];
-	for (int i=0;i<len;i++){
-	    temp[i]=neighbors[i];
-	}
-	return neighbors;
+	//Point[] neighbors=new Point[len];
+	//for (int i=0;i<len;i++){
+	//    temp[i]=neighbors[i];
+	//}
+	//return neighbors;
+	return temp;
     }
     
     /**return an array [x1,y1,x2,y2,x3,y3...]
