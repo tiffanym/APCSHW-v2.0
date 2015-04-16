@@ -136,9 +136,9 @@ public class MyDeque<T>{
 	    if (i%2==0){
 		ans+="("+data[i]+",";
 	    }else{
-		ans+=
+		ans+=data[i]+")";
 		if (i!=tail-1){
-		    ans+="";
+		    ans+=",";
 		}
 	    }
 	}
