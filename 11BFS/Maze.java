@@ -131,7 +131,8 @@ public class Maze{
 	boolean solved = false;
 	while(!solved && rest.hasNext()){
 	    if(animate && !solved){
-		System.out.println(toString(true));		
+		System.out.println(toString(true));
+		wait(100);
 	    }
 	    Point next = rest.remove();
 	    //check if solved
@@ -208,7 +209,8 @@ public class Maze{
     public static void main(String[] args){
 	Maze test1=new Maze("data1.dat");
 	Maze test2=new Maze("easy.dat");
+	Maze test3=new Maze("emptyMaze.dat");
 	//System.out.println(test2.solveBFS());
-	System.out.println(test1.solveDFS());
+	System.out.println(test3.solveDFS());
     }
 }
