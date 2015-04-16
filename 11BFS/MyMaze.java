@@ -164,14 +164,16 @@ public class MyMaze{
     }
 
     public void addCoordinatesToSolutionArray(Point next){	
-	int[] temp;
 	while (next!=null){
-	    temp=new int[solutionAR.length+2];
+	    int[]temp=new int[solutionAR.length+2];
+	    for (int i=0;i<solutionAR.length;i++){
+		temp[i]=solutionAR[i];
+	    }
 	    temp[temp.length-2]=next.getX();
 	    temp[temp.length-1]=next.getY();
 	    next=next.getParent();
+	    solutionAR=temp;
 	}
-	solutionAR=temp;
     }
 
     public Point[] getNeighbors(Point next){
@@ -210,8 +212,8 @@ public class MyMaze{
 		    ans+=",";
 		}
 	    }
-	    ans+="]";
 	}
+	ans+="]";
 	return ans;
     }
 
@@ -226,6 +228,9 @@ public class MyMaze{
 	Point z=new Point(3,3);
 	x.setParent(z);
 	z.setParent(y);
-	test2.addCoordinatesToSolutionArray(x);
+	//test2.addCoordinatesToSolutionArray(x);
+	//test2.addCoordinatesToSolutionArray(y);
+	test2.addCoordinatesToSolutionArray(z);
+	System.out.println(test2.solution());
     }
 }

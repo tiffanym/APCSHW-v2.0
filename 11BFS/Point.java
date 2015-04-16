@@ -11,6 +11,7 @@ public class Point{
     public Point(int x, int y){
 	setX(x);
 	setY(y);
+	setParent(null);
     }
     public Point(){
 	setX(0);
