@@ -145,30 +145,6 @@ public class MyDeque<T>{
     }
     */
 
-
-    /*
-    public Iterator<T> iterator(){
-	return new MyDequeIterator<T>();
-    }
-    //from http://codereview.stackexchange.com/questions/56361/generic-deque-implementation
-    private class DequeIterator implements Iterator<T> {	
-	private Node<T> curr = head;
-	
-	public boolean hasNext() {
-	    return curr != null;
-	}
-	public void remove() {
-	    throw new UnsupportedOperationException();
-	}
-	public T next() {
-	    if (!hasNext()) { throw new NoSuchElementException(); }
-	    T item = curr.item;
-	    curr = curr.right;
-	    return item;
-	}
-    }
-    */
-
     //EXTRA: For Maze.java (with BFS and DFS to work)
 
 

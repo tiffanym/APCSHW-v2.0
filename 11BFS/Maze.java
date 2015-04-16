@@ -136,17 +136,20 @@ public class Maze{
 	    }
 	    Point next = rest.remove();
 	    //check if solved
-	    if(maze[next.getX()][next.getY()]=='E'){
-		solved = true;
-		addCoordinatesToSolutionArray(next);
-	    }else{
-		//not solved, so add neighbors to Frontier and mark the floor with x.
-		if (maze[next.getX()][next.getY()]!='S'){
-		    maze[next.getX()][next.getY()]='x';
-		}
-		for(Point p : getNeighbors(next)){
-		    rest.add(p);
+	    if (next!=null){
+		if(maze[next.getX()][next.getY()]=='E'){
+		    solved = true;
 		    addCoordinatesToSolutionArray(next);
+		}else{
+		    //not solved, so add neighbors to Frontier and mark the floor with x.
+		    if (maze[next.getX()][next.getY()]!='S'){
+			maze[next.getX()][next.getY()]='x';
+		    }
+		    addCoordinatesToSolutionArray(next);
+		    for(Point p : getNeighbors(next)){
+			rest.add(p);
+			addCoordinatesToSolutionArray(p);
+		    }
 		}
 	    }
 	}
@@ -212,6 +215,6 @@ public class Maze{
 	Maze test2=new Maze("easy.dat");
 	Maze test3=new Maze("emptyMaze.dat");
 	//System.out.println(test3.solveBFS());
-	System.out.println(test2.solveDFS());
+	System.out.println(test2.solveBFS());
     }
 }
