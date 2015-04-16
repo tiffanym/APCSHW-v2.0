@@ -128,7 +128,7 @@ public class MyDeque<T>{
 	return size==0;
     }
 
-    /*
+    
     public String toString(){
 	resize();
 	String ans="[";
@@ -142,8 +142,9 @@ public class MyDeque<T>{
 		}
 	    }
 	}
+	return ans;
     }
-    */
+    
 
     //EXTRA: For Maze.java (with BFS and DFS to work)
 
