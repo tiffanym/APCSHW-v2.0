@@ -48,16 +48,6 @@ public class Maze{
 		starty = i/maxx;
 	    }
 	}
-	/*
-	checked=new int[maze.length][maze[0].length];
-	for (int i=0;i<maze.length;i++){
-	    for (int j=0;i<maze.length;j++){
-		if (i!=startx && j!=starty){
-		    checked[i][j]=-1;
-		}
-	    }
-	}
-	*/
     }
 
     /**TOSTRING methods*/
