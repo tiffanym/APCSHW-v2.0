@@ -219,11 +219,29 @@ public class Maze{
 	return ans;
     }
 
+    public boolean solveBest(){
+    	return solveBest(true);
+    }
+
+    public boolean solveAStar(){
+    	return solveAStar(true);
+    }
+    
+    public boolean solveBest(boolean animate){
+    	return false; //add stuff
+    }
+    
+    public boolean solveAStar(){
+    	return false; //add stuff
+    }
+
     public static void main(String[] args){
 	Maze test1=new Maze("data1.dat");
 	Maze test2=new Maze("easy.dat");
 	Maze test3=new Maze("emptyMaze.dat");
 	//System.out.println(test3.solveBFS());
 	System.out.println(test1.solveDFS());
+	//System.out.println(test3.solveBest());
+	//System.out.println(test3.solveAStar());
     }
 }
