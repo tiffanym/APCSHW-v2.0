@@ -151,15 +151,15 @@ public class Maze{
 		    maze[next.getX()][next.getY()]='.';
 		}
 		ArrayList<Point> neighbors= getNeighbors(next);
-		if (neighbors.size()==0){
+		//if (neighbors.size()==0){
 		    maze[next.getX()][next.getY()]='x';
-		    rest.remove();
-		}else{
+		    //rest.remove();
+		    //}else{
 		    for(Point p : neighbors){
 			rest.add(p);
 			addCoordinatesToSolutionArray(p);			
 		    }
-		}
+		    //}
 	    }	    
 	}
 	return solved;
@@ -231,7 +231,7 @@ public class Maze{
     	return false; //add stuff
     }
     
-    public boolean solveAStar(){
+    public boolean solveAStar(boolean animate){
     	return false; //add stuff
     }
 
