@@ -148,20 +148,12 @@ public class Maze{
 	    else{
 		//not solved, so add neighbors to Frontier and mark the floor with x.
 		if (maze[next.getX()][next.getY()]!='S'){
-		    maze[next.getX()][next.getY()]='.';
+		    maze[next.getX()][next.getY()]='x';
 		}
 		ArrayList<Point> neighbors= getNeighbors(next);
-		maze[next.getX()][next.getY()]='x';
 		for(Point p : neighbors){
 		    rest.add(p);
-		    //addCoordinatesToSolutionArray(p);
-		}
-
-		if (mode==DFS){
-		    //Point 
-		}
-
-		
+		}		
 	    }	    
 	}
 	return solved;
@@ -189,7 +181,7 @@ public class Maze{
 	for(int[] spot:connected){
 	    if (spot[0]>=0 && spot[1]>=0 && spot[0]<maxx && spot[1]<maxy){
 		if (maze[spot[0]][spot[1]]==' ' || maze[spot[0]][spot[1]]=='E'){
-		    temp.add(new Point(spot[0],spot[1]));
+		    temp.add(new Point(spot[0],spot[1],next));
 		}
 	    }
 	}
@@ -243,6 +235,7 @@ public class Maze{
 	Maze test3=new Maze("emptyMaze.dat");
 	//System.out.println(test3.solveBFS());
 	System.out.println(test1.solveDFS());
+	//System.out.println(test1.solveBFS());
 	//System.out.println(test3.solveBest());
 	//System.out.println(test3.solveAStar());
     }
