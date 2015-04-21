@@ -160,7 +160,6 @@ public class Maze{
     }
 
     public void addCoordinatesToSolutionArray(Point next){
-	//Point copy=next;
 	while (next!=null){
 	    int[]temp=new int[solutionAR.length+2];
 	    for (int i=0;i<solutionAR.length;i++){
