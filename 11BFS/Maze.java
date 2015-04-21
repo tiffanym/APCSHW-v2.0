@@ -193,7 +193,11 @@ public class Maze{
      *Postcondition:  the correct solution is in the returned array
      */
     public int[] solutionArray(){
-	return solutionAR;
+	int[] temp=new int[solutionAR.length];
+	for (int i=0;i<solutionAR.length;i++){
+	    temp[i]=solutionAR[solutionAR.length-1-i];
+	}
+	return temp;
     }
 
     public String solution(){
