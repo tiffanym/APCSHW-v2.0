@@ -3,14 +3,14 @@ public class MyDeque<T>{
     Object[] data;
     int head,tail;
     int size;
-    int[] priorityBox;
+    int[] weights;
 
     public MyDeque(){
 	data=new Object[10];
 	head=0;
 	tail=size-1;
 	size=0;
-	priorityBox=new int[10];
+	weights=new int[10];
     }
     //h--,insert
     public void addFirst(T value){
@@ -67,19 +67,24 @@ public class MyDeque<T>{
 	    temp=2*data.length;
 	}
 	Object[] out=new Object[temp];
+	int[] newWeights=new int[temp];
 	if (head<=tail){
 	    for (int i=head;i<tail+1;i++){
 		out[i]=data[i];
+		newWeights[i]=weights[i];
 	    }
 	}else{ //tail<head
 	    for (int i=0;i<tail;i++){
 		out[i]=data[i];
+		newWeights[i]=weights[i];
 	    }
 	    for (int i=head;i<data.length;i++){
 		out[i]=data[i];
+		newWeights[i]=weights[i];
 	    }
 	}
 	data=out;
+	weights=newWeights;
 	head=0;
 	if (size>0){
 	    tail=size-1;
@@ -89,27 +94,46 @@ public class MyDeque<T>{
 
 
     /**PRIORITY QUEUE*/
-    public void add(T object,int priority){
-	addLast(object);
+    public void add(T value,int weight){
+	resize();
+	addLast(value);
 	tail++;
 	resize();
-	priorityBox[tail]=priority;
+	weights[tail]=weight;
     }
     
     public T removeSmallest(){
-	//T min=(T)data[0];
-	int indexOut=0;
-	for (int i=0;i<size;i++){
-	    //if (min.compareTo((T)data[i])>0){ //this.compareTo(arg)>0 => arg<this	
-	    //min=(T)data[i];
-	    //	indexOut=i;
-	    //}
-	    if (priorityBox[i]<priorityBox[indexOut]){
-		indexOut=i;
+	if (size==1){
+	    size--;
+	    return (T)data[head];
+	}
+	int indexOut=head;
+	int weight=weights[head];
+	if (size>1){
+	    int i=head;
+	    int end;
+	    if (head<tail){
+		end=tail;
+	    }else{
+		end=weights.length+tail;
+	    }
+	    while (i<=end){
+		int index=i%weights.length;
+		if (weights[index]<weight){
+		    weight=weights[index];
+		    indexOut=index;
+		}
+		i++;
 	    }
 	}
+
 	T min=(T)data[indexOut];
-	data[indexOut]=0;
+	data[indexOut]=data[head];
+	weights[indexOut]=weights[head];
+	data[head]=null;
+	weights[head]=-1;
+	head=(head+1)%data.length;
+	size--;
 	return min;
     }
 
@@ -129,20 +153,29 @@ public class MyDeque<T>{
     }
 
     
-    public String toString(){
+    //for toString:
+    private static final int DATA=0;
+    private static final int WEIGHT=1;
+    public String toString(int mode){
 	resize();
 	String ans="[";
-	for (int i=head;i<tail;i++){
-	    if (i%2==0){
-		ans+="("+data[i]+",";
-	    }else{
-		ans+=data[i]+")";
-		if (i!=tail-1){
-		    ans+=",";
+	if (mode==DATA){
+	    for (int i=head;i<tail;i++){
+		if (i%2==0){
+		    ans+="("+data[i]+",";
+		}else{
+		    ans+=data[i]+")";
+		    //if (i!=tail-1){
+		    //	ans+=",";
+		    //}
 		}
 	    }
+	}else if (mode==WEIGHT){
+	    for (int i : weights){
+		ans+=""+i+",";
+	    }
 	}
-	return ans;
+	return ans.substring(0,ans.length()-1)+"]";
     }
     
 
@@ -151,6 +184,7 @@ public class MyDeque<T>{
 
     public static void main(String[] args){
 	MyDeque<Integer> test=new MyDeque<Integer>();
+	/*
 	//ADDLAST
 	test.addLast(new Integer(0));
 	System.out.println("last: "+test.getLast()); //addLast seems to work when adding first element to an empty array
@@ -172,6 +206,7 @@ public class MyDeque<T>{
 	System.out.println("removed: "+test.removeFirst());
 
 	//REMOVELAST
+	*/
 	
     }
 }
