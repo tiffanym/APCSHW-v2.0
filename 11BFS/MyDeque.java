@@ -40,6 +40,7 @@ public class MyDeque<T>{
 	Object temp=data[0];
 	data[head]=null;
 	head++;
+	size--;
 	return (T)temp;
     }
 
@@ -49,7 +50,8 @@ public class MyDeque<T>{
 	}	
 	Object temp=data[tail];
 	data[tail]=null;
-	tail--;	
+	tail--;
+	size--;
 	return (T)temp;
     }
 

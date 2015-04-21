@@ -121,6 +121,9 @@ public class Maze{
 	return works;
     }
 
+
+    private static final int BFS=0;
+    private static final int DFS=1;
     private boolean solve(boolean animate,int mode){
 	//1=DFS; 0=BFS
 	Frontier rest = new Frontier(mode);
@@ -142,24 +145,25 @@ public class Maze{
 		solved = true;
 		addCoordinatesToSolutionArray(next);
 	    }
-	    //else if(maze[next.getX()][next.getY()]=='#'){
-	    //rest.remove();
-	    //}
 	    else{
 		//not solved, so add neighbors to Frontier and mark the floor with x.
 		if (maze[next.getX()][next.getY()]!='S'){
 		    maze[next.getX()][next.getY()]='.';
 		}
 		ArrayList<Point> neighbors= getNeighbors(next);
-		//if (neighbors.size()==0){
-		    maze[next.getX()][next.getY()]='x';
-		    //rest.remove();
-		    //}else{
-		    for(Point p : neighbors){
-			rest.add(p);
-			addCoordinatesToSolutionArray(p);			
+		maze[next.getX()][next.getY()]='x';
+		for(Point p : neighbors){
+		    rest.add(p);
+		    //addCoordinatesToSolutionArray(p);
+		}
+
+		if (mode==DFS){
+		    for (Point p: rest){
+
 		    }
-		    //}
+		}
+
+		
 	    }	    
 	}
 	return solved;
