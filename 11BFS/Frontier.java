@@ -21,7 +21,9 @@ public class Frontier{//is a deque
 	    if (mode==1){ //DFS=stack
 		out=pile.removeLast();
 	    }else if (mode==0){ //BFS=queue
+		System.out.println("Stuff will be removed");//added
 		out=pile.removeFirst();
+		System.out.println("Stuff removed: "+out);//added
 	    }
 	}else{
 	    throw new NoSuchElementException();

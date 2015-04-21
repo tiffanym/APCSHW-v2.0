@@ -128,6 +128,7 @@ public class Maze{
 	//1=DFS; 0=BFS
 	Frontier rest = new Frontier(mode);
 	Point start = new Point(startx,starty);
+	System.out.println(start); //added
 	
 	rest.add(start);//put the start into the Frontier 
 	
@@ -139,6 +140,7 @@ public class Maze{
 		wait(100);
 	    }
 	    Point next = rest.remove();
+	    //System.out.println("Point exists");
 	    
 	    //check if solved
 	    if (maze[next.getX()][next.getY()]=='E'){
@@ -236,9 +238,8 @@ public class Maze{
 	Maze test1=new Maze("data1.dat");
 	Maze test2=new Maze("easy.dat");
 	Maze test3=new Maze("emptyMaze.dat");
-	//System.out.println(test3.solveBFS());
-	System.out.println(test1.solveDFS());
-	//System.out.println(test1.solveBFS());
+	System.out.println(test1.solveBFS());
+	//System.out.println(test1.solveDFS());
 	//System.out.println(test3.solveBest());
 	//System.out.println(test3.solveAStar());
     }

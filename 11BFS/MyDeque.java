@@ -37,6 +37,8 @@ public class MyDeque<T>{
 	if (size==0 || data.length==0){
 	    throw new NoSuchElementException();
 	}
+	resize();
+	System.out.println("Array: "+toString(DATA));
 	Object temp=data[0];
 	data[head]=null;
 	head++;
