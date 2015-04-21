@@ -158,9 +158,7 @@ public class Maze{
 		}
 
 		if (mode==DFS){
-		    for (Point p: rest){
-
-		    }
+		    //Point 
 		}
 
 		

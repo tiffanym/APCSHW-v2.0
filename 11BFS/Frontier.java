@@ -1,6 +1,6 @@
 /**FRONTIER class*/
 import java.util.*;
-public class Frontier implements Iterable{//is a deque
+public class Frontier{//is a deque
     int mode;
     MyDeque<Point> pile;
     
