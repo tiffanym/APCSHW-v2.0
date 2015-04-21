@@ -97,9 +97,10 @@ public class MyDeque<T>{
     public void add(T value,int weight){
 	resize();
 	addLast(value);
-	tail++;
-	resize();
 	weights[tail]=weight;
+	tail++;
+	//resize();
+	
     }
     
     public T removeSmallest(){
@@ -107,6 +108,7 @@ public class MyDeque<T>{
 	    size--;
 	    return (T)data[head];
 	}
+	resize();
 	int indexOut=head;
 	int weight=weights[head];
 	if (size>1){
@@ -161,6 +163,8 @@ public class MyDeque<T>{
 	String ans="[";
 	if (mode==DATA){
 	    for (int i=head;i<tail;i++){
+		ans+=data[i]+",";
+		/* //I think this part was to print out stuff in Frontier class
 		if (i%2==0){
 		    ans+="("+data[i]+",";
 		}else{
@@ -169,6 +173,7 @@ public class MyDeque<T>{
 		    //	ans+=",";
 		    //}
 		}
+		*/
 	    }
 	}else if (mode==WEIGHT){
 	    for (int i : weights){
@@ -207,6 +212,22 @@ public class MyDeque<T>{
 
 	//REMOVELAST
 	*/
-	
+
+	//For PRIORITY QUEUE
+	test.add(12,2);
+	System.out.println("Data: "+test.toString(0));
+	System.out.println("Priority: "+test.toString(1));
+
+	test.add(3,4);
+	System.out.println("Data: "+test.toString(0));
+	System.out.println("Priority: "+test.toString(1));
+
+	test.add(2,8);
+	System.out.println("Data: "+test.toString(0));
+	System.out.println("Priority: "+test.toString(1));
+
+	System.out.println(test.removeSmallest());
+	System.out.println("Data: "+test.toString(0));
+	System.out.println("Priority: "+test.toString(1));
     }
 }
