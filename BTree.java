@@ -9,4 +9,8 @@ public class BTree<T>{
 
     }
 
+    public void add(TreeNode<T> parent, T data){
+
+    }
+
 }
