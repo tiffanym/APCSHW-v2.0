@@ -1,0 +1,117 @@
+//used to test methods in BTree.java
+
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+public class BTree<E> {
+    
+   public static final int PRE_ORDER = 0;
+   public static final int IN_ORDER = 1;
+   public static final int POST_ORDER = 2;
+
+   private static final int LEFT=0;
+   private static final int RIGHT=1; //cuz I'm too lazy to type the number...
+
+
+   private TreeNode<E> root;
+
+   public BTree() {
+      root = null;
+   }
+
+   public void add( E d ) { 
+      add(root,new TreeNode<E>(d));
+   }
+
+   private void add( TreeNode<E> curr, TreeNode<E> bn ) {
+      if (curr==null){
+         curr=bn;
+      }else{
+         Random r=new Random();
+         int side=r.nextInt(2);
+         if (side==LEFT){
+            //add(curr.getLeft(),data);
+            //curr.setLeft(new TreeNode<T>(data));
+            add(curr.getLeft(),bn);
+         }if (side==RIGHT){
+            //add(curr.getRight(),data);
+            //curr.setRight(new TreeNode<T>(data));
+            add(curr.getRight(),bn);
+         }
+      }
+   }
+
+   public static void main( String[] args ) {
+
+      BTree<Integer> t = new BTree<Integer>();
+
+      for ( int i=0; i < 8; i++ ) 
+         t.add( i );
+
+   }
+   
+   public class TreeNode<T>{
+      T data;
+      TreeNode<T> left,right;
+      private static final int preORDER=0;
+      private static final int postORDER=1;
+      private static final int inORDER=2;
+
+      public TreeNode(T data,TreeNode<T> left,TreeNode<T> right){	
+         this.data=data;
+         this.left=left;
+         this.right=right;
+      }
+      public TreeNode(T data){
+         this.data=data;
+         left=null;
+         right=null;
+      }
+
+      public String toString(int order,TreeNode<T> parent){
+         return toString(order,parent,"");
+      }
+
+      public String toString(int order,TreeNode<T> parent,String ans){
+         if (parent==null){
+            ans+="";
+         }else{
+            if (order==preORDER){//V left right
+               ans+=""+parent.getData()+
+                  toString(order,parent.getLeft(),ans)+
+                  toString(order,parent.getRight(),ans); 
+            }else if(order==postORDER){// left right V
+               ans+= ""+toString(order,parent.getLeft(),ans)+
+                  toString(order,parent.getRight(),ans)+ 
+                  parent.getData();
+            }else if(order==inORDER){// left V right
+               ans+= ""+toString(order,parent.getLeft(),ans)+
+                  parent.getData()+		    
+                  toString(order,parent.getRight(),ans); 
+            }
+         }
+         return ans;
+      }
+
+      public T getData(){
+         return data;
+      }
+      public void setData(T data){
+         this.data=data;
+      }
+      public TreeNode<T> getLeft(){
+         return left;
+      }
+      public void setLeft(TreeNode<T> left){
+         this.left=left;
+      }
+      public TreeNode<T> getRight(){
+         return right;
+      }
+      public void setRight(TreeNode<T> right){
+         this.right=right;
+      }
+
+   }
+}
