@@ -69,6 +69,7 @@ public class BTree<E> {
 		add(curr.getRight(),bn);
 	    }
 	}
+	root=curr;
     }
     
     public void traverse( int mode) {
