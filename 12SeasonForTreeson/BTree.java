@@ -104,6 +104,11 @@ public class BTree<E> {
       in-order Traversal
       ====================*/
     public void inOrder( TreeNode<E> curr ) {
+	if (curr!=null){
+	    String ans=""+curr.getLeft()+
+		curr.getData()+curr.getRight();
+	    System.out.println(ans);
+	}
     }
 
     /*======== public void postOrder() ==========
@@ -115,6 +120,11 @@ public class BTree<E> {
 
       ====================*/
     public void postOrder( TreeNode<E> curr ) {
+	if (curr!=null){
+	    String ans=""+curr.getLeft()+
+		curr.getRight()+curr.getData();
+	    System.out.println(ans);
+	}	
     }
     
     /*======== public int getHeight()) ==========
