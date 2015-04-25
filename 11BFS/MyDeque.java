@@ -134,17 +134,21 @@ public class MyDeque<T>{
 	}
 
 	T min=(T)data[indexOut];
+	System.out.println("Replaced "+data[indexOut]+" with "+data[head]);
 	data[indexOut]=data[head];
+	System.out.println("Replaced "+weights[indexOut]+" with "+weights[head]);
 	weights[indexOut]=weights[head];
-	data[head]=null;
+	System.out.println("Replaced "+data[indexOut]+" with null");
+	data[head]=null;	
+	System.out.println("Replaced "+weights[indexOut]+" with -1");
 	weights[head]=-1;
 	head=(head+1)%data.length;
+	System.out.println("Head now equals: "+head);
 	size--;
+	System.out.println("Size is now: "+size);
 	return min;
     }
 
-    //public void resize(){ //use resize method above
-    //}    
     /**PRIORITY QUEUE*/
 
 
@@ -180,8 +184,10 @@ public class MyDeque<T>{
 		*/
 	    }
 	}else if (mode==WEIGHT){
-	    for (int i : weights){
-		ans+=""+i+",";
+	    //for (int i : weights){
+	    for (int i=head;i<=tail;i++){
+		//ans+=""+i+",";
+		ans+=weights[i]+",";
 	    }
 	}
 	return ans.substring(0,ans.length()-1)+"]";
