@@ -99,10 +99,10 @@ public class MyDeque<T>{
 
     /**PRIORITY QUEUE*/
     public void add(T value,int weight){
-	resize();
+	//resize();
 	addLast(value);
 	weights[tail]=weight;
-	tail++;
+	//tail++;
 	//resize();
 	
     }
@@ -166,7 +166,7 @@ public class MyDeque<T>{
 	resize();
 	String ans="[";
 	if (mode==DATA){
-	    for (int i=head;i<tail;i++){
+	    for (int i=head;i<=tail;i++){
 		ans+=data[i]+",";
 		/* //I think this part was to print out stuff in Frontier class
 		if (i%2==0){
