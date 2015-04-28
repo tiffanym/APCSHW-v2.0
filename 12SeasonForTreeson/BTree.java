@@ -99,9 +99,16 @@ public class BTree<E> {
 	    //System.out.println("Adding "+curr.getData()+" then "+curr.getLeft().getData()+" and finally "+curr.getRight().getData());
 	    //String ans=""+curr.getData()+
 	    //curr.getLeft()+curr.getRight();
+	    System.out.println("Current: "+curr.getData());
 	    System.out.print(curr.getData());
-	    preOrder(curr.getLeft());
-	    preOrder(curr.getRight());
+	    if (curr.getLeft()!=null){
+		System.out.println("Left: "+curr.getRight().getData());
+		preOrder(curr.getLeft());
+	    }
+	    if (curr.getRight()!=null){
+		System.out.println("Right: "+curr.getRight().getData());
+		preOrder(curr.getRight());
+	    }
 	}
     }
 
