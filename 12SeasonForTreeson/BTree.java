@@ -64,26 +64,26 @@ public class BTree<E> {
 	    curr = bn;
 	} else {
 	    int side=r.nextInt(2);
-	    System.out.print("Adding to ");
+	    //System.out.print("Adding to ");
 
 	    if (side==LEFT){
-		System.out.println("left");
+		//System.out.println("left");
 		//add(curr.getLeft(),data);
 		//curr.setLeft(new TreeNode<T>(data));
 		if ( curr.getLeft() == null )
 		    curr.setLeft(bn);
 		else
 		    add(curr.getLeft(),bn);
-		System.out.println("Added "+bn.getData());
+		//System.out.println("Added "+bn.getData());
 	    }else{
-		System.out.println("right");
+		//System.out.println("right");
 		//add(curr.getRight(),data);
 		//curr.setRight(new TreeNode<T>(data));
 		if ( curr.getRight() == null )
 		    curr.setRight(bn);
 		else
 		    add(curr.getRight(),bn);
-		System.out.println("Added "+bn.getData());
+		//System.out.println("Added "+bn.getData());
 	    }
 	}
     }
@@ -235,15 +235,15 @@ public class BTree<E> {
 
 	for ( int i=0; i < 8; i++ ) {
 	    t.add( i ); //debugging shows add works
-	    System.out.println( "Pre-order: ");
-	    t.traverse( PRE_ORDER );
 	}
-	/*System.out.println( "In-order: ");
+	System.out.println( "Pre-order: ");
+	t.traverse( PRE_ORDER );
+	System.out.println( "In-order: ");
 	t.traverse( IN_ORDER );
 	System.out.println( "Post-order: ");
 	t.traverse( POST_ORDER );
 	System.out.println( "Height: " + t.getHeight() );
-	*/
+	
 	System.out.println( t );
     }
 }
