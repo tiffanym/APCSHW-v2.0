@@ -44,9 +44,11 @@ public class BSTreeNode<T extends Comparable> {
 
     //below is just a lazy way to not type setCounter :P
     public void plus(){
-	counter++;
+	//counter++;
+	setCounter(getCounter()+1);
     }
     public void minus(){
-	counter--;	
+	//counter--;	
+	setCounter(getCounter()-1);
     }
 }

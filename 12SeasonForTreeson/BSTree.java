@@ -34,7 +34,20 @@ public class BSTree <T extends Comparable> {
       Add t to the correct place in the tree rooted at curr.
       ====================*/
     private BSTreeNode<T> add(BSTreeNode<T> curr, BSTreeNode<T> t) {
-	return null;
+	if (curr==null){
+	    return t;
+	}else if (curr.getData().compareTo(t.getData())==0){
+	    //t value same as current node/root
+	    //curr.setLeft(add(curr.getLeft(),t));	    
+	    curr.increase();
+	}else if (curr.getData().compareTo(t.getData())>0){
+	    //t value less than current node/root
+	    curr.setLeft(add(curr.getLeft(),t));	    
+	}else if (curr.getData().compareTo(t.getData())<0){
+	    //t value greater than current node/root
+	    curr.setRight(add(curr.getRight(),t));	    
+	}
+	return curr;
     }
 
     /*======== public void remove() ==========
