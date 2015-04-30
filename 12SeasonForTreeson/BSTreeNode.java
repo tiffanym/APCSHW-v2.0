@@ -6,6 +6,7 @@ public class BSTreeNode<T extends Comparable> {
     private T data;
     private BSTreeNode<T> left;
     private BSTreeNode<T> right;
+    private int counter;
     
     public BSTreeNode( T d ) {
 	
@@ -23,6 +24,9 @@ public class BSTreeNode<T extends Comparable> {
     public BSTreeNode<T> getRight() {
 	return right;
     }
+    public int getCounter(){
+	return counter;
+    }
     
     //mutators
     public void setData( T d ) {
@@ -33,5 +37,16 @@ public class BSTreeNode<T extends Comparable> {
     }
     public void setRight( BSTreeNode<T> r ) {
 	right = r;
+    }
+    public void setCounter(int count){
+	counter=count;
+    }
+
+    //below is just a lazy way to not type setCounter :P
+    public void plus(){
+	counter++;
+    }
+    public void minus(){
+	counter--;	
     }
 }
