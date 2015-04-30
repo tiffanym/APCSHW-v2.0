@@ -92,9 +92,9 @@ public class BTree<E> {
 	if ( mode == PRE_ORDER )
 	    System.out.println(preOrder(root,""));
 	else if ( mode == IN_ORDER )
-	    inOrder( root );
+	    System.out.println(inOrder(root,""));
 	else
-	    postOrder( root );
+	    System.out.println(postOrder(root,""));
 	System.out.println();
     }
 
@@ -137,12 +137,12 @@ public class BTree<E> {
       Prints out the elements in the tree by doing an
       in-order Traversal
       ====================*/
-    public void inOrder( TreeNode<E> curr ) {
+    public String inOrder( TreeNode<E> curr , String ans ) {
 	if (curr!=null){
-	    String ans=""+curr.getLeft()+
-		curr.getData()+curr.getRight();
-	    System.out.println(ans);
+	    ans+=inOrder(curr.getLeft(),ans)+curr.getData()+inOrder(curr.getRight(),ans);
+	    //System.out.println(ans);
 	}
+	return ans;
     }
 
     /*======== public void postOrder() ==========
@@ -153,12 +153,13 @@ public class BTree<E> {
       post-order Traversal    
 
       ====================*/
-    public void postOrder( TreeNode<E> curr ) {
+    public String postOrder( TreeNode<E> curr , String ans ) {
 	if (curr!=null){
-	    String ans=""+curr.getLeft()+
-		curr.getRight()+curr.getData();
-	    System.out.println(ans);
-	}	
+	    ans+=postOrder(curr.getLeft(),ans)+
+		postOrder(curr.getRight(),ans)+curr.getData();
+	    //System.out.println(ans);
+	}
+	return ans;
     }
     
     /*======== public int getHeight()) ==========
@@ -236,13 +237,13 @@ public class BTree<E> {
 	for ( int i=0; i < 8; i++ ) {
 	    t.add( i ); //debugging shows add works
 	}
-	System.out.println( "Pre-order: ");
-	t.traverse( PRE_ORDER );
-	System.out.println( "In-order: ");
-	t.traverse( IN_ORDER );
+	//System.out.println( "Pre-order: ");
+	//t.traverse( PRE_ORDER );
+	//System.out.println( "In-order: ");
+	//t.traverse( IN_ORDER );
 	System.out.println( "Post-order: ");
 	t.traverse( POST_ORDER );
-	System.out.println( "Height: " + t.getHeight() );
+	//System.out.println( "Height: " + t.getHeight() );
 	
 	System.out.println( t );
     }
