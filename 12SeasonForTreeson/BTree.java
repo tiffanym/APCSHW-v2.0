@@ -79,7 +79,7 @@ public class BTree<E> {
     
     public void traverse( int mode) {
 	if ( mode == PRE_ORDER )
-	    preOrder( root );
+	    System.out.println(preOrder(root,""));
 	else if ( mode == IN_ORDER )
 	    inOrder( root );
 	else
@@ -94,7 +94,13 @@ public class BTree<E> {
       Prints out the elements in the tree by doing an
       pre-order Traversal
       ====================*/
-    public void preOrder( TreeNode<E> curr ) {
+    public String preOrder( TreeNode<E> curr, String ans ) {
+	if (curr!=null){
+	    ans+=curr.getData()+preOrder(curr.getLeft(),ans)+
+		preOrder(curr.getRight(),ans);
+	}
+	return ans;
+	/*
 	if (curr!=null){
 	    //System.out.println("Adding "+curr.getData()+" then "+curr.getLeft().getData()+" and finally "+curr.getRight().getData());
 	    //String ans=""+curr.getData()+
@@ -110,6 +116,7 @@ public class BTree<E> {
 		preOrder(curr.getRight());
 	    }
 	}
+	*/
     }
 
     /*======== public void inOrder() ==========
