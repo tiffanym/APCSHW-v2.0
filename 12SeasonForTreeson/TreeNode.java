@@ -15,7 +15,7 @@ public class TreeNode<T>{
 	setLeft(null);
 	setRight(null);
     }
-
+/*
     public String toString(int order,TreeNode<T> parent){
 	return toString(order,parent,"");
     }
@@ -40,7 +40,7 @@ public class TreeNode<T>{
 	}
 	return ans;
     }
-
+*/
     public T getData(){
 	return data;
     }
@@ -68,6 +68,6 @@ public class TreeNode<T>{
 	test.setRight(new TreeNode<Integer>(new Integer(7)));
 	test.getRight().setLeft(new TreeNode<Integer>(new Integer(1)));
 	test.getRight().setRight(new TreeNode<Integer>(new Integer(2)));
-	System.out.println(test.toString(2,test));
+//	System.out.println(test.toString(2,test));
     }
 }
