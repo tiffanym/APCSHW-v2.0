@@ -37,8 +37,7 @@ public class BSTree <T extends Comparable> {
 	if (curr==null){
 	    return t;
 	}else if (curr.getData().compareTo(t.getData())==0){
-	    //t value same as current node/root
-	    //curr.setLeft(add(curr.getLeft(),t));	    
+	    //t value same as current node/root 
 	    System.out.println("Increasing counter of "+curr.getData());
 	    curr.plus();
 	}else if (curr.getData().compareTo(t.getData())>0){
