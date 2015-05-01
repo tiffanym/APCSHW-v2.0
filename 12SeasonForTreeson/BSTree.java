@@ -39,12 +39,15 @@ public class BSTree <T extends Comparable> {
 	}else if (curr.getData().compareTo(t.getData())==0){
 	    //t value same as current node/root
 	    //curr.setLeft(add(curr.getLeft(),t));	    
-	    curr.increase();
+	    System.out.println("Increasing counter of "+curr.getData());
+	    curr.plus();
 	}else if (curr.getData().compareTo(t.getData())>0){
 	    //t value less than current node/root
+	    System.out.println("Adding "+t.getData()+" to left of "+curr.getData());
 	    curr.setLeft(add(curr.getLeft(),t));	    
 	}else if (curr.getData().compareTo(t.getData())<0){
 	    //t value greater than current node/root
+	    System.out.println("Adding "+t.getData()+" to right of "+curr.getData());
 	    curr.setRight(add(curr.getRight(),t));	    
 	}
 	return curr;
@@ -101,7 +104,16 @@ public class BSTree <T extends Comparable> {
 
    
     public static void main( String[] args ) {
-
+	BSTree<Integer> t=new BSTree<Integer>();
+	Random r=new Random();
+	if (args.length==1){
+	    r=new Random(Integer.parseInt(args[0]));
+	}
+	for ( int i=0; i<8;i++){
+	    t.add(r.nextInt(100));
+	    System.out.println("InOrder: ");
+	    t.inOrder();
+	}
     }
 
 }
