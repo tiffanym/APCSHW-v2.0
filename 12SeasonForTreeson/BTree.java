@@ -39,6 +39,7 @@ public class BTree<E> {
       
       Wrapper method for the recursive add()
       ====================*/     
+
     public void add( E d ) {
 	TreeNode<E> tmp = new TreeNode<E>(d);
 	if (root == null) {
@@ -66,13 +67,13 @@ public class BTree<E> {
 	    int side=r.nextInt(2);
 
 	    if (side==LEFT){
-		System.out.println("left");
+		//System.out.println("left");
 		if ( curr.getLeft() == null )
 		    curr.setLeft(bn);
 		else
 		    add(curr.getLeft(),bn);
 	    }else{
-		System.out.println("right");
+		//System.out.println("right");
 		if ( curr.getRight() == null )
 		    curr.setRight(bn);
 		else
@@ -81,7 +82,7 @@ public class BTree<E> {
 	}
     }
 
-    public void traverse( int mode) {
+    public void traverse( int mode ) {
 	if ( mode == PRE_ORDER )
 	    System.out.println(preOrder(root,""));
 	else if ( mode == IN_ORDER )
@@ -161,16 +162,28 @@ public class BTree<E> {
 	}
     }
 
+    //for testing purposes
+    public String getLevel(int level){
+	return getLevel(root,level);
+    }
     /*======== public String getLevel() ==========
       Inputs:   TreeNode<E> curr
                 int level
-                int currLevel  
       Returns: A string containing all the elements on the
-               given level, ordered left -> right
+               given level with respect to the curr treenode
+	       ordered left -> right
       
       ====================*/
-    private String getLevel( TreeNode<E> curr, int level, int currLevel ) {
-	return "";
+    private String getLevel( TreeNode<E> curr, int level ) {
+	if (curr==null){
+	    return "";
+	}
+	if (level>getHeight(curr)){
+	    System.out.println("Sorry, you can't do that :/");	    
+	}if (level==0){
+	    return ""+curr.getData()+"\t";
+	}
+	return getLevel(curr.getLeft(),level-1)+getLevel(curr.getRight(),level-1);
     }
     
     /*======== public String toString()) ==========
@@ -195,7 +208,11 @@ public class BTree<E> {
 
       ====================*/
     public String toString() {
-	return "";
+	String ans="";
+	for (int i=0;i<getHeight();i++){
+	    ans+=getLevel(root,i)+"\n";
+	}
+	return ans;
     }
 
     public void setSeed(long seed){
@@ -212,17 +229,18 @@ public class BTree<E> {
 
 	for ( int i=0; i < 8; i++ ) {
 	    t.add( i ); //debugging shows add works
-	    System.out.println( "Pre-order: ");
-	    t.traverse( PRE_ORDER );
-	System.out.println( "Height: " + t.getHeight() );
+	    //System.out.println( "Pre-order: ");
+	    //t.traverse( PRE_ORDER );
+	    //System.out.println( "Height: " + t.getHeight() );
 	}
-	//System.out.println( "Pre-order: ");
-	//t.traverse( PRE_ORDER );
+	System.out.println( "Pre-order: ");
+	t.traverse( PRE_ORDER );
 	//System.out.println( "In-order: ");
 	//t.traverse( IN_ORDER );
 	//System.out.println( "Post-order: ");
 	//t.traverse( POST_ORDER );
-	System.out.println( "Height: " + t.getHeight() );
+	//System.out.println( "Height: " + t.getHeight() );
+	//System.out.println( "At level 3: "+ t.getLevel(4) );
 	
 	System.out.println( t );
     }
