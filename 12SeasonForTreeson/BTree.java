@@ -66,13 +66,13 @@ public class BTree<E> {
 	    int side=r.nextInt(2);
 
 	    if (side==LEFT){
-		//System.out.println("left");
+		System.out.println("left");
 		if ( curr.getLeft() == null )
 		    curr.setLeft(bn);
 		else
 		    add(curr.getLeft(),bn);
 	    }else{
-		//System.out.println("right");
+		System.out.println("right");
 		if ( curr.getRight() == null )
 		    curr.setRight(bn);
 		else
@@ -157,7 +157,7 @@ public class BTree<E> {
 	    return 0;
 	}else{
 	    return 1+Math.max(getHeight(curr.getLeft()),
-			      getHeight(curr.getRight()));
+			    getHeight(curr.getRight()));
 	}
     }
 
@@ -214,6 +214,7 @@ public class BTree<E> {
 	    t.add( i ); //debugging shows add works
 	    System.out.println( "Pre-order: ");
 	    t.traverse( PRE_ORDER );
+	System.out.println( "Height: " + t.getHeight() );
 	}
 	//System.out.println( "Pre-order: ");
 	//t.traverse( PRE_ORDER );
