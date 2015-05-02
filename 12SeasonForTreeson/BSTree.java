@@ -71,11 +71,12 @@ public class BSTree <T extends Comparable> {
       curr, if it exists.
       ====================*/
     private BSTreeNode<T> remove( BSTreeNode<T> curr, T c ) {
-	if (curr.
-	if (curr.getData()==c){
-	    curr.setData(null);
-	    remove(curr.getRight(),);
-	}
+	//if (curr.
+	//if (curr.getData()==c){
+	//    curr.setData(null);
+	//    remove(curr.getRight(),);
+	//}
+	return null;
     }
 
 
@@ -236,6 +237,7 @@ public class BSTree <T extends Comparable> {
 	    System.out.println("InOrder: ");
 	    t.inOrder();
 	}
+	System.out.println(t);
     }
 
 }

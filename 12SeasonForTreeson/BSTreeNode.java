@@ -42,6 +42,10 @@ public class BSTreeNode<T extends Comparable> {
 	counter=count;
     }
 
+    public String toString(){
+	return data.toString();
+    }
+
     //below is just a lazy way to not type setCounter :P
     public void plus(){
 	//counter++;
