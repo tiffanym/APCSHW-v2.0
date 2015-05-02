@@ -38,15 +38,15 @@ public class BSTree <T extends Comparable> {
 	    return t;
 	}else if (curr.getData().compareTo(t.getData())==0){
 	    //t value same as current node/root
-	    System.out.println("Increasing counter of "+curr.getData());
+	    //System.out.println("Increasing counter of "+curr.getData());
 	    curr.plus();
 	}else if (curr.getData().compareTo(t.getData())>0){
 	    //t value less than current node/root
-	    System.out.println("Adding "+t.getData()+" to left of "+curr.getData());
+	    //System.out.println("Adding "+t.getData()+" to left of "+curr.getData());
 	    curr.setLeft(add(curr.getLeft(),t));
 	}else if (curr.getData().compareTo(t.getData())<0){
 	    //t value greater than current node/root
-	    System.out.println("Adding "+t.getData()+" to right of "+curr.getData());
+	    //System.out.println("Adding "+t.getData()+" to right of "+curr.getData());
 	    curr.setRight(add(curr.getRight(),t));
 	}
 	return curr;
@@ -71,14 +71,64 @@ public class BSTree <T extends Comparable> {
       curr, if it exists.
       ====================*/
     private BSTreeNode<T> remove( BSTreeNode<T> curr, T c ) {
-	//if (curr.
-	//if (curr.getData()==c){
-	//    curr.setData(null);
-	//    remove(curr.getRight(),);
-	//}
-	return null;
+	if (curr.getData().equals(c)){
+	    if (isLeaf(curr)){
+		curr=null;
+	    }
+	    else if (curr.getLeft()!=null && curr.getRight()==null){
+		curr.setData(curr.getLeft().getData());
+		//curr.setLeft(remove(curr.getLeft(),curr.getLeft().getData()));
+		moveUp(curr.getLeft(),0);
+	    }
+	}else if (curr.getData().compareTo(c)>0){
+	    curr=remove(curr.getLeft(),c);
+	}else if (curr.getData().compareTo(c)<0){
+	    curr=remove(curr.getRight(),c);
+	}
+	return curr;
     }
 
+    //this is for remove
+    //value at current is taking the value below it;
+    //continues for all subtrees until reaches null
+    private BSTreeNode<T> moveUp( BSTreeNode<T> curr , int side){
+	if (side==0){
+	    if (curr.getLeft()==null){
+		curr.setData(null);
+	    }else{
+		curr.setData(curr.getLeft().getData());
+		//curr.
+	    }
+	}else if (side==1){
+	    curr.setData(curr.getRight().getData());
+	}
+
+    }
+
+    //BELOW IS FOR REMOVE
+    /*returns how many children 'curr' has
+      If have no children, returns -1;
+      If have one child, returns 0 if child on left, 
+                         returns 1 if child on right;
+      If have two children, return 2;
+     */
+    public int howManyChildren(BSTreeNode<T> curr){
+	int ans;
+	if (isLeaf(curr)){
+	    ans=-1;
+	}else if (curr.getLeft()!=null && curr.getRight()==null){
+	    ans=0;
+	}else if (curr.getLeft()==null && curr.getRight()!=null){
+	    ans=1;
+	}else if(curr.getLeft()!=null && curr.getRight()==null){
+	    ans=2;
+	}else{
+	    System.out.println("What the heck did you do to get this message?!?!");
+	    ans=-10;
+	}
+	return ans;
+    }
+    
 
     /*======== public void inOrder()) ==========
       Inputs:
@@ -232,11 +282,15 @@ public class BSTree <T extends Comparable> {
 	if (args.length==1){
 	    r=new Random(Integer.parseInt(args[0]));
 	}
-	for ( int i=0; i<8;i++){
-	    t.add(r.nextInt(100));
-	    System.out.println("InOrder: ");
-	    t.inOrder();
-	}
+	//for ( int i=0; i<8;i++){
+	//t.add(r.nextInt(100));
+	    //System.out.println("InOrder: ");
+	    //t.inOrder();
+	//}
+	t.add(new Integer(7));
+	t.add(new Integer(5));
+	t.add(new Integer(2));
+	t.remove(5);
 	System.out.println(t);
     }
 
