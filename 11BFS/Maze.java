@@ -4,6 +4,7 @@ public class Maze{
     private char[][]maze;
     private int maxx,maxy;
     private int startx,starty;
+    private int endx,endy;
     private int[] solutionAR=new int[0];
 
     //Stuff for printing out maze
@@ -46,6 +47,10 @@ public class Maze{
 	    if(c=='S'){
 		startx = i%maxx;
 		starty = i/maxx;
+	    }
+	    else if (c=='E'){
+		endx = i%maxx;
+		endy = i/maxx;
 	    }
 	}
     }
@@ -124,6 +129,8 @@ public class Maze{
 
     private static final int BFS=0;
     private static final int DFS=1;
+    private static final int BEST=2;
+    private static final int ASTAR=3;
     private boolean solve(boolean animate,int mode){
 	//1=DFS; 0=BFS
 	Frontier rest = new Frontier(mode);
@@ -226,12 +233,16 @@ public class Maze{
     	return solveAStar(true);
     }
     
-    public boolean solveBest(boolean animate){
-    	return false; //add stuff
+    public boolean solveBest(boolean animate){	
+	return solve(animate,BEST);
     }
     
     public boolean solveAStar(boolean animate){
-    	return false; //add stuff
+	return solve(animate,ASTAR);
+    }
+    
+    private int dist(Point p){
+	return Math.abs(endx-p.getX())+Math.abs(endy-p.getY());
     }
 
     public static void main(String[] args){
