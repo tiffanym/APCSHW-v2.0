@@ -226,13 +226,15 @@ public class Maze{
     	return solveAStar(true);
     }
     
-    public boolean solveBest(boolean animate){
+    public boolean solveBest(boolean animate){	
     	return false; //add stuff
     }
     
     public boolean solveAStar(boolean animate){
     	return false; //add stuff
     }
+    
+    public
 
     public static void main(String[] args){
 	Maze test1=new Maze("data1.dat");

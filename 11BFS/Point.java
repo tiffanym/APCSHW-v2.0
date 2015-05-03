@@ -2,11 +2,15 @@
 public class Point{
     int x,y;
     Point parent=null;
+    int steps=0;
+    Point previous;
     
     public Point(int x, int y, Point parent){
 	setX(x);
 	setY(y);
 	setParent(parent);
+	steps=parent.getSteps()+1;
+	previous=parent;
     }
     public Point(int x, int y){
 	setX(x);
@@ -35,5 +39,17 @@ public class Point{
     }
     public void setParent(Point parent){
 	this.parent=parent;
+    }
+    public int getSteps(){
+	return steps;
+    }
+    public void setSteps(int steps){
+	this.parent=parent;
+    }
+    public Point getPrevious(){
+	return previous;
+    }
+    public void setPrevious(Point previous){
+	this.previous=previous;
     }
 }
