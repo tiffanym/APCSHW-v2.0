@@ -3,7 +3,11 @@ import java.util.*;
 public class Frontier{//is a deque
     int mode;
     MyDeque<Point> pile;
-    
+    private static final int BFS=0;
+    private static final int DFS=1;
+    private static final int BEST=2;
+    private static final int ASTAR=3;
+
     //queue-->BFS =0
     //stack-->DFS =1
     public Frontier (int mode){	
@@ -11,6 +15,9 @@ public class Frontier{//is a deque
 	pile=new MyDeque<Point>();
     }
     
+    public void add(Point next, int weight){
+	pil.add(next,weight);
+    }
     public void add(Point next){
 	pile.addLast(next);
     }
@@ -24,6 +31,8 @@ public class Frontier{//is a deque
 		System.out.println("Stuff will be removed");//added
 		out=pile.removeFirst();
 		System.out.println("Stuff removed: "+out);//added
+	    }else{
+		out=pile.removeSmallest();
 	    }
 	}else{
 	    throw new NoSuchElementException();
