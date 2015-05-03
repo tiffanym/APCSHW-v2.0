@@ -161,7 +161,13 @@ public class Maze{
 		}
 		ArrayList<Point> neighbors= getNeighbors(next);
 		for(Point p : neighbors){
-		    rest.add(p);
+		    if (mode==BFS || mode==DFS){
+			rest.add(p);
+		    }else if(mode==BEST){
+			rest.add(p,dist(p));
+		    }else if(mode==ASTAR){
+			rest.add(p,dist(p)+p.getSteps());
+		    }
 		}		
 	    }	    
 	}

@@ -16,7 +16,7 @@ public class Frontier{//is a deque
     }
     
     public void add(Point next, int weight){
-	pil.add(next,weight);
+	pile.add(next,weight);
     }
     public void add(Point next){
 	pile.addLast(next);
