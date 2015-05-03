@@ -91,18 +91,22 @@ public class BSTree <T extends Comparable> {
     //this is for remove
     //value at current is taking the value below it;
     //continues for all subtrees until reaches null
-    private BSTreeNode<T> moveUp( BSTreeNode<T> curr , int side){
+    private void moveUp( BSTreeNode<T> curr , int side){
 	if (side==0){
 	    if (curr.getLeft()==null){
 		curr.setData(null);
 	    }else{
 		curr.setData(curr.getLeft().getData());
-		//curr.
+		curr=curr.getLeft();
 	    }
 	}else if (side==1){
-	    curr.setData(curr.getRight().getData());
-	}
-
+	    if (curr.getRight()==null){
+		curr.setData(null);
+	    }else{
+		curr.setData(curr.getRight().getData());
+		curr=curr.getRight();
+	    }	    
+	}	
     }
 
     //BELOW IS FOR REMOVE
