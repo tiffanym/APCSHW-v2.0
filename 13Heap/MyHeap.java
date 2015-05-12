@@ -19,6 +19,7 @@ public class MyHeap{
     }
 
     public int remove(){ //remove the root and return the value  O(logn)
+	int root=heap[1];
 	heap[0]--;
 	return 0;//dummy
     }
@@ -32,11 +33,11 @@ public class MyHeap{
 	heap[0]++;
 	int eliIndex=heap[0];
 	if (isMaxHeap){
-	    while (heap[eliIndex]<heap[eliIndex/2]){ //will assume no duplicates for now
+	    while (heap[eliIndex]>heap[eliIndex/2]){ //will assume no duplicates for now
 		swap(eliIndex,eliIndex/2);
 	    }
 	}else{ //minHeap	    
-	    while (heap[eliIndex]>heap[eliIndex/2]){ //will assume no duplicates for now
+	    while (heap[eliIndex]<heap[eliIndex/2]){ //will assume no duplicates for now
 		swap(eliIndex,eliIndex/2);
 	    }
 	}
