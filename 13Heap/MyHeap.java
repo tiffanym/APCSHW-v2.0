@@ -30,6 +30,16 @@ public class MyHeap{
 	}
 	heap[heap[0]+1] = elligence;	
 	heap[0]++;
+	int eliIndex=heap[0];
+	if (isMaxHeap){
+	    while (heap[eliIndex]<heap[eliIndex/2]){ //will assume no duplicates for now
+		swap(eliIndex,eliIndex/2);
+	    }
+	}else{ //minHeap	    
+	    while (heap[eliIndex]>heap[eliIndex/2]){ //will assume no duplicates for now
+		swap(eliIndex,eliIndex/2);
+	    }
+	}
     }
 
     public int peek(){ // return the value of the root but do not remove it.  O(1)
@@ -43,6 +53,12 @@ public class MyHeap{
 	    temp[i]=heap[i];
 	}
 	heap=temp;
+    }
+
+    public void swap(int i , int j){
+	int temp=heap[j];
+	heap[j]=heap[i];
+	heap[i]=temp;
     }
 
     //Index: 0   1   2   3   4   5   6   7   8   9
