@@ -20,8 +20,14 @@ public class MyHeap{
 
     public int remove(){ //remove the root and return the value  O(logn)
 	int root=heap[1];
+	if (isMaxHeap){
+	    //do something
+	}else{ //minHeap
+	    //switch root with last element;
+	    //then swap till everything is back in place (according to notes)
+	}
 	heap[0]--;
-	return 0;//dummy
+	return root;//dummy
     }
 
     public void add(int elligence){ //add the int to the heap  O(logn)
