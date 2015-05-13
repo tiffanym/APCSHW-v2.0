@@ -1,3 +1,4 @@
+import java.util.*;
 public class MyHeap{
     int[] heap;
     boolean isMaxHeap;
@@ -30,17 +31,33 @@ public class MyHeap{
 
     public int remove(){ //remove the root and return the value  O(logn)
 	int root=heap[1];
+	if (root==0){
+	    throw new NoSuchElementException("Add something first!!!");
+	}
 	//switch root with last element;
 	heap[1]=heap[heap[0]];
 	heap[heap[0]]=0;	
 	heap[0]--;
 	
-	//then swap till everything is back in place (according to notes)
+	//then swap till everything is back in place
 	int eliIndex=1;
 	int li=eliIndex*2; //left index
 	int ri=eliIndex*2+1; //right index		
 	if (isMaxHeap){
-
+	    int max=Math.max(heap[li],heap[ri]);
+	    int maxIndex;	
+	    while(eliIndex<heap[0] && max>heap[eliIndex] && (li<heap[0] || ri<heap[0])){
+		if (heap[li]==max){
+		    maxIndex=li;
+		}else{
+		    maxIndex=ri;
+		}
+		swap(maxIndex,eliIndex);
+		eliIndex=maxIndex;			
+		li=eliIndex*2;
+		ri=eliIndex*2+1;
+		max=Math.max(heap[li],heap[ri]);
+	    }
 	}else{ //minHeap
 	    int min=Math.min(heap[li],heap[ri]);
 	    int minIndex;	
@@ -57,7 +74,7 @@ public class MyHeap{
 		min=Math.min(heap[li],heap[ri]);
 	    }
 	}
-	return root;//dummy
+	return root;
     }
 
     public void add(int elligence){ //add the int to the heap  O(logn)
@@ -104,7 +121,8 @@ public class MyHeap{
     //Value: 6   9   10  32  16  50  40  0   0   0  -> 0= no element there
     //NOTE: index 0 is the COUNTER
     public static void main(String[] args){
-	MyHeap test=new MyHeap(false);
+	MyHeap test=new MyHeap();
+	//test.remove();
 	test.add(2);
 	//System.out.println(test.toString());
 	test.add(5);
