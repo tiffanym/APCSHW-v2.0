@@ -15,18 +15,47 @@ public class MyHeap{
     public String toString(){
 	//print array first
 	//Worry about later: based on height of tree and which level you're on, can make printing shape of tree; when is full
-	return ""; //dummy
-    }
 
+	//String index="Index: ";
+	//String value="Value: ";
+	System.out.print("Index: ");
+	for (int i=0;i<heap.length;i++){
+	    System.out.printf("%-4d",i);
+	}
+	System.out.println();
+	System.out.print("Value: ");
+	for(int i : heap){
+	    //index+=i+"   ";
+	    //value+="%-3d"+heap[i];//+addSpaces(heap[i],"");
+	    System.out.printf("%-4d",i);
+	}
+	return "";
+    }
+    /*
+    public String addSpaces(int n){
+	if(n==0){
+	    return "   ";
+	}else{
+	    for (int i=0;
+	}
+	
+    }
+    */
     public int remove(){ //remove the root and return the value  O(logn)
 	int root=heap[1];
-	if (isMaxHeap){
-	    //do something
-	}else{ //minHeap
-	    //switch root with last element;
-	    //then swap till everything is back in place (according to notes)
-	}
+	//switch root with last element;
+	heap[1]=heap[heap[0]];
+	heap[heap[0]]=0;	
 	heap[0]--;
+	
+	//then swap till everything is back in place (according to notes)
+	if (isMaxHeap){
+
+	}else{ //minHeap
+	    //while(heap){
+
+	    //}
+	}
 	return root;//dummy
     }
 
@@ -35,16 +64,18 @@ public class MyHeap{
 	if (heap[0]+1>=heap.length){
 	    resize();
 	}
-	heap[heap[0]+1] = elligence;	
+	heap[heap[0]+1] = elligence;
 	heap[0]++;
 	int eliIndex=heap[0];
 	if (isMaxHeap){
-	    while (heap[eliIndex]>heap[eliIndex/2]){ //will assume no duplicates for now
+	    while (eliIndex>1 && heap[eliIndex]>heap[eliIndex/2]){ //will assume no duplicates for now
 		swap(eliIndex,eliIndex/2);
+		eliIndex=eliIndex/2;
 	    }
 	}else{ //minHeap	    
-	    while (heap[eliIndex]<heap[eliIndex/2]){ //will assume no duplicates for now
+	    while (eliIndex>1 && heap[eliIndex]<heap[eliIndex/2]){ //will assume no duplicates for now
 		swap(eliIndex,eliIndex/2);
+		eliIndex=eliIndex/2;
 	    }
 	}
     }
@@ -73,6 +104,19 @@ public class MyHeap{
     //NOTE: index 0 is the COUNTER
     public static void main(String[] args){
 	MyHeap test=new MyHeap();
+	test.add(2);
+	System.out.println(test.toString());
+	test.add(5);
+	System.out.println(test.toString());
+	test.add(3);
+	System.out.println(test.toString());
+	test.add(1);
+	System.out.println(test.toString());
+	for (int i=14;i<25;i++){
+	    test.add(i);
+	    System.out.println("Adding: "+i);
+	    System.out.println(test.toString());
+	}
 	
     }
 }
