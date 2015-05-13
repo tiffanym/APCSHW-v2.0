@@ -50,10 +50,7 @@ public class MyHeap{
 		}else{
 		    minIndex=ri;
 		}
-
-		//if(min<heap[eliIndex]){
 		swap(minIndex,eliIndex);
-		//}
 		eliIndex=minIndex;			
 		li=eliIndex*2;
 		ri=eliIndex*2+1;
