@@ -43,7 +43,7 @@ public class MyHeap{
     }
     
     public int getMaxRowSize(){
-	return 0;
+	return heap[0] + 1 - (int) Math.pow( 2.0 , (double)getHeight() );
     }
 
     public int remove(){ //remove the root and return the value  O(logn)
@@ -147,7 +147,7 @@ public class MyHeap{
 	//System.out.println(test.toString());
 	test.add(1);
 	//System.out.println(test.toString());
-	for (int i=14;i<26;i++){
+	for (int i=14;i<25;i++){
 	    test.add(i);
 	    //System.out.println("Adding: "+i);
 	    //System.out.println(test.toString());
@@ -156,6 +156,7 @@ public class MyHeap{
 	//System.out.println("Remove root: "+test.remove());
 	//System.out.println(test.toString());
 	
-	System.out.println(test.getHeight());
+	//System.out.println(test.getHeight());
+	System.out.println(test.getMaxRowSize());
     }
 }
