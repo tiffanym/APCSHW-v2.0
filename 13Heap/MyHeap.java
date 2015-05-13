@@ -36,12 +36,29 @@ public class MyHeap{
 	heap[0]--;
 	
 	//then swap till everything is back in place (according to notes)
+	int eliIndex=1;
+	int li=eliIndex*2; //left index
+	int ri=eliIndex*2+1; //right index		
 	if (isMaxHeap){
 
 	}else{ //minHeap
-	    //while(heap){
+	    int min=Math.min(heap[li],heap[ri]);
+	    int minIndex;	
+	    while(eliIndex<heap[0] && min<heap[eliIndex] && (li<heap[0] || ri<heap[0])){
+		if (heap[li]==min){
+		    minIndex=li;
+		}else{
+		    minIndex=ri;
+		}
 
-	    //}
+		//if(min<heap[eliIndex]){
+		swap(minIndex,eliIndex);
+		//}
+		eliIndex=minIndex;			
+		li=eliIndex*2;
+		ri=eliIndex*2+1;
+		min=Math.min(heap[li],heap[ri]);
+	    }
 	}
 	return root;//dummy
     }
@@ -90,20 +107,22 @@ public class MyHeap{
     //Value: 6   9   10  32  16  50  40  0   0   0  -> 0= no element there
     //NOTE: index 0 is the COUNTER
     public static void main(String[] args){
-	MyHeap test=new MyHeap();
+	MyHeap test=new MyHeap(false);
 	test.add(2);
-	System.out.println(test.toString());
+	//System.out.println(test.toString());
 	test.add(5);
-	System.out.println(test.toString());
+	//System.out.println(test.toString());
 	test.add(3);
-	System.out.println(test.toString());
+	//System.out.println(test.toString());
 	test.add(1);
-	System.out.println(test.toString());
+	//System.out.println(test.toString());
 	for (int i=14;i<25;i++){
 	    test.add(i);
-	    System.out.println("Adding: "+i);
-	    System.out.println(test.toString());
+	    //System.out.println("Adding: "+i);
+	    //System.out.println(test.toString());
 	}
-	
+	System.out.println(test.toString());
+	System.out.println("Remove root: "+test.remove());
+	System.out.println(test.toString());
     }
 }
