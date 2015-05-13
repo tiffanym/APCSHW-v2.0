@@ -17,6 +17,7 @@ public class MyHeap{
 	//print array first
 	//Worry about later: based on height of tree and which level you're on, can make printing shape of tree; when is full
 	//use boolean later to print simple array vs tree-looking array
+	/*
 	System.out.print("Index: ");
 	for (int i=0;i<heap.length;i++){
 	    System.out.printf("%-4d",i);
@@ -26,7 +27,23 @@ public class MyHeap{
 	for(int i : heap){
 	    System.out.printf("%-4d",i);
 	}
+	*/
 	return "";
+    }
+
+    public int getHeight(){
+	return getHeightHelp(heap[0],0);
+    }
+    public int getHeightHelp(int curr,int count){ //curr=heap[0] //count starts at 0
+	if (curr==0){
+	    return count;
+	}else{
+	    return getHeightHelp(curr/2,count+1);
+	}
+    }
+    
+    public int getMaxRowSize(){
+	return 0;
     }
 
     public int remove(){ //remove the root and return the value  O(logn)
@@ -78,7 +95,6 @@ public class MyHeap{
     }
 
     public void add(int elligence){ //add the int to the heap  O(logn)
-	//int si=1; //start index //si < data.length?
 	if (heap[0]+1>=heap.length){
 	    resize();
 	}
@@ -131,13 +147,15 @@ public class MyHeap{
 	//System.out.println(test.toString());
 	test.add(1);
 	//System.out.println(test.toString());
-	for (int i=14;i<25;i++){
+	for (int i=14;i<26;i++){
 	    test.add(i);
 	    //System.out.println("Adding: "+i);
 	    //System.out.println(test.toString());
 	}
 	System.out.println(test.toString());
-	System.out.println("Remove root: "+test.remove());
-	System.out.println(test.toString());
+	//System.out.println("Remove root: "+test.remove());
+	//System.out.println(test.toString());
+	
+	System.out.println(test.getHeight());
     }
 }
