@@ -26,16 +26,7 @@ public class MyHeap{
 	}
 	return "";
     }
-    /*
-    public String addSpaces(int n){
-	if(n==0){
-	    return "   ";
-	}else{
-	    for (int i=0;
-	}
-	
-    }
-    */
+
     public int remove(){ //remove the root and return the value  O(logn)
 	int root=heap[1];
 	//switch root with last element;
