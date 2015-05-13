@@ -17,7 +17,7 @@ public class MyHeap{
 	//print array first
 	//Worry about later: based on height of tree and which level you're on, can make printing shape of tree; when is full
 	//use boolean later to print simple array vs tree-looking array
-	/*
+	
 	System.out.print("Index: ");
 	for (int i=0;i<heap.length;i++){
 	    System.out.printf("%-4d",i);
@@ -27,7 +27,7 @@ public class MyHeap{
 	for(int i : heap){
 	    System.out.printf("%-4d",i);
 	}
-	*/
+	
 	return "";
     }
 
@@ -157,6 +157,6 @@ public class MyHeap{
 	//System.out.println(test.toString());
 	
 	//System.out.println(test.getHeight());
-	System.out.println(test.getMaxRowSize());
+	//System.out.println(test.getMaxRowSize());
     }
 }
