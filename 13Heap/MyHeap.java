@@ -31,7 +31,7 @@ public class MyHeap{
 
     public int remove(){ //remove the root and return the value  O(logn)
 	int root=heap[1];
-	if (root==0){
+	if (heap[0]==0){ //size=0 means no elements inside
 	    throw new NoSuchElementException("Add something first!!!");
 	}
 	//switch root with last element;
