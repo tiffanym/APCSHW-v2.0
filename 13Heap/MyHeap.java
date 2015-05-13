@@ -12,21 +12,18 @@ public class MyHeap{
 	heap=new int[10];
     }
 
-    public String toString(boolean isPrettyTree){
+    public String toString(){
 	//print array first
 	//Worry about later: based on height of tree and which level you're on, can make printing shape of tree; when is full
 	//use boolean later to print simple array vs tree-looking array
-	if (isPrettyTree){
-	}else{
-	    System.out.print("Index: ");
-	    for (int i=0;i<heap.length;i++){
-		System.out.printf("%-4d",i);
-	    }
-	    System.out.println();
-	    System.out.print("Value: ");
-	    for(int i : heap){
-		System.out.printf("%-4d",i);
-	    }
+	System.out.print("Index: ");
+	for (int i=0;i<heap.length;i++){
+	    System.out.printf("%-4d",i);
+	}
+	System.out.println();
+	System.out.print("Value: ");
+	for(int i : heap){
+	    System.out.printf("%-4d",i);
 	}
 	return "";
     }
@@ -95,17 +92,17 @@ public class MyHeap{
     public static void main(String[] args){
 	MyHeap test=new MyHeap();
 	test.add(2);
-	System.out.println(test.toString(false));
+	System.out.println(test.toString());
 	test.add(5);
-	System.out.println(test.toString(false));
+	System.out.println(test.toString());
 	test.add(3);
-	System.out.println(test.toString(false));
+	System.out.println(test.toString());
 	test.add(1);
-	System.out.println(test.toString(false));
+	System.out.println(test.toString());
 	for (int i=14;i<25;i++){
 	    test.add(i);
 	    System.out.println("Adding: "+i);
-	    System.out.println(test.toString(false));
+	    System.out.println(test.toString());
 	}
 	
     }
