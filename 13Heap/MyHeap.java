@@ -15,9 +15,6 @@ public class MyHeap{
     public String toString(){
 	//print array first
 	//Worry about later: based on height of tree and which level you're on, can make printing shape of tree; when is full
-
-	//String index="Index: ";
-	//String value="Value: ";
 	System.out.print("Index: ");
 	for (int i=0;i<heap.length;i++){
 	    System.out.printf("%-4d",i);
@@ -25,8 +22,6 @@ public class MyHeap{
 	System.out.println();
 	System.out.print("Value: ");
 	for(int i : heap){
-	    //index+=i+"   ";
-	    //value+="%-3d"+heap[i];//+addSpaces(heap[i],"");
 	    System.out.printf("%-4d",i);
 	}
 	return "";
