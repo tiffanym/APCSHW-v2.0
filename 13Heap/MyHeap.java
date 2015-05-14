@@ -115,7 +115,11 @@ public class MyHeap{
     }
 
     public int peek(){ // return the value of the root but do not remove it.  O(1)
-	return heap[1];
+	if (heap[0]<1){
+	    throw new NoSuchElementException("Add something first!!!");
+	}else{
+	    return heap[1];
+	}
     }
 
     public void resize(){
