@@ -45,15 +45,15 @@ public class RunningMedian{
 
     public void resize(){
 	if (Math.abs(maxHeap.size()-minHeap.size())>1){
-	    System.out.println("Resizing...");
+	    //System.out.println("Resizing...");
 	    if (maxHeap.size()>minHeap.size()){
 		while (maxHeap.size()-1 > minHeap.size()){
-		    System.out.println("Adding "+maxHeap.peek()+" to minHeap");
+		    //System.out.println("Adding "+maxHeap.peek()+" to minHeap");
 		    minHeap.add(maxHeap.remove());
 		}
 	    }else if (minHeap.size()>maxHeap.size()){
 		while (minHeap.size()-1 > maxHeap.size()){
-		    System.out.println("Adding "+minHeap.peek()+" to maxHeap");
+		    //System.out.println("Adding "+minHeap.peek()+" to maxHeap");
 		    maxHeap.add(minHeap.remove());
 		}
 	    }
@@ -78,14 +78,17 @@ public class RunningMedian{
 	Random r = new Random();
 	System.out.println("Will add "+4);
 	test.add(4);
+	test.toString();
 	for (int i=0;i<20;i++){
 	    int el=r.nextInt(500);
 	    System.out.println("Will add "+el);
 	    //test.add(r.nextInt(500));
 	    test.add(el);
+	    test.toString();
 	}
 	System.out.println("Will add "+42);
 	test.add(42);
+	test.toString();
 	System.out.println("Will add "+2);
 	test.add(2);
 	test.toString();

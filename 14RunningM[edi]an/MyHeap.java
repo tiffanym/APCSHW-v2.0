@@ -91,7 +91,8 @@ public class MyHeap{
 	if (isMaxHeap){
 	    int max=Math.max(heap[li],heap[ri]);
 	    int maxIndex;	
-	    while(eliIndex<heap[0] && max>heap[eliIndex] && (li<heap[0] || ri<heap[0])){
+	    while(//(li<heap[0] && ri<heap[0]) && 
+		  eliIndex<heap[0] && max>heap[eliIndex]){
 		if (heap[li]==max){
 		    maxIndex=li;
 		}else{
@@ -100,25 +101,39 @@ public class MyHeap{
 		swap(maxIndex,eliIndex);
 		eliIndex=maxIndex;			
 		li=eliIndex*2;
+		System.out.println("Left index: "+li);
 		ri=eliIndex*2+1;
+		System.out.println("Right index: "+ri);
+		System.out.println("Getting max of li and ri");
+		if (li>=heap[0] || ri>=heap[0]){
+		    break;
+		}
 		max=Math.max(heap[li],heap[ri]);
 	    }
 	}else{ //minHeap
 	    int min=Math.min(heap[li],heap[ri]);
 	    int minIndex;	
-	    while(eliIndex<heap[0] && min<heap[eliIndex] && (li<heap[0] || ri<heap[0])){
+	    while(//(li<heap[0] && ri<heap[0]) && 
+		  eliIndex<heap[0] && min<heap[eliIndex] ){
 		if (heap[li]==min){
 		    minIndex=li;
 		}else{
 		    minIndex=ri;
 		}
 		swap(minIndex,eliIndex);
-		eliIndex=minIndex;			
+		eliIndex=minIndex;		
 		li=eliIndex*2;
+		System.out.println("Left index: "+li);
 		ri=eliIndex*2+1;
+		System.out.println("Right index: "+ri);
+		System.out.println("Getting max of li and ri");
+		if (li>=heap[0] || ri>=heap[0]){
+		    break;
+		}
 		min=Math.min(heap[li],heap[ri]);
 	    }
 	}
+	System.out.println("Successfully removed: "+ root);
 	return root;
     }
 
