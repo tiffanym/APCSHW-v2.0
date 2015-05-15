@@ -130,12 +130,12 @@ public class MyHeap{
 	heap[0]++;
 	int eliIndex=heap[0];
 	if (isMaxHeap){
-	    while (eliIndex>1 && heap[eliIndex]>heap[eliIndex/2]){ //will assume no duplicates for now
+	    while (eliIndex>1 && heap[eliIndex]>heap[eliIndex/2]){ //will assume no duplicates
 		swap(eliIndex,eliIndex/2);
 		eliIndex=eliIndex/2;
 	    }
 	}else{ //minHeap	    
-	    while (eliIndex>1 && heap[eliIndex]<heap[eliIndex/2]){ //will assume no duplicates for now
+	    while (eliIndex>1 && heap[eliIndex]<heap[eliIndex/2]){ //will assume no duplicates
 		swap(eliIndex,eliIndex/2);
 		eliIndex=eliIndex/2;
 	    }
@@ -163,6 +163,11 @@ public class MyHeap{
 	int temp=heap[j];
 	heap[j]=heap[i];
 	heap[i]=temp;
+    }
+
+    //for RunningMedian
+    public int size(){
+	return head[0];
     }
 
     //Index: 0   1   2   3   4   5   6   7   8   9
