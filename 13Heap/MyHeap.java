@@ -185,6 +185,10 @@ public class MyHeap{
 	return heap[0];
     }
 
+    public String name(){
+	return "ming.tiffany";
+    }
+
     //Index: 0   1   2   3   4   5   6   7   8   9
     //Value: 6   9   10  32  16  50  40  0   0   0  -> 0= no element there
     //NOTE: index 0 is the COUNTER
