@@ -41,17 +41,25 @@ public class MyHeap{
 	*/
 	for (int i=1 ; i<heap[0]+1 ; i++){
 	    //current level
-	    int level= (int)( (Math.log(count)) / (Math.log(2)) );
+	    int level= (int)( (Math.log(i)) / (Math.log(2)) );
 	    //spaces needed
-	    int spaces=totalLevels - level;
-	    if (){
-
+	    //int spaces=totalLevels - level;
+	    int spaces;
+	    if (((int)(Math.pow(2,level))==i)){
+		    System.out.println();
+		    //System.out.print(addSpaces(spaces));
+		    spaces = (int)(Math.pow(2,totalLevels-level)) - 1;
+	    }else{
+		//System.out.print(" ");
+		spaces = (int)(Math.pow(2,totalLevels-level+1)) - 1;
 	    }
+	    System.out.print(addSpaces(spaces));
+	    System.out.print(heap[i]);		    
 	}
 	return "";
     }
 
-    public String spaces(int levels){
+    public String addSpaces(int levels){
 	return spacesHelp(levels, "");
     }
 
@@ -183,7 +191,7 @@ public class MyHeap{
 	//System.out.println(test.toString());
 	test.add(1);
 	//System.out.println(test.toString());
-	for (int i=14;i<25;i++){
+	for (int i=14;i<21;i++){
 	    test.add(i);
 	    //System.out.println("Adding: "+i);
 	    //System.out.println(test.toString());
