@@ -14,9 +14,7 @@ public class MyHeap{
     }
 
     public String toString(){
-	//print array first
-	//Worry about later: based on height of tree and which level you're on, can make printing shape of tree; when is full
-	//use boolean later to print simple array vs tree-looking array
+	//code for straight out printing array with indexes aligned
 	/*
 	System.out.print("Index: ");
 	for (int i=0;i<heap.length;i++){
@@ -29,16 +27,6 @@ public class MyHeap{
 	}
 	*/
 	int totalLevels=getHeight();
-	//for (int i=1;i<heap[0]+1;i++){
-	/*
-	int count=1;
-	for (int i=1; i<totalLevels+1;i++){
-	    int levels=totalLevels - (int)( (Math.log(count)) / (Math.log(2)) );
-	    while(){
-		System.out.print(spaces(levels)+heap[i]);
-	    }
-	}
-	*/
 	for (int i=1 ; i<heap[0]+1 ; i++){
 	    //current level
 	    int level= (int)( (Math.log(i)) / (Math.log(2)) );
