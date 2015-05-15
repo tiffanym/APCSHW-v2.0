@@ -167,7 +167,7 @@ public class MyHeap{
 
     //for RunningMedian
     public int size(){
-	return head[0];
+	return heap[0];
     }
 
     //Index: 0   1   2   3   4   5   6   7   8   9
@@ -184,7 +184,7 @@ public class MyHeap{
 	//System.out.println(test.toString());
 	test.add(1);
 	//System.out.println(test.toString());
-	for (int i=14;i<21;i++){
+	for (int i=14;i<25;i++){
 	    test.add(i);
 	    //System.out.println("Adding: "+i);
 	    //System.out.println(test.toString());
