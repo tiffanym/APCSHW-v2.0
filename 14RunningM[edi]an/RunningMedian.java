@@ -11,16 +11,17 @@ public class RunningMedian{
     
     public void add(int eger){
 	if (maxHeap.size()==0 && minHeap.size()==0){
+	    System.out.println("Adding to maxHeap: "+eger);
 	    maxHeap.add(eger);
 	}else{
 	    resize();
 	    //System.out.println("MaxHeap size: "+maxHeap.size());
 	    //System.out.println("MinHeap size: "+minHeap.size());
-	    if (maxHeap.size()==0 || eger<maxHeap.peek()){
-		//System.out.println("Adding to maxHeap");
+	    if (maxHeap.size()==0 || eger<getMedian()){
+		System.out.println("Adding to maxHeap: "+eger);
 		maxHeap.add(eger);
-	    }else if ( minHeap.size()==0 || eger>=minHeap.peek()){
-		//System.out.println("Adding to minHeap");
+	    }else if ( minHeap.size()==0 || eger>=getMedian()){
+		System.out.println("Adding to minHeap: "+eger);
 		minHeap.add(eger);
 	    }
 	}
@@ -44,12 +45,15 @@ public class RunningMedian{
 
     public void resize(){
 	if (Math.abs(maxHeap.size()-minHeap.size())>1){
+	    System.out.println("Resizing...");
 	    if (maxHeap.size()>minHeap.size()){
 		while (maxHeap.size()-1 > minHeap.size()){
+		    System.out.println("Adding "+maxHeap.peek()+" to minHeap");
 		    minHeap.add(maxHeap.remove());
 		}
 	    }else if (minHeap.size()>maxHeap.size()){
 		while (minHeap.size()-1 > maxHeap.size()){
+		    System.out.println("Adding "+minHeap.peek()+" to maxHeap");
 		    maxHeap.add(minHeap.remove());
 		}
 	    }
@@ -72,11 +76,17 @@ public class RunningMedian{
     public static void main(String[] args){
 	RunningMedian test=new RunningMedian();
 	Random r = new Random();
+	System.out.println("Will add "+4);
 	test.add(4);
-	//for (int i=0;i<1;i++){
-	//    test.add(r.nextInt(500));
-	//}
+	for (int i=0;i<20;i++){
+	    int el=r.nextInt(500);
+	    System.out.println("Will add "+el);
+	    //test.add(r.nextInt(500));
+	    test.add(el);
+	}
+	System.out.println("Will add "+42);
 	test.add(42);
+	System.out.println("Will add "+2);
 	test.add(2);
 	test.toString();
     }
