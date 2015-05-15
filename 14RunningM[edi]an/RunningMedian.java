@@ -73,6 +73,11 @@ public class RunningMedian{
 	System.out.println("Median: "+getMedian());
 	return "";
     }
+
+    public String name(){
+	return "ming.tiffany";
+    }
+
     public static void main(String[] args){
 	RunningMedian test=new RunningMedian();
 	Random r = new Random();
