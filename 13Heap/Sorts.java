@@ -41,7 +41,7 @@ public class Sorts{
     }
 
     public static void main(String[] args){
-	int[] ary = {0,9,3,1,6,4,2,7};
+	int[] ary = {-21,0,9,3,15,42,100,49,500,54,1,6,4,2,7};
 	Sorts test = new Sorts(ary);	
 	test.heapsort(ary);
 	test.toString();
