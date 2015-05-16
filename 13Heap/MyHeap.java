@@ -185,6 +185,11 @@ public class MyHeap{
 	return heap[0];
     }
 
+    //for heapsort/heapify in Sorts.java
+    public int[] whatsMyHeap(){
+	return heap;
+    }
+
     public String name(){
 	return "ming.tiffany";
     }
