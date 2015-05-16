@@ -15,22 +15,21 @@ public class Sorts{
 	int count = ary.length-1;
 	while (maxHeap.size()>0){
 	    ary[count] = maxHeap.remove();
-	    System.out.println("Adding "+ary[count]+
-			       " from maxHeap to position "+count
-			       +" in array");
+	    //System.out.println("Adding "+ary[count]+
+	    //		       " from maxHeap to position "+count
+	    //		       +" in array");
 	    count--;
 	}
     }
 
     public void heapify(int[] ary){
-	//MyHeap maxHeap = new MyHeap(true);
 	for (int i : ary){
-	    System.out.println("Adding "+i+" to maxHeap");
+	    //System.out.println("Adding "+i+" to maxHeap");
 	    maxHeap.add(i);
 	}
-	System.out.println("Setting ary equal to maxHeap");
-	System.out.println("MaxHeap:");
-	System.out.print(maxHeap.toString());
+	//System.out.println("Setting ary equal to maxHeap");
+	//System.out.println("MaxHeap:");
+	//System.out.print(maxHeap.toString());
 	ary=maxHeap.whatsMyHeap();
     }
 
